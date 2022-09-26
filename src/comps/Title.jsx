@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 
 const TitleStyles = styled(motion.div)`
   width: 100%;
-  margin-top: 4rem;
   opacity: 0;
 
   ${FlexColumn()}

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 
 import { motion } from 'framer-motion';
@@ -7,9 +8,9 @@ import styled from 'styled-components';
 import { Flex } from '../helpers/mixins';
 import { ReactComponent as RightArrow } from '../imgs/svg/right-arrow.svg';
 import { ReactComponent as LeftArrow } from '../imgs/svg/left-arrow.svg';
-import Button from './temps/Button';
-import ResultsCard from './temps/ResultsCard';
-import GhostCard from './temps/GhostCard';
+import Button from '../comps/temps/Button';
+import ResultsCard from '../comps/temps/ResultsCard';
+import GhostCard from '../comps/temps/GhostCard';
 
 const ResultsStyles = styled(motion.section)`
   width: 80%;
@@ -65,6 +66,7 @@ const ResultsBtnStyles = styled(Button)`
 `;
 
 const Results = props => {
+  const navigate = useNavigate();
   const [results, setResults] = useState(null);
 
   const url = `/api/v1/recipes?name=${props.inputResult}`;
@@ -100,6 +102,8 @@ const Results = props => {
   }, [props.inputResult]);
 
   const rightArrowHandler = () => {
+    if (!results) return;
+
     if (
       curSlide.current + NUM_OF_CARDS_PER_VIEW <
       results.data.recipes.length
@@ -111,11 +115,17 @@ const Results = props => {
   };
 
   const leftArrowHandler = () => {
+    if (!results) return;
+
     if (curSlide.current > 0) {
       setCurSlide(prevState => {
         return { current: prevState.current - 1 };
       });
     }
+  };
+
+  const getResultHandler = id => {
+    navigate(`/${id}`);
   };
 
   return (
@@ -146,11 +156,13 @@ const Results = props => {
             results.data.recipes.map(recipe => (
               <ResultsCard
                 key={recipe.id}
+                id={recipe.id}
                 title={recipe.name}
                 image={recipe.coverImage}
                 author={recipe.author.username}
                 setScrollWidth={scrollWidthHandler}
                 sliderEl={slider}
+                getResult={getResultHandler}
               />
             ))}
           {isError && (
@@ -160,7 +172,7 @@ const Results = props => {
           )}
           {results && results.data.recipes.length === 0 && (
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} key="1">
-              No recipes found! <br /> Please try another...
+              Sorry, no recipes found! <br /> Please try another...
             </motion.p>
           )}
         </RecipeContainer>

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
-import Button from './temps/Button';
+import Button from '../comps/temps/Button';
 import { ReactComponent as LeftArrow } from '../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../imgs/svg/right-arrow-servings.svg';
 import { ReactComponent as IngIcon } from '../imgs/svg/title-icon.svg';
 
 const RecipeListingSection = styled.section`
+  margin-top: 2rem;
   width: 100rem;
   padding: 1.6rem;
   border: 0.2rem solid black;
@@ -194,6 +196,8 @@ const IngIconStyles = styled(IngIcon)`
 `;
 
 const Result = () => {
+  const params = useParams();
+
   return (
     <RecipeListingSection>
       <RecipeListingContainer>

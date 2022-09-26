@@ -1,36 +1,32 @@
 import { useState } from 'react';
+import { Route, Routes, Outlet } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { FlexColumn } from './helpers/mixins';
 
 import Header from './comps/Header';
 import Title from './comps/Title';
-import Search from './comps/Search';
-import Results from './comps/Results';
-import Result from './comps/Result';
+import Search from './pages/Search';
+import Result from './pages/Result';
 
 const AppStyles = styled.main`
   margin: 4rem;
 
   ${FlexColumn()};
-  gap: 4rem;
+  gap: 2rem;
 `;
 
 function App() {
-  const [searchInput, setSearchInput] = useState(null);
-
-  const searchInputHandler = input => {
-    setSearchInput(input);
-  };
-
   return (
     <>
       <Header />
-      <Title />
-      <Search searchInput={searchInputHandler} />
       <AppStyles>
-        {searchInput && <Results inputResult={searchInput} />}
-        <Result />
+        <Title />
+        <Search />
+        <Routes>
+          <Route path="/" element={<Outlet />} />
+          <Route path="/:resultId" element={<Result />} />
+        </Routes>
       </AppStyles>
     </>
   );

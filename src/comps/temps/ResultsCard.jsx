@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -65,6 +65,10 @@ const ImgContainerStyled = styled.div`
 const ResultCard = props => {
   const resultBoxWidth = useRef();
 
+  const onClickHandler = () => {
+    props.getResult(props.id);
+  };
+
   const PADDING_SIZE = 40;
   useEffect(() => {
     props.setScrollWidth(
@@ -74,7 +78,11 @@ const ResultCard = props => {
   }, [props]);
 
   return (
-    <ResultsBox animate={{ opacity: 1 }} ref={resultBoxWidth}>
+    <ResultsBox
+      onClick={onClickHandler}
+      animate={{ opacity: 1 }}
+      ref={resultBoxWidth}
+    >
       <ResultStyled>
         <ImgContainerStyled>
           <img
