@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { ReactComponent as TitleIcon } from '../imgs/svg/title-icon.svg';
-import { FlexColumn, Flex } from '../helpers/mixins';
+import { FlexColumn } from '../helpers/mixins';
 import { motion } from 'framer-motion';
 
 const TitleStyles = styled(motion.div)`
   width: 100%;
   opacity: 0;
+  margin-top: 4rem;
 
   ${FlexColumn()}
 

@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { Flex, FlexColumn } from '../helpers/mixins';
 import { motion } from 'framer-motion';
 
 import Button from '../comps/temps/Button';
+import Title from '../comps/Title';
 import Results from '../comps/Results';
 
 const SearchStyles = styled.section`
@@ -20,6 +22,8 @@ const SearchInputStyles = styled(motion.div)`
 
   ${Flex()}
   gap: 1rem;
+
+  margin-top: -1rem;
 
   & input {
     padding: 1rem;
@@ -44,11 +48,11 @@ const ButtonStyles = styled(Button)`
   line-height: 4rem;
 `;
 
-const Search = props => {
+const Search = () => {
   const inputEl = useRef();
   const [searchInput, setSearchInput] = useState(null);
 
-  const searchInputHandler = e => {
+  const searchInputHandler = () => {
     setSearchInput(inputEl.current.value);
 
     inputEl.current.value = '';
@@ -56,6 +60,7 @@ const Search = props => {
 
   return (
     <SearchStyles>
+      <Title />
       <SearchInputStyles
         animate={{ opacity: 1 }}
         transition={{ type: 'spring', duration: 6 }}
@@ -67,6 +72,8 @@ const Search = props => {
       </SearchInputStyles>
 
       {searchInput && <Results inputResult={searchInput} />}
+
+      <Outlet />
     </SearchStyles>
   );
 };

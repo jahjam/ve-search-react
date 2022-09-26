@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import useRequest from '../hooks/use-request';
+import { useState, useEffect } from 'react';
 
 import Button from '../comps/temps/Button';
 import { ReactComponent as LeftArrow } from '../imgs/svg/left-arrow-servings.svg';
@@ -198,75 +200,100 @@ const IngIconStyles = styled(IngIcon)`
 const Result = () => {
   const params = useParams();
 
+  const [result, setResult] = useState(null);
+
+  const { isLoading, isError, errorMsg, sendRequest } = useRequest();
+
+  useEffect(() => {
+    const receiver = data => {
+      console.log('hi');
+      setResult(data);
+    };
+
+    sendRequest({ url: `/api/v1/recipes/${params.resultId}` }, receiver);
+  }, [params.resultId, sendRequest]);
+
+  const calculateNutritionalPercs = (amount, base) => {
+    return (amount / base) * 100;
+  };
+
   return (
     <RecipeListingSection>
-      <RecipeListingContainer>
-        <RecipeImageBox>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Japanese_SilkyTofu_%28Kinugoshi_Tofu%29.JPG/2560px-Japanese_SilkyTofu_%28Kinugoshi_Tofu%29.JPG"
-            alt="Food"
-          />
-        </RecipeImageBox>
+      {result && (
+        <RecipeListingContainer>
+          <RecipeImageBox>
+            <img src={result.data.recipe.coverImage} alt="Food" />
+          </RecipeImageBox>
 
-        <h2>Block Of Tofu</h2>
+          <h2>{result.data.recipe.name}</h2>
 
-        <RecipeServingsBox>
-          <ServingsBtn btnSize="small" icon={true}>
-            <ArrowLeftIconStyles />
-          </ServingsBtn>
-          <span>4 Servings</span>
-          <ServingsBtn btnSize="small" icon={true}>
-            <ArrowRightIconStyles />
-          </ServingsBtn>
-        </RecipeServingsBox>
+          <RecipeServingsBox>
+            <ServingsBtn btnSize="small" icon={true}>
+              <ArrowLeftIconStyles />
+            </ServingsBtn>
+            <span>{result.data.recipe.servings} Servings</span>
+            <ServingsBtn btnSize="small" icon={true}>
+              <ArrowRightIconStyles />
+            </ServingsBtn>
+          </RecipeServingsBox>
 
-        <NutritionInfo>
-          <div>
-            <h3>Nutritional Facts</h3>
-            <h4>Estimated per serving</h4>
+          <NutritionInfo>
+            <div>
+              <h3>Nutritional Facts</h3>
+              <h4>(Estimated per serving)</h4>
+              <ul>
+                <li>
+                  <p>Energy</p>
+                  <p>
+                    {result.data.recipe.nutrition.kcal.amount}
+                    {result.data.recipe.nutrition.kcal.measurement}
+                  </p>
+                  <p>
+                    {calculateNutritionalPercs(
+                      result.data.recipe.nutrition.kcal.amount,
+                      2500
+                    )}
+                    %
+                  </p>
+                </li>
+                <li>
+                  <p>Carb</p>
+                  <p>40g</p>
+                  <p>40g</p>
+                </li>
+                <li>
+                  <p>Fat</p>
+                  <p>40g</p>
+                  <p>40g</p>
+                </li>
+                <li>
+                  <p>Saturates</p>
+                  <p>40g</p>
+                  <p>40g</p>
+                </li>
+                <li>
+                  <p>Salt</p>
+                  <p>40g</p>
+                  <p>40g</p>
+                </li>
+              </ul>
+            </div>
+          </NutritionInfo>
+
+          <IngredientBox>
+            <h2>Ingredients</h2>
+
             <ul>
               <li>
-                <p>Energy</p>
-                <p>40g</p>
-                <p>40g</p>
-              </li>
-              <li>
-                <p>Carb</p>
-                <p>40g</p>
-                <p>40g</p>
-              </li>
-              <li>
-                <p>Fat</p>
-                <p>40g</p>
-                <p>40g</p>
-              </li>
-              <li>
-                <p>Saturates</p>
-                <p>40g</p>
-                <p>40g</p>
-              </li>
-              <li>
-                <p>Salt</p>
-                <p>40g</p>
-                <p>40g</p>
+                <span>
+                  <IngIconStyles />
+                  <p>1tsp ing</p>
+                </span>
               </li>
             </ul>
-          </div>
-        </NutritionInfo>
-
-        <IngredientBox>
-          <h2>Recipe Ingredients</h2>
-
-          <ul>
-            <li>
-              <span>
-                <IngIconStyles />
-                <p>1tsp ing</p>
-              </span>
-            </li>
-          </ul>
-        </IngredientBox>
-      </RecipeListingContainer>
+          </IngredientBox>
+        </RecipeListingContainer>
+      )}
     </RecipeListingSection>
   );
 };

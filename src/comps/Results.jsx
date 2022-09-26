@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 
@@ -69,18 +69,16 @@ const Results = props => {
   const navigate = useNavigate();
   const [results, setResults] = useState(null);
 
-  const url = `/api/v1/recipes?name=${props.inputResult}`;
-  const { isLoading, isError, errorMsg, sendRequest } = useRequest(url);
+  const inputResult = props.inputResult;
+  const { isLoading, isError, errorMsg, sendRequest } = useRequest();
 
   useEffect(() => {
-    if (!props.inputResult) return;
-
     const receiver = data => {
       setResults(data);
     };
 
-    sendRequest(receiver);
-  }, [props.inputResult, sendRequest]);
+    sendRequest({ url: `/api/v1/recipes?name=${inputResult}` }, receiver);
+  }, [inputResult, sendRequest]);
 
   // retrieve data for calculating dom elements widths
   const slider = useRef();
@@ -99,7 +97,7 @@ const Results = props => {
   // reset cards to beginning on new search
   useEffect(() => {
     setCurSlide({ current: 0 });
-  }, [props.inputResult]);
+  }, [inputResult]);
 
   const rightArrowHandler = () => {
     if (!results) return;
@@ -125,7 +123,7 @@ const Results = props => {
   };
 
   const getResultHandler = id => {
-    navigate(`/${id}`);
+    navigate(`/search/${id}`);
   };
 
   return (

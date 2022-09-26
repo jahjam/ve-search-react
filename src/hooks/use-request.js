@@ -1,36 +1,38 @@
 import { useState, useCallback } from 'react';
 
-const useRequest = url => {
+const useRequest = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const sendRequest = useCallback(
-    async (fn, requestConfig = {}) => {
-      setIsLoading(true);
-      setIsError(false);
-      try {
-        const res = await fetch(url, {
-          method: requestConfig.method || 'GET',
-          headers: requestConfig.headers || {},
-          body: JSON.stringify(requestConfig.body) || null,
-        });
+  const sendRequest = useCallback(async (requestConfig, fn) => {
+    console.log('hi');
 
-        if (!res.ok) {
-          throw new Error('Something went wrong. Please try again later!');
-        }
+    setIsLoading(true);
+    setIsError(false);
+    try {
+      const res = await fetch(requestConfig.url, {
+        method: requestConfig.method || 'GET',
+        headers: requestConfig.headers || {},
+        body: JSON.stringify(requestConfig.body) || null,
+      });
 
-        const data = await res.json();
-
-        fn(data);
-      } catch (err) {
-        setIsError(true);
-        setErrorMsg(err.message);
+      if (!res.ok) {
+        throw new Error('Something went wrong. Please try again later!');
       }
-      setIsLoading(false);
-    },
-    [url]
-  );
+
+      const data = await res.json();
+
+      console.log(Date.now());
+      console.log(data);
+
+      fn(data);
+    } catch (err) {
+      setIsError(true);
+      setErrorMsg(err.message);
+    }
+    setIsLoading(false);
+  }, []);
 
   return {
     isLoading,

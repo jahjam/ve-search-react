@@ -1,33 +1,20 @@
-import { useState } from 'react';
-import { Route, Routes, Outlet } from 'react-router-dom';
-
-import styled from 'styled-components';
-import { FlexColumn } from './helpers/mixins';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import Header from './comps/Header';
-import Title from './comps/Title';
 import Search from './pages/Search';
 import Result from './pages/Result';
-
-const AppStyles = styled.main`
-  margin: 4rem;
-
-  ${FlexColumn()};
-  gap: 2rem;
-`;
 
 function App() {
   return (
     <>
       <Header />
-      <AppStyles>
-        <Title />
-        <Search />
-        <Routes>
-          <Route path="/" element={<Outlet />} />
-          <Route path="/:resultId" element={<Result />} />
-        </Routes>
-      </AppStyles>
+
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/search" />} />
+        <Route path="/search" element={<Search />}>
+          <Route path=":resultId" element={<Result />} />
+        </Route>
+      </Routes>
     </>
   );
 }
