@@ -12,18 +12,16 @@ const Ingredient = props => {
   };
 
   return (
-    <ul>
-      <li>
-        <span>
-          <IngIconStyles />
-          <p>
-            {props.amount}
-            {seperator()}
-            {props.measurement} {props.name.toLowerCase()}
-          </p>
-        </span>
-      </li>
-    </ul>
+    <li>
+      <span>
+        <IngIconStyles />
+        <p>
+          {props.amount}
+          {seperator()}
+          {props.measurement} {props.name.toLowerCase()}
+        </p>
+      </span>
+    </li>
   );
 };
 

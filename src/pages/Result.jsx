@@ -2,14 +2,24 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 import Button from '../comps/temps/Button';
+import { FlexColumn } from '../helpers/mixins';
 import { ReactComponent as LeftArrow } from '../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../imgs/svg/right-arrow-servings.svg';
 import Ingredient from '../comps/Ingredient';
-import LinkSection from '../comps/LinkSection'
+import LinkSection from '../comps/LinkSection';
+import GhostResult from '../comps/temps/GhostResult';
 
-const RecipeListingSection = styled.section`
+const Container = styled(motion.section)`
+  ${FlexColumn()}
+  gap: 3rem;
+
+  margin-bottom: 4rem;
+`;
+
+const RecipeListingSection = styled.div`
   margin-top: 2rem;
   width: 100rem;
   padding: 1.6rem;
@@ -193,6 +203,10 @@ const IngredientBox = styled.div`
   }
 `;
 
+const Kcal = styled.span`
+  font-size: 1rem;
+`;
+
 const Result = () => {
   const params = useParams();
 
@@ -219,121 +233,138 @@ const Result = () => {
   };
 
   return (
-    <RecipeListingSection>
-      {result && (
-        <RecipeListingContainer>
-          <RecipeImageBox>
-            <img src={result.data.recipe.coverImage} alt="Food" />
-          </RecipeImageBox>
-
-          <h2>{result.data.recipe.name}</h2>
-
-          <RecipeServingsBox>
-            <ServingsBtn btnSize="small" icon={true}>
-              <ArrowLeftIconStyles />
-            </ServingsBtn>
-            <span>{result.data.recipe.servings} Servings</span>
-            <ServingsBtn btnSize="small" icon={true}>
-              <ArrowRightIconStyles />
-            </ServingsBtn>
-          </RecipeServingsBox>
-
-          <NutritionInfo>
-            <div>
-              <h3>Nutritional Facts</h3>
-              <h4>(Estimated per serving)</h4>
-              <ul>
-                <li>
-                  <p>Energy</p>
-                  <p>
-                    {result.data.recipe.nutrition.kcal.amount}
-                    kcal
-                  </p>
-                  <p>
-                    {calculateNutritionalPercs(
-                      result.data.recipe.nutrition.kcal.amount,
-                      DAILY_KCALS
-                    ).toFixed()}
-                    %
-                  </p>
-                </li>
-                <li>
-                  <p>Carb</p>
-                  <p>
-                    {result.data.recipe.nutrition.carbs.amount}
-                    {result.data.recipe.nutrition.carbs.measurement}
-                  </p>
-                  <p>
-                    {calculateNutritionalPercs(
-                      result.data.recipe.nutrition.carbs.amount,
-                      DAILY_CARBS
-                    ).toFixed()}
-                    %
-                  </p>
-                </li>
-                <li>
-                  <p>Fat</p>
-                  <p>
-                    {result.data.recipe.nutrition.fat.amount}
-                    {result.data.recipe.nutrition.fat.measurement}
-                  </p>
-                  <p>
-                    {calculateNutritionalPercs(
-                      result.data.recipe.nutrition.fat.amount,
-                      DAILY_FAT
-                    ).toFixed()}
-                    %
-                  </p>
-                </li>
-                <li>
-                  <p>Saturates</p>
-                  <p>
-                    {result.data.recipe.nutrition.saturates.amount}
-                    {result.data.recipe.nutrition.saturates.measurement}
-                  </p>
-                  <p>
-                    {calculateNutritionalPercs(
-                      result.data.recipe.nutrition.saturates.amount,
-                      DAILY_SATURATES
-                    ).toFixed()}
-                    %
-                  </p>
-                </li>
-                <li>
-                  <p>Salt</p>
-                  <p>
-                    {result.data.recipe.nutrition.salt.amount}
-                    {result.data.recipe.nutrition.salt.measurement}
-                  </p>
-                  <p>
-                    {calculateNutritionalPercs(
-                      result.data.recipe.nutrition.salt.amount,
-                      DAILY_SALT
-                    ).toFixed()}
-                    %
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </NutritionInfo>
-
-          <IngredientBox>
-            <h2>Ingredients</h2>
-
-            {result.data.recipe.ingredients.map(ingredient => (
-              <Ingredient
-                key={ingredient._id}
-                amount={ingredient.amount}
-                measurement={ingredient.measurement}
-                name={ingredient.name}
-              />
-            ))}
-          </IngredientBox>
-        </RecipeListingContainer>
-
-        {result.data.recipe.methodsProvided && <LinkSection />}
+    <Container>
+      {isLoading && (
+        <GhostResult
+          initial={{ opacity: 0.8 }}
+          animate={{ opacity: 1 }}
+          transition={{ repeatType: 'mirror', repeat: Infinity, duration: 0.8 }}
+        />
       )}
-    </RecipeListingSection>
+
+      {result && (
+        <RecipeListingSection>
+          <RecipeListingContainer>
+            <RecipeImageBox>
+              <img src={result.data.recipe.coverImage} alt="Food" />
+            </RecipeImageBox>
+
+            <h2>{result.data.recipe.name}</h2>
+
+            <RecipeServingsBox>
+              <ServingsBtn btnSize="small" icon={true}>
+                <ArrowLeftIconStyles />
+              </ServingsBtn>
+              <span>{result.data.recipe.servings} Servings</span>
+              <ServingsBtn btnSize="small" icon={true}>
+                <ArrowRightIconStyles />
+              </ServingsBtn>
+            </RecipeServingsBox>
+
+            <NutritionInfo>
+              <div>
+                <h3>Nutritional Facts</h3>
+                <h4>(Estimated per serving)</h4>
+                <ul>
+                  <li>
+                    <p>Energy</p>
+                    <p>
+                      {result.data.recipe.nutrition.kcal.amount}
+                      <Kcal>kcal</Kcal>
+                    </p>
+                    <p>
+                      {calculateNutritionalPercs(
+                        result.data.recipe.nutrition.kcal.amount,
+                        DAILY_KCALS
+                      ).toFixed()}
+                      %
+                    </p>
+                  </li>
+                  <li>
+                    <p>Carb</p>
+                    <p>
+                      {result.data.recipe.nutrition.carbs.amount}
+                      {result.data.recipe.nutrition.carbs.measurement}
+                    </p>
+                    <p>
+                      {calculateNutritionalPercs(
+                        result.data.recipe.nutrition.carbs.amount,
+                        DAILY_CARBS
+                      ).toFixed()}
+                      %
+                    </p>
+                  </li>
+                  <li>
+                    <p>Fat</p>
+                    <p>
+                      {result.data.recipe.nutrition.fat.amount}
+                      {result.data.recipe.nutrition.fat.measurement}
+                    </p>
+                    <p>
+                      {calculateNutritionalPercs(
+                        result.data.recipe.nutrition.fat.amount,
+                        DAILY_FAT
+                      ).toFixed()}
+                      %
+                    </p>
+                  </li>
+                  <li>
+                    <p>Saturates</p>
+                    <p>
+                      {result.data.recipe.nutrition.saturates.amount}
+                      {result.data.recipe.nutrition.saturates.measurement}
+                    </p>
+                    <p>
+                      {calculateNutritionalPercs(
+                        result.data.recipe.nutrition.saturates.amount,
+                        DAILY_SATURATES
+                      ).toFixed()}
+                      %
+                    </p>
+                  </li>
+                  <li>
+                    <p>Salt</p>
+                    <p>
+                      {result.data.recipe.nutrition.salt.amount}
+                      {result.data.recipe.nutrition.salt.measurement}
+                    </p>
+                    <p>
+                      {calculateNutritionalPercs(
+                        result.data.recipe.nutrition.salt.amount,
+                        DAILY_SALT
+                      ).toFixed()}
+                      %
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </NutritionInfo>
+
+            <IngredientBox>
+              <h2>Ingredients</h2>
+
+              <ul>
+                {result.data.recipe.ingredients.map(ingredient => (
+                  <Ingredient
+                    key={ingredient._id}
+                    amount={ingredient.amount}
+                    measurement={ingredient.measurement}
+                    name={ingredient.name}
+                  />
+                ))}
+              </ul>
+            </IngredientBox>
+          </RecipeListingContainer>
+        </RecipeListingSection>
+      )}
+
+      {result && !result.data.recipe.methodsProvided && (
+        <LinkSection
+          publisher={result.data.recipe.author.username}
+          url={result.data.recipe.methodsAlternative}
+        />
+      )}
+    </Container>
   );
 };
 
