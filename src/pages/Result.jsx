@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 import Button from '../comps/temps/Button';
 import { ReactComponent as LeftArrow } from '../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../imgs/svg/right-arrow-servings.svg';
-import { ReactComponent as IngIcon } from '../imgs/svg/title-icon.svg';
+import Ingredient from '../comps/Ingredient';
+import LinkSection from '../comps/LinkSection'
 
 const RecipeListingSection = styled.section`
   margin-top: 2rem;
@@ -192,11 +193,6 @@ const IngredientBox = styled.div`
   }
 `;
 
-const IngIconStyles = styled(IngIcon)`
-  height: 20px;
-  width: 20px;
-`;
-
 const Result = () => {
   const params = useParams();
 
@@ -206,13 +202,18 @@ const Result = () => {
 
   useEffect(() => {
     const receiver = data => {
-      console.log('hi');
       setResult(data);
+      console.log(data);
     };
 
     sendRequest({ url: `/api/v1/recipes/${params.resultId}` }, receiver);
   }, [params.resultId, sendRequest]);
 
+  const DAILY_KCALS = 2500;
+  const DAILY_CARBS = 325;
+  const DAILY_FAT = 97;
+  const DAILY_SATURATES = 30;
+  const DAILY_SALT = 6;
   const calculateNutritionalPercs = (amount, base) => {
     return (amount / base) * 100;
   };
@@ -246,35 +247,71 @@ const Result = () => {
                   <p>Energy</p>
                   <p>
                     {result.data.recipe.nutrition.kcal.amount}
-                    {result.data.recipe.nutrition.kcal.measurement}
+                    kcal
                   </p>
                   <p>
                     {calculateNutritionalPercs(
                       result.data.recipe.nutrition.kcal.amount,
-                      2500
-                    )}
+                      DAILY_KCALS
+                    ).toFixed()}
                     %
                   </p>
                 </li>
                 <li>
                   <p>Carb</p>
-                  <p>40g</p>
-                  <p>40g</p>
+                  <p>
+                    {result.data.recipe.nutrition.carbs.amount}
+                    {result.data.recipe.nutrition.carbs.measurement}
+                  </p>
+                  <p>
+                    {calculateNutritionalPercs(
+                      result.data.recipe.nutrition.carbs.amount,
+                      DAILY_CARBS
+                    ).toFixed()}
+                    %
+                  </p>
                 </li>
                 <li>
                   <p>Fat</p>
-                  <p>40g</p>
-                  <p>40g</p>
+                  <p>
+                    {result.data.recipe.nutrition.fat.amount}
+                    {result.data.recipe.nutrition.fat.measurement}
+                  </p>
+                  <p>
+                    {calculateNutritionalPercs(
+                      result.data.recipe.nutrition.fat.amount,
+                      DAILY_FAT
+                    ).toFixed()}
+                    %
+                  </p>
                 </li>
                 <li>
                   <p>Saturates</p>
-                  <p>40g</p>
-                  <p>40g</p>
+                  <p>
+                    {result.data.recipe.nutrition.saturates.amount}
+                    {result.data.recipe.nutrition.saturates.measurement}
+                  </p>
+                  <p>
+                    {calculateNutritionalPercs(
+                      result.data.recipe.nutrition.saturates.amount,
+                      DAILY_SATURATES
+                    ).toFixed()}
+                    %
+                  </p>
                 </li>
                 <li>
                   <p>Salt</p>
-                  <p>40g</p>
-                  <p>40g</p>
+                  <p>
+                    {result.data.recipe.nutrition.salt.amount}
+                    {result.data.recipe.nutrition.salt.measurement}
+                  </p>
+                  <p>
+                    {calculateNutritionalPercs(
+                      result.data.recipe.nutrition.salt.amount,
+                      DAILY_SALT
+                    ).toFixed()}
+                    %
+                  </p>
                 </li>
               </ul>
             </div>
@@ -283,16 +320,18 @@ const Result = () => {
           <IngredientBox>
             <h2>Ingredients</h2>
 
-            <ul>
-              <li>
-                <span>
-                  <IngIconStyles />
-                  <p>1tsp ing</p>
-                </span>
-              </li>
-            </ul>
+            {result.data.recipe.ingredients.map(ingredient => (
+              <Ingredient
+                key={ingredient._id}
+                amount={ingredient.amount}
+                measurement={ingredient.measurement}
+                name={ingredient.name}
+              />
+            ))}
           </IngredientBox>
         </RecipeListingContainer>
+
+        {result.data.recipe.methodsProvided && <LinkSection />}
       )}
     </RecipeListingSection>
   );

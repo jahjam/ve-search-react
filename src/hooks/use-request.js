@@ -6,8 +6,6 @@ const useRequest = () => {
   const [errorMsg, setErrorMsg] = useState(null);
 
   const sendRequest = useCallback(async (requestConfig, fn) => {
-    console.log('hi');
-
     setIsLoading(true);
     setIsError(false);
     try {
@@ -22,9 +20,6 @@ const useRequest = () => {
       }
 
       const data = await res.json();
-
-      console.log(Date.now());
-      console.log(data);
 
       fn(data);
     } catch (err) {

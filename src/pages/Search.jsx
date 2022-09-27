@@ -10,6 +10,7 @@ import Title from '../comps/Title';
 import Results from '../comps/Results';
 
 const SearchStyles = styled.section`
+  margin-top: -2rem;
   width: 100%;
 
   ${FlexColumn()}
