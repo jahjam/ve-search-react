@@ -141,7 +141,6 @@ const NutritionInfo = styled.div`
 `;
 
 const IngredientBox = styled.div`
-  width: 100%;
   align-items: center;
 
   grid-area: ing;
@@ -194,9 +193,9 @@ const ArrowRightIconStyles = styled(RightArrow)`
 
 const MotionLinearGradientGreen = styled(motion.div)`
   height: 80rem;
-  width: 40rem;
+  width: 80rem;
   background: linear-gradient(silver, var(--main-theme-color));
-  opacity: 0.4;
+  opacity: 0.6;
   filter: blur(3rem);
 `;
 

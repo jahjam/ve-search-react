@@ -54,11 +54,13 @@ const ImgContainerStyled = styled.div`
   border-radius: 50%;
   overflow: hidden;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   & img {
     height: 120%;
     width: 120%;
-    display: flex;
-    align-items: center;
   }
 `;
 
@@ -85,10 +87,7 @@ const ResultCard = props => {
     >
       <ResultStyled>
         <ImgContainerStyled>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Japanese_SilkyTofu_%28Kinugoshi_Tofu%29.JPG/2560px-Japanese_SilkyTofu_%28Kinugoshi_Tofu%29.JPG"
-            alt="food"
-          />
+          <img src={`/public/img/recipes/${props.image}`} alt="food" />
         </ImgContainerStyled>
         <span>{props.title}</span>
         <span>{props.author}</span>

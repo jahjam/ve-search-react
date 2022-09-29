@@ -2,8 +2,11 @@ import styled from 'styled-components';
 import { Flex, FlexColumn } from '../helpers/mixins';
 import Button from './temps/Button';
 import { ReactComponent as TitleIcon } from '../imgs/svg/title-icon.svg';
-import { useState } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import useRequest from '../hooks/use-request';
+import AuthContext from '../store/auth-context';
 
 const HeaderStyled = styled(motion.header)`
   width: 100%;
@@ -47,40 +50,44 @@ const HeaderIconStyles = styled(TitleIcon)`
   height: 40px;
   width: 40px;
   color: var(--main-light-color);
+
+  cursor: pointer;
 `;
 
-const LoginFormStyles = styled(motion.form)`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+const LoginFormStyles = styled.div`
+  & form {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 
-  & input {
-    padding: 1rem;
-    height: 4rem;
-    border: none;
-    border: 0.2rem solid black;
-    background-color: var(--main-light-color);
+    & input {
+      padding: 1rem;
+      height: 4rem;
+      border: none;
+      border: 0.2rem solid black;
+      background-color: var(--main-light-color);
 
-    font-family: inherit;
-  }
-
-  & div {
-    ${FlexColumn}
-    gap: 0.5rem;
-
-    & a {
-      color: var(--main-dark-color);
-      font-size: 1rem;
-
-      align-self: center;
-
-      &:hover,
-      &:active {
-        color: var(--main-light-color);
-      }
+      font-family: inherit;
     }
 
-    & a {
+    & div {
+      ${FlexColumn}
+      gap: 0.5rem;
+
+      & a {
+        color: var(--main-dark-color);
+        font-size: 1rem;
+
+        align-self: center;
+
+        &:hover,
+        &:active {
+          color: var(--main-light-color);
+        }
+      }
+
+      & a {
+      }
     }
   }
 `;
@@ -91,6 +98,17 @@ const SigninSignupContainer = styled.div`
 `;
 
 const HeaderLoginBtnStyles = styled(Button)`
+  padding: 0.3rem;
+  align-self: center;
+
+  background-color: transparent;
+
+  &:hover {
+    background-color: var(--main-light-color);
+  }
+`;
+
+const HeaderLoginFormBtnStyles = styled(Button)`
   padding: 0.3rem;
   align-self: center;
 
@@ -112,28 +130,76 @@ const HeaderSignupBtnStyles = styled(Button)`
 `;
 
 const Header = () => {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+  const email = useRef();
+  const password = useRef();
   const [toLogin, setToLogin] = useState(false);
+  const [loginDetails, setLoginDetails] = useState({});
+
+  const { isLoading, isError, errorMsg, sendRequest } = useRequest();
+
+  useEffect(() => {
+    if (Object.keys(loginDetails).length === 0) return;
+
+    const reciever = data => {
+      data && authCtx.setIsLoggedInHandler(true);
+      data && setToLogin(false);
+    };
+
+    sendRequest(
+      {
+        url: '/api/v1/users/login',
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: {
+          email: loginDetails.email,
+          password: loginDetails.password,
+        },
+      },
+      reciever
+    );
+  }, [
+    authCtx,
+    loginDetails.password,
+    loginDetails.email,
+    sendRequest,
+    loginDetails,
+  ]);
 
   const toLoginHandler = () => {
     setToLogin(true);
+  };
+
+  const returnHomeHandler = () => {
+    navigate('/');
+  };
+
+  const onLoginSubmitHandler = e => {
+    e.preventDefault();
+
+    setLoginDetails({
+      email: email.current.value,
+      password: password.current.value,
+    });
   };
 
   return (
     <HeaderStyled
       transition={{ duration: 1 }}
       initial={{ translateY: -80, opacity: 0 }}
-      animate={{ opacity: 1, translateY: 0, height: toLogin ? 120 : 80 }}
+      animate={{
+        opacity: 1,
+        translateY: 0,
+        height: toLogin || authCtx.isLoggedIn ? 120 : 80,
+      }}
     >
-      <HeaderIconStyles />
+      <HeaderIconStyles onClick={returnHomeHandler} />
 
       <div>
-        {!toLogin ? (
+        {!toLogin && !authCtx.isLoggedIn && (
           <SigninSignupContainer>
-            <HeaderLoginBtnStyles
-              onClick={toLoginHandler}
-              type="submit"
-              btnSize="medium"
-            >
+            <HeaderLoginBtnStyles onClick={toLoginHandler} btnSize="medium">
               Sign in
             </HeaderLoginBtnStyles>
 
@@ -141,23 +207,33 @@ const Header = () => {
               Sign up
             </HeaderSignupBtnStyles>
           </SigninSignupContainer>
-        ) : (
-          <LoginFormStyles animate={{ opacity: toLogin ? 1 : 0 }}>
-            <input placeholder="username" />
-            <input placeholder="password" />
-            <div>
-              <HeaderLoginBtnStyles type="submit" btnSize="medium">
-                Sign in
-              </HeaderLoginBtnStyles>
-              <a href="/">Sign up</a>
-              <a href="/">Forgot username or password?</a>
-            </div>
+        )}
+
+        {toLogin && !authCtx.isLoggedIn && (
+          <LoginFormStyles>
+            <form
+              animate={{ opacity: toLogin ? 1 : 0 }}
+              onSubmit={onLoginSubmitHandler}
+            >
+              <input ref={email} placeholder="email" />
+              <input ref={password} placeholder="password" />
+              <div>
+                <HeaderLoginFormBtnStyles type="submit" btnSize="medium">
+                  Sign in
+                </HeaderLoginFormBtnStyles>
+                <a href="/">Sign up</a>
+                <a href="/">Forgot username or password?</a>
+              </div>
+            </form>
           </LoginFormStyles>
         )}
-        {/* <ProfileStyles>
-          <div></div>
-          <p>elijam</p>
-        </ProfileStyles> */}
+
+        {authCtx.isLoggedIn && (
+          <ProfileStyles>
+            <div></div>
+            <p>Hi, elijam!</p>
+          </ProfileStyles>
+        )}
       </div>
     </HeaderStyled>
   );

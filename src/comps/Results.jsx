@@ -163,11 +163,17 @@ const Results = props => {
                 getResult={getResultHandler}
               />
             ))}
+
           {isError && (
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} key="1">
+            <motion.p
+              initial={{ opacity: 0, color: 'red' }}
+              animate={{ opacity: 1 }}
+              key="1"
+            >
               {errorMsg}
             </motion.p>
           )}
+
           {results && results.data.recipes.length === 0 && (
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} key="1">
               Sorry, no recipes found! <br /> Please try another...

@@ -19,7 +19,7 @@ const Container = styled(motion.section)`
   margin-bottom: 4rem;
 `;
 
-const RecipeListingSection = styled.div`
+const RecipeListingSection = styled(motion.section)`
   margin-top: 2rem;
   width: 100rem;
   padding: 1.6rem;
@@ -242,11 +242,27 @@ const Result = () => {
         />
       )}
 
+      {isError && (
+        <motion.p
+          initial={{ opacity: 0, fontSize: '1.4rem', color: 'red' }}
+          animate={{ opacity: 1 }}
+          key="1"
+        >
+          {errorMsg}
+        </motion.p>
+      )}
+
       {result && (
-        <RecipeListingSection>
+        <RecipeListingSection
+          animate={{ opacity: 1 }}
+          transition={{ type: 'spring', duration: 0.2 }}
+        >
           <RecipeListingContainer>
             <RecipeImageBox>
-              <img src={result.data.recipe.coverImage} alt="Food" />
+              <img
+                src={`/public/img/recipes/${result.data.recipe.coverImage}`}
+                alt="Food"
+              />
             </RecipeImageBox>
 
             <h2>{result.data.recipe.name}</h2>

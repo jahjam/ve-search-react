@@ -16,7 +16,8 @@ const useRequest = () => {
       });
 
       if (!res.ok) {
-        throw new Error('Something went wrong. Please try again later!');
+        const error = await res.json();
+        throw error;
       }
 
       const data = await res.json();
