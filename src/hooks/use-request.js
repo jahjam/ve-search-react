@@ -30,10 +30,15 @@ const useRequest = () => {
     setIsLoading(false);
   }, []);
 
+  const resetError = () => {
+    setIsError(false);
+  };
+
   return {
     isLoading,
     isError,
     errorMsg,
+    resetError,
     sendRequest,
   };
 };

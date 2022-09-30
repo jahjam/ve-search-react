@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { FlexColumn, Flex } from '../helpers/mixins';
+import { useContext, useState } from 'react';
+import AuthContext from '../store/auth-context';
+import { motion } from 'framer-motion';
 
 import { ReactComponent as AccountIcon } from '../imgs/svg/account.svg';
 import { ReactComponent as IngIcon } from '../imgs/svg/title-icon.svg';
@@ -25,7 +28,6 @@ const AccountGrid = styled.div`
     'deets edit avatar'
     'deets edit avatar';
   row-gap: 4rem;
-  column-gap: 2rem;
 `;
 
 const Name = styled.div`
@@ -126,7 +128,7 @@ const Details = styled.div`
 const Edit = styled.div`
   grid-area: edit;
   height: auto;
-  width: 100%;
+  width: 30rem;
 
   ${FlexColumn('center', 'flex-start')}
 
@@ -158,6 +160,26 @@ const Edit = styled.div`
           text-decoration: underline;
 
           cursor: pointer;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+
+      & form {
+        width: 100%;
+        ${Flex('center', 'space-between')}
+
+        & input {
+          border: var(--main-border);
+          padding: 1rem;
+          height: 3rem;
+          width: 18rem;
+        }
+
+        & button {
+          background-color: var(--main-theme-color);
         }
       }
 
@@ -199,24 +221,70 @@ const AddBtn = styled(Button)`
   }
 `;
 
+const EditPassDiv = styled.div`
+  ${FlexColumn('center', 'flex-start')}
+  gap: 1rem;
+
+  & span {
+    text-decoration: none !important;
+    font-size: 1.2rem !important;
+  }
+`;
+
 const Password = styled.span`
   font-size: 1.6rem !important;
 `;
 
 const Account = props => {
+  const authCtx = useContext(AuthContext);
+  const [editEmail, setEditEmail] = useState(false);
+  const [editPass, setEditPass] = useState(false);
+  const [editAvatar, setEditAvatar] = useState(false);
+
+  const { isLoading, userDetails } = authCtx;
+
+  const editEmailHandler = () => {
+    setEditEmail(!editEmail);
+  };
+
+  const editPassHandler = () => {
+    setEditPass(!editPass);
+  };
+
+  const editAvatarHandler = () => {
+    setEditAvatar(!editAvatar);
+  };
+
   return (
     <AccountContainerStyled>
       <AccountGrid>
         <Name>
-          <h1>Hi, Eli!</h1>
-          <span>Member since September 2022</span>
+          <h1>Hi, {userDetails.user && userDetails.user.username}!</h1>
+          <span>
+            Member since{' '}
+            {userDetails.user && (userDetails.user.joinDate || '...')}
+          </span>
         </Name>
 
         <Avatar>
           <div>
-            <img src="/public/img/users/default.jpeg" alt="avatar" />
+            <img
+              src={`/public/img/users/${
+                userDetails.user && userDetails.user.photo
+              }`}
+              alt="avatar"
+            />
           </div>
-          <span>Edit avatar</span>
+          <span onClick={editAvatarHandler}>Edit avatar</span>
+
+          {editAvatar && (
+            <motion.form
+              initial={{ y: -40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+            >
+              <input type="file" placeholder="Enter new email" />
+            </motion.form>
+          )}
         </Avatar>
 
         <Details>
@@ -241,18 +309,47 @@ const Account = props => {
             <li>
               <div>
                 <h2>Email</h2>
-                <span>Edit</span>
+                <span onClick={editEmailHandler}>Edit</span>
               </div>
-              <span>elijahjamesuk@hotmail.com</span>
+              <span>{userDetails.user && userDetails.user.email}</span>
+              {editEmail && (
+                <motion.form
+                  initial={{ y: -40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                >
+                  <input placeholder="Enter new email" />
+                  <Button display="flex" btnSize="small">
+                    Update
+                  </Button>
+                </motion.form>
+              )}
             </li>
             <li>
               <div>
                 <h2>Password</h2>
-                <span>Edit</span>
+                <span onClick={editPassHandler}>Edit</span>
               </div>
               <Password>
                 &#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;
               </Password>
+
+              {editPass && (
+                <EditPassDiv>
+                  <span>
+                    A password reset link will be sent to the email you enter
+                    below:
+                  </span>
+                  <motion.form
+                    initial={{ y: -40, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                  >
+                    <input placeholder="Email" />
+                    <Button display="flex" btnSize="small">
+                      Send
+                    </Button>
+                  </motion.form>
+                </EditPassDiv>
+              )}
             </li>
           </ul>
         </Edit>

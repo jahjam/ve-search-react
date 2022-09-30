@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { Flex } from '../../helpers/mixins';
 
 const btnSizes = {
-  small: { height: '2rem', width: '6rem', fontSize: '1.2rem' },
-  medium: { height: '3rem', width: '12rem', fontSize: '1.4rem' },
+  small: { height: '3rem', width: '6rem', fontSize: '1.2rem' },
+  medium: { height: '4rem', width: '12rem', fontSize: '1.4rem' },
   large: { height: '4.8rem', width: '18rem', fontSize: '2rem' },
 };
 
@@ -48,7 +47,7 @@ const BtnText = styled.span`
     if (props.btnSize === 'large') return '1.8rem';
   }};
 
-  font-size: ${props => btnSizes[props.btnSize].fontSize};
+  font-size: ${props => btnSizes[props.btnSize].fontSize} !important;
 `;
 
 const Button = ({ children, ...props }) => {

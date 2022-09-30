@@ -7,11 +7,12 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import AuthContext from '../store/auth-context';
+import { generateFramerElipsis } from '../helpers/generateFramerElipsis';
 
 const HeaderStyled = styled(motion.header)`
   width: 100%;
   height: 8rem;
-  padding: 4rem 8%;
+  padding: 2rem 8%;
 
   background-color: var(--main-theme-color);
 
@@ -21,16 +22,22 @@ const HeaderStyled = styled(motion.header)`
     font-family: goodlife-brush, sans-serif;
     font-size: 4rem;
   }
+
+  position: relative;
 `;
 
 const ProfileStyles = styled.div`
-  padding: 0.8rem 2.2rem;
+  padding: 0.8rem 3rem;
   border: var(--main-border);
 
   cursor: pointer;
 
   ${Flex('center', 'flex-end')};
-  gap: 1rem;
+  gap: 2rem;
+
+  &:hover {
+    background-color: #58b15a;
+  }
 
   & div {
     background-color: blue;
@@ -39,9 +46,16 @@ const ProfileStyles = styled.div`
     border-radius: 50%;
 
     border: var(--main-border);
+
+    overflow: hidden;
+
+    & img {
+      width: 100%;
+    }
   }
 
   & p {
+    margin-top: 0.3rem;
     font-size: 2rem;
   }
 `;
@@ -98,13 +112,17 @@ const SigninSignupContainer = styled.div`
 `;
 
 const HeaderLoginBtnStyles = styled(Button)`
-  padding: 0.3rem;
+  width: 5rem;
+  border: none;
   align-self: center;
 
   background-color: transparent;
 
+  text-decoration: underline;
+
   &:hover {
-    background-color: var(--main-light-color);
+    background-color: transparent;
+    text-decoration: none;
   }
 `;
 
@@ -113,6 +131,10 @@ const HeaderLoginFormBtnStyles = styled(Button)`
   align-self: center;
 
   background-color: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: var(--main-light-color);
@@ -129,21 +151,46 @@ const HeaderSignupBtnStyles = styled(Button)`
   }
 `;
 
+const Alert = styled(motion.div)`
+  height: 6rem;
+  width: 40%;
+
+  border: var(--main-border);
+  border-top: none;
+
+  ${Flex()}
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  & h2 {
+    font-weight: 400;
+  }
+`;
+
 const Header = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
   const email = useRef();
   const password = useRef();
   const [toLogin, setToLogin] = useState(false);
+  const [enteredLoginDetails, setenteredLoginDetails] = useState({});
   const [loginDetails, setLoginDetails] = useState({});
 
-  const { isLoading, isError, errorMsg, sendRequest } = useRequest();
+  const { userDetails } = authCtx;
+
+  const { isLoading, isError, errorMsg, resetError, sendRequest } =
+    useRequest();
 
   useEffect(() => {
-    if (Object.keys(loginDetails).length === 0) return;
+    if (Object.keys(enteredLoginDetails).length === 0) return;
 
     const reciever = data => {
-      data && authCtx.setIsLoggedInHandler(true);
+      setLoginDetails(prevState => {
+        return { ...prevState, ...data.data.user };
+      });
+      data && authCtx.setIsLoggedInHandler();
       data && setToLogin(false);
     };
 
@@ -153,19 +200,13 @@ const Header = () => {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: {
-          email: loginDetails.email,
-          password: loginDetails.password,
+          email: enteredLoginDetails.email,
+          password: enteredLoginDetails.password,
         },
       },
       reciever
     );
-  }, [
-    authCtx,
-    loginDetails.password,
-    loginDetails.email,
-    sendRequest,
-    loginDetails,
-  ]);
+  }, [authCtx, sendRequest, enteredLoginDetails]);
 
   const toLoginHandler = () => {
     setToLogin(true);
@@ -178,10 +219,18 @@ const Header = () => {
   const onLoginSubmitHandler = e => {
     e.preventDefault();
 
-    setLoginDetails({
+    setenteredLoginDetails({
       email: email.current.value,
       password: password.current.value,
     });
+  };
+
+  const toAccountPageHandler = () => {
+    navigate('/me');
+  };
+
+  const tryAgainHandler = () => {
+    if (isError) resetError(false);
   };
 
   return (
@@ -193,14 +242,27 @@ const Header = () => {
         translateY: 0,
         height: toLogin || authCtx.isLoggedIn ? 120 : 80,
       }}
+      onClick={tryAgainHandler}
     >
       <HeaderIconStyles onClick={returnHomeHandler} />
+
+      <Alert
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          y: isError ? 0 : -80,
+          x: '-50%',
+          backgroundColor: isError ? '#e31212' : '#f0f8ff',
+        }}
+      >
+        <h2>{errorMsg}</h2>
+      </Alert>
 
       <div>
         {!toLogin && !authCtx.isLoggedIn && (
           <SigninSignupContainer>
             <HeaderLoginBtnStyles onClick={toLoginHandler} btnSize="medium">
-              Sign in
+              Login
             </HeaderLoginBtnStyles>
 
             <HeaderSignupBtnStyles btnSize="medium">
@@ -218,8 +280,18 @@ const Header = () => {
               <input ref={email} placeholder="email" />
               <input ref={password} placeholder="password" />
               <div>
-                <HeaderLoginFormBtnStyles type="submit" btnSize="medium">
-                  Sign in
+                <HeaderLoginFormBtnStyles
+                  display="flex"
+                  type="submit"
+                  btnSize="medium"
+                  icon={true}
+                >
+                  {isLoading
+                    ? generateFramerElipsis({
+                        flexDirection: 'row',
+                        marginTop: '-0.6rem',
+                      })
+                    : 'Login'}
                 </HeaderLoginFormBtnStyles>
                 <a href="/">Sign up</a>
                 <a href="/">Forgot username or password?</a>
@@ -229,9 +301,16 @@ const Header = () => {
         )}
 
         {authCtx.isLoggedIn && (
-          <ProfileStyles>
-            <div></div>
-            <p>Hi, elijam!</p>
+          <ProfileStyles onClick={toAccountPageHandler}>
+            <div>
+              <img
+                src={`/public/img/users/${
+                  loginDetails.photo || userDetails.user.photo
+                }`}
+                alt="avatar"
+              />
+            </div>
+            <p>{loginDetails.username || userDetails.user.username}</p>
           </ProfileStyles>
         )}
       </div>

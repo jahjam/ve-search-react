@@ -5,20 +5,23 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   userDetails: {},
   setIsLoggedIn: () => {},
+  setLoginDetailsHandler: () => {},
+  isLoading: false,
 });
 
 export const AuthContextProvider = props => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userDetails, setUserDetails] = useState({});
 
-  const { sendRequest } = useRequest();
+  const { isLoading, sendRequest } = useRequest();
 
   useEffect(() => {
     const reciever = data => {
+      console.log(data);
       data && setIsLoggedIn(true);
       data &&
         setUserDetails(prevState => {
-          return { ...prevState, data };
+          return { ...prevState, user: data.data.user };
         });
     };
 
@@ -33,6 +36,7 @@ export const AuthContextProvider = props => {
     isLoggedIn,
     userDetails,
     setIsLoggedInHandler,
+    isLoading,
   };
 
   return (

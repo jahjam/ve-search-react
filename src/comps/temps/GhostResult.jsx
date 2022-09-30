@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+import { generateFramerElipsis } from '../../helpers/generateFramerElipsis';
 import { ReactComponent as LeftArrow } from '../../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../../imgs/svg/right-arrow-servings.svg';
 
@@ -200,78 +201,6 @@ const MotionLinearGradientGreen = styled(motion.div)`
 `;
 
 const GhostResult = () => {
-  const loadingCircle = {
-    display: 'block',
-    width: '0.45rem',
-    height: '0.45rem',
-    borderRadius: '0.25rem',
-  };
-
-  const loadingContainerVariants = {
-    start: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-    end: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const loadingCircleVariants = {
-    start: {
-      y: '0%',
-    },
-    end: {
-      y: '100%',
-    },
-  };
-
-  const loadingCircleTransition = {
-    duration: 0.5,
-    repeat: Infinity,
-    repeatType: 'reverse',
-    ease: 'easeInOut',
-  };
-
-  const generateFramerElipsis = (
-    styles,
-    backgroundColor = { backgroundColor: 'black' }
-  ) => {
-    return (
-      <motion.div
-        style={{
-          ...styles,
-          width: '2rem',
-          height: '2rem',
-          display: 'flex',
-          justifyContent: 'space-around',
-        }}
-        variants={loadingContainerVariants}
-        initial="start"
-        animate="end"
-      >
-        <motion.span
-          style={{ ...loadingCircle, ...backgroundColor }}
-          variants={loadingCircleVariants}
-          transition={loadingCircleTransition}
-        />
-        <motion.span
-          style={{ ...loadingCircle, ...backgroundColor }}
-          variants={loadingCircleVariants}
-          transition={loadingCircleTransition}
-        />
-        <motion.span
-          style={{ ...loadingCircle, ...backgroundColor }}
-          variants={loadingCircleVariants}
-          transition={loadingCircleTransition}
-        />
-      </motion.div>
-    );
-  };
-
   return (
     <RecipeListingSection>
       <RecipeListingContainer>
@@ -291,7 +220,11 @@ const GhostResult = () => {
 
         <h2>
           Loading Recipe{' '}
-          {generateFramerElipsis({ marginLeft: '0.4rem', paddingTop: '2rem' })}
+          {generateFramerElipsis({
+            marginLeft: '0.4rem',
+            paddingTop: '2rem',
+            gap: '0.2rem',
+          })}
         </h2>
 
         <RecipeServingsBox>
@@ -303,6 +236,7 @@ const GhostResult = () => {
             {generateFramerElipsis({
               marginLeft: '0.4rem',
               paddingTop: '1rem',
+              gap: '0.2rem',
             })}
           </span>
           <ServingsBtn btnSize="small" icon={true}>
@@ -317,50 +251,95 @@ const GhostResult = () => {
             <ul>
               <li>
                 <p>Kcal</p>
-                <div>{generateFramerElipsis({ flexDirection: 'row' })}</div>
+                <div>
+                  {generateFramerElipsis({
+                    flexDirection: 'row',
+                    gap: '0.2rem',
+                  })}
+                </div>
                 <div>
                   {generateFramerElipsis(
-                    { flexDirection: 'row', paddingBottom: '1rem' },
+                    {
+                      flexDirection: 'row',
+                      paddingBottom: '1rem',
+                      gap: '0.2rem',
+                    },
                     { backgroundColor: 'white' }
                   )}
                 </div>
               </li>
               <li>
                 <p>Carb</p>
-                <div>{generateFramerElipsis({ flexDirection: 'row' })}</div>
+                <div>
+                  {generateFramerElipsis({
+                    flexDirection: 'row',
+                    gap: '0.2rem',
+                  })}
+                </div>
                 <div>
                   {generateFramerElipsis(
-                    { flexDirection: 'row', paddingBottom: '1rem' },
+                    {
+                      flexDirection: 'row',
+                      paddingBottom: '1rem',
+                      gap: '0.2rem',
+                    },
                     { backgroundColor: 'white' }
                   )}
                 </div>
               </li>
               <li>
                 <p>Fat</p>
-                <div>{generateFramerElipsis({ flexDirection: 'row' })}</div>
+                <div>
+                  {generateFramerElipsis({
+                    flexDirection: 'row',
+                    gap: '0.2rem',
+                  })}
+                </div>
                 <div>
                   {generateFramerElipsis(
-                    { flexDirection: 'row', paddingBottom: '1rem' },
+                    {
+                      flexDirection: 'row',
+                      paddingBottom: '1rem',
+                      gap: '0.2rem',
+                    },
                     { backgroundColor: 'white' }
                   )}
                 </div>
               </li>
               <li>
                 <p>Saturates</p>
-                <div>{generateFramerElipsis({ flexDirection: 'row' })}</div>
+                <div>
+                  {generateFramerElipsis({
+                    flexDirection: 'row',
+                    gap: '0.2rem',
+                  })}
+                </div>
                 <div>
                   {generateFramerElipsis(
-                    { flexDirection: 'row', paddingBottom: '1rem' },
+                    {
+                      flexDirection: 'row',
+                      paddingBottom: '1rem',
+                      gap: '0.2rem',
+                    },
                     { backgroundColor: 'white' }
                   )}
                 </div>
               </li>
               <li>
                 <p>Salt</p>
-                <div>{generateFramerElipsis({ flexDirection: 'row' })}</div>
+                <div>
+                  {generateFramerElipsis({
+                    flexDirection: 'row',
+                    gap: '0.2rem',
+                  })}
+                </div>
                 <div>
                   {generateFramerElipsis(
-                    { flexDirection: 'row', paddingBottom: '1rem' },
+                    {
+                      flexDirection: 'row',
+                      paddingBottom: '1rem',
+                      gap: '0.2rem',
+                    },
                     { backgroundColor: 'white' }
                   )}
                 </div>
@@ -375,6 +354,7 @@ const GhostResult = () => {
             {generateFramerElipsis({
               marginLeft: '0.4rem',
               paddingTop: '2rem',
+              gap: '0.2rem',
             })}
           </h2>
 
