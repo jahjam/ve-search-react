@@ -9,7 +9,7 @@ import Button from '../comps/temps/Button';
 import Title from '../comps/Title';
 import Results from '../comps/Results';
 
-const SearchStyles = styled.section`
+const SearchStyles = styled(motion.section)`
   margin-top: -2rem;
   width: 100%;
 
@@ -17,9 +17,8 @@ const SearchStyles = styled.section`
   gap: 3rem;
 `;
 
-const SearchInputStyles = styled(motion.div)`
+const SearchInputStyles = styled.div`
   width: 100%;
-  opacity: 0;
 
   ${Flex()}
   gap: 1rem;
@@ -60,12 +59,13 @@ const Search = () => {
   };
 
   return (
-    <SearchStyles>
+    <SearchStyles
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <Title />
-      <SearchInputStyles
-        animate={{ opacity: 1 }}
-        transition={{ type: 'spring', duration: 6 }}
-      >
+      <SearchInputStyles>
         <input ref={inputEl} type="text" />
         <ButtonStyles onClick={searchInputHandler} btnSize="medium">
           Search

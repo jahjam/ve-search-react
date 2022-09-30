@@ -2,15 +2,16 @@ import styled from 'styled-components';
 import { FlexColumn, Flex } from '../helpers/mixins';
 import { useContext, useState } from 'react';
 import AuthContext from '../store/auth-context';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import { ReactComponent as AccountIcon } from '../imgs/svg/account.svg';
 import { ReactComponent as IngIcon } from '../imgs/svg/title-icon.svg';
 import { ReactComponent as Bookmark } from '../imgs/svg/bookmark.svg';
 import { ReactComponent as AddIcon } from '../imgs/svg/add.svg';
+import { ReactComponent as Upload } from '../imgs/svg/upload.svg';
 import Button from '../comps/temps/Button';
+import MyRecipes from '../pages/MyRecipes';
 
-const AccountContainerStyled = styled.section`
+const AccountContainerStyled = styled(motion.section)`
   margin-top: 2rem;
   width: auto;
   height: auto;
@@ -60,6 +61,7 @@ const Avatar = styled.div`
     height: 12rem;
     background-color: black;
     border-radius: 50%;
+    border: var(--main-border);
 
     overflow: hidden;
 
@@ -88,7 +90,7 @@ const Details = styled.div`
   height: auto;
   width: 100%;
 
-  ${FlexColumn()}
+  ${FlexColumn('center', 'flex-start')}
 
   & ul {
     list-style: none;
@@ -221,7 +223,7 @@ const AddBtn = styled(Button)`
   }
 `;
 
-const EditPassDiv = styled.div`
+const EditPassDiv = styled(motion.div)`
   ${FlexColumn('center', 'flex-start')}
   gap: 1rem;
 
@@ -233,6 +235,33 @@ const EditPassDiv = styled.div`
 
 const Password = styled.span`
   font-size: 1.6rem !important;
+`;
+
+const UploadIconStyles = styled(Upload)`
+  height: 2rem;
+`;
+
+const UploadForm = styled(motion.form)`
+  font-size: 1.4rem;
+  background-color: var(--main-theme-color);
+
+  & label {
+    border: var(--main-border);
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+
+    ${Flex()}
+    gap: 1rem;
+  }
+
+  & input {
+    display: none;
+  }
+
+  &:hover {
+    background-color: #58b15a;
+  }
 `;
 
 const Account = props => {
@@ -255,114 +284,132 @@ const Account = props => {
     setEditAvatar(!editAvatar);
   };
 
-  return (
-    <AccountContainerStyled>
-      <AccountGrid>
-        <Name>
-          <h1>Hi, {userDetails.user && userDetails.user.username}!</h1>
-          <span>
-            Member since{' '}
-            {userDetails.user && (userDetails.user.joinDate || '...')}
-          </span>
-        </Name>
+  if (isLoading) return <h1>loading...</h1>;
 
-        <Avatar>
-          <div>
-            <img
-              src={`/public/img/users/${
-                userDetails.user && userDetails.user.photo
-              }`}
-              alt="avatar"
-            />
-          </div>
-          <span onClick={editAvatarHandler}>Edit avatar</span>
+  if (!isLoading)
+    return (
+      <>
+        <AccountContainerStyled
+          initial={{ y: -40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <AccountGrid>
+            <Name>
+              <h1>Hi, {userDetails.user?.username}!</h1>
+              <span>Member since {userDetails.user?.joinDate || '...'}</span>
+            </Name>
 
-          {editAvatar && (
-            <motion.form
-              initial={{ y: -40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-            >
-              <input type="file" placeholder="Enter new email" />
-            </motion.form>
-          )}
-        </Avatar>
-
-        <Details>
-          <ul>
-            <li>
-              <AccountIcon />
-              <span>My account</span>
-            </li>
-            <li>
-              <IngIcon />
-              <span>My recipes</span>
-            </li>
-            <li>
-              <Bookmark />
-              <span>My saved recipes</span>
-            </li>
-          </ul>
-        </Details>
-
-        <Edit>
-          <ul>
-            <li>
+            <Avatar>
               <div>
-                <h2>Email</h2>
-                <span onClick={editEmailHandler}>Edit</span>
+                {userDetails.user && (
+                  <img
+                    src={`/public/img/users/${userDetails.user.photo}`}
+                    alt="avatar"
+                  />
+                )}
               </div>
-              <span>{userDetails.user && userDetails.user.email}</span>
-              {editEmail && (
-                <motion.form
-                  initial={{ y: -40, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                >
-                  <input placeholder="Enter new email" />
-                  <Button display="flex" btnSize="small">
-                    Update
-                  </Button>
-                </motion.form>
-              )}
-            </li>
-            <li>
-              <div>
-                <h2>Password</h2>
-                <span onClick={editPassHandler}>Edit</span>
-              </div>
-              <Password>
-                &#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;
-              </Password>
+              <span onClick={editAvatarHandler}>Edit avatar</span>
 
-              {editPass && (
-                <EditPassDiv>
-                  <span>
-                    A password reset link will be sent to the email you enter
-                    below:
-                  </span>
-                  <motion.form
+              <AnimatePresence>
+                {editAvatar && (
+                  <UploadForm
                     initial={{ y: -40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
                   >
-                    <input placeholder="Email" />
-                    <Button display="flex" btnSize="small">
-                      Send
-                    </Button>
-                  </motion.form>
-                </EditPassDiv>
-              )}
-            </li>
-          </ul>
-        </Edit>
+                    <label>
+                      <UploadIconStyles />
+                      <input type="file" placeholder="Enter new email" />
+                      Upload
+                    </label>
+                  </UploadForm>
+                )}
+              </AnimatePresence>
+            </Avatar>
 
-        <Add>
-          <AddBtn icon={true} btnSize="large">
-            <AddIconStyles />
-            <span>Add a recipe</span>
-          </AddBtn>
-        </Add>
-      </AccountGrid>
-    </AccountContainerStyled>
-  );
+            <Details>
+              <ul>
+                <li>
+                  <IngIcon />
+                  <span>My recipes</span>
+                </li>
+                <li>
+                  <Bookmark />
+                  <span>My saved recipes</span>
+                </li>
+              </ul>
+            </Details>
+
+            <Edit>
+              <ul>
+                <li>
+                  <div>
+                    <h2>Email</h2>
+                    <span onClick={editEmailHandler}>Edit</span>
+                  </div>
+                  <span>{userDetails.user?.email}</span>
+
+                  <AnimatePresence>
+                    {editEmail && (
+                      <motion.form
+                        initial={{ y: -40, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <input placeholder="Enter new email" />
+                        <Button display="flex" btnSize="small">
+                          Update
+                        </Button>
+                      </motion.form>
+                    )}
+                  </AnimatePresence>
+                </li>
+                <li>
+                  <div>
+                    <h2>Password</h2>
+                    <span onClick={editPassHandler}>Edit</span>
+                  </div>
+                  <Password>
+                    &#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;
+                  </Password>
+
+                  <AnimatePresence>
+                    {editPass && (
+                      <EditPassDiv
+                        initial={{ y: -40, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <span>
+                          A password reset link will be sent to the email you
+                          enter below:
+                        </span>
+                        <form>
+                          <input placeholder="Email" />
+                          <Button display="flex" btnSize="small">
+                            Send
+                          </Button>
+                        </form>
+                      </EditPassDiv>
+                    )}
+                  </AnimatePresence>
+                </li>
+              </ul>
+            </Edit>
+
+            <Add>
+              <AddBtn icon={true} btnSize="large">
+                <AddIconStyles />
+                <span>Add a recipe</span>
+              </AddBtn>
+            </Add>
+          </AccountGrid>
+        </AccountContainerStyled>
+
+        <MyRecipes />
+      </>
+    );
 };
 
 export default Account;

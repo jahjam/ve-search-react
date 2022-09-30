@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 import { ReactComponent as TitleIcon } from '../imgs/svg/title-icon.svg';
 import { FlexColumn } from '../helpers/mixins';
-import { motion } from 'framer-motion';
 
-const TitleStyles = styled(motion.div)`
+const TitleStyles = styled.div`
   width: 100%;
-  opacity: 0;
   margin-top: 4rem;
 
   ${FlexColumn()}
@@ -31,10 +29,7 @@ const TitleIconStyles = styled(TitleIcon)`
 
 const Title = () => {
   return (
-    <TitleStyles
-      animate={{ opacity: 1 }}
-      transition={{ type: 'spring', duration: 6 }}
-    >
+    <TitleStyles>
       <h1>
         VEsearch <TitleIconStyles />
       </h1>

@@ -1,6 +1,7 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexColumn } from './helpers/mixins';
+import { AnimatePresence } from 'framer-motion';
 
 import Header from './comps/Header';
 import Search from './pages/Search';
@@ -14,18 +15,22 @@ const SearchStyles = styled.main`
 `;
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
       <Header />
 
       <SearchStyles>
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/search" />} />
-          <Route path="/search" element={<Search />}>
-            <Route path=":resultId" element={<Result />} />
-          </Route>
-          <Route path="/me" element={<Account />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname.split('/')[1]}>
+            <Route path="/" element={<Navigate replace to="/search" />} />
+            <Route path="/search" element={<Search />}>
+              <Route path=":resultId" element={<Result />} />
+            </Route>
+            <Route path="/me" element={<Account />} />
+          </Routes>
+        </AnimatePresence>
       </SearchStyles>
     </>
   );

@@ -17,7 +17,6 @@ export const AuthContextProvider = props => {
 
   useEffect(() => {
     const reciever = data => {
-      console.log(data);
       data && setIsLoggedIn(true);
       data &&
         setUserDetails(prevState => {
