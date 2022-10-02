@@ -17,6 +17,8 @@ const useRequest = () => {
 
       if (!res.ok) {
         const error = await res.json();
+
+        setIsLoading(false);
         throw error;
       }
 
@@ -27,6 +29,7 @@ const useRequest = () => {
       setIsError(true);
       setErrorMsg(err.message);
     }
+
     setIsLoading(false);
   }, []);
 

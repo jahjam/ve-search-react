@@ -41,7 +41,6 @@ const SourceLinkButton = styled(Button)`
 `;
 
 const LinkSection = props => {
-  console.log(props);
   return (
     <SourceLinkSection>
       <SourceLinkTitle>Want to cook this recipe?</SourceLinkTitle>

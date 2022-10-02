@@ -3,13 +3,13 @@ import { FlexColumn, Flex } from '../helpers/mixins';
 import { useContext, useState } from 'react';
 import AuthContext from '../store/auth-context';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, Outlet } from 'react-router-dom';
 
 import { ReactComponent as IngIcon } from '../imgs/svg/title-icon.svg';
 import { ReactComponent as Bookmark } from '../imgs/svg/bookmark.svg';
 import { ReactComponent as AddIcon } from '../imgs/svg/add.svg';
 import { ReactComponent as Upload } from '../imgs/svg/upload.svg';
 import Button from '../comps/temps/Button';
-import MyRecipes from '../pages/MyRecipes';
 
 const AccountContainerStyled = styled(motion.section)`
   margin-top: 2rem;
@@ -265,6 +265,7 @@ const UploadForm = styled(motion.form)`
 `;
 
 const Account = props => {
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   const [editEmail, setEditEmail] = useState(false);
   const [editPass, setEditPass] = useState(false);
@@ -282,6 +283,10 @@ const Account = props => {
 
   const editAvatarHandler = () => {
     setEditAvatar(!editAvatar);
+  };
+
+  const myRecipesHandler = () => {
+    navigate('/me/my-recipes');
   };
 
   if (isLoading) return <h1>loading...</h1>;
@@ -330,7 +335,7 @@ const Account = props => {
 
             <Details>
               <ul>
-                <li>
+                <li onClick={myRecipesHandler}>
                   <IngIcon />
                   <span>My recipes</span>
                 </li>
@@ -407,7 +412,7 @@ const Account = props => {
           </AccountGrid>
         </AccountContainerStyled>
 
-        <MyRecipes />
+        <Outlet />
       </>
     );
 };

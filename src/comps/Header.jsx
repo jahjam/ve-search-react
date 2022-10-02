@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Flex, FlexColumn } from '../helpers/mixins';
 import Button from './temps/Button';
 import { ReactComponent as TitleIcon } from '../imgs/svg/title-icon.svg';
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
@@ -175,38 +175,11 @@ const Header = () => {
   const email = useRef();
   const password = useRef();
   const [toLogin, setToLogin] = useState(false);
-  const [enteredLoginDetails, setenteredLoginDetails] = useState({});
-  const [loginDetails, setLoginDetails] = useState({});
 
   const { userDetails } = authCtx;
 
   const { isLoading, isError, errorMsg, resetError, sendRequest } =
     useRequest();
-
-  useEffect(() => {
-    if (Object.keys(enteredLoginDetails).length === 0) return;
-
-    const reciever = data => {
-      setLoginDetails(prevState => {
-        return { ...prevState, ...data.data.user };
-      });
-      data && authCtx.setIsLoggedInHandler();
-      data && setToLogin(false);
-    };
-
-    sendRequest(
-      {
-        url: '/api/v1/users/login',
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: {
-          email: enteredLoginDetails.email,
-          password: enteredLoginDetails.password,
-        },
-      },
-      reciever
-    );
-  }, [authCtx, sendRequest, enteredLoginDetails]);
 
   const toLoginHandler = () => {
     setToLogin(true);
@@ -219,10 +192,24 @@ const Header = () => {
   const onLoginSubmitHandler = e => {
     e.preventDefault();
 
-    setenteredLoginDetails({
-      email: email.current.value,
-      password: password.current.value,
-    });
+    const reciever = data => {
+      authCtx.setIsLoggedInHandler();
+      authCtx.setUserDetailsHandler(data);
+      setToLogin(false);
+    };
+
+    sendRequest(
+      {
+        url: '/api/v1/users/login',
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: {
+          email: email.current.value,
+          password: password.current.value,
+        },
+      },
+      reciever
+    );
   };
 
   const toAccountPageHandler = () => {
@@ -304,13 +291,11 @@ const Header = () => {
           <ProfileStyles onClick={toAccountPageHandler}>
             <div>
               <img
-                src={`/public/img/users/${
-                  loginDetails.photo || userDetails.user.photo
-                }`}
+                src={`/public/img/users/${userDetails.user.photo}`}
                 alt="avatar"
               />
             </div>
-            <p>{loginDetails.username || userDetails.user.username}</p>
+            <p>{userDetails.user.username}</p>
           </ProfileStyles>
         )}
       </div>

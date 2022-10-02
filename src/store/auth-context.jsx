@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import useRequest from '../hooks/use-request';
 
 const AuthContext = React.createContext({
@@ -31,11 +31,18 @@ export const AuthContextProvider = props => {
     setIsLoggedIn(true);
   };
 
+  const setUserDetailsHandler = data => {
+    setUserDetails(prevState => {
+      return { ...prevState, user: data.data.user };
+    });
+  };
+
   const contextValue = {
     isLoggedIn,
     userDetails,
-    setIsLoggedInHandler,
     isLoading,
+    setUserDetailsHandler,
+    setIsLoggedInHandler,
   };
 
   return (
