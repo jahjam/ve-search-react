@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FlexColumn, Flex } from '../helpers/mixins';
 
+import { useContext, useState } from 'react';
+import AuthContext from '../store/auth-context';
+
+import RecipeCard from '../comps/temps/RecipeCard';
+
 const ContainerStyled = styled(motion.section)`
   margin-top: 2rem;
   width: 80%;
@@ -22,34 +27,6 @@ const Results = styled.div`
   column-gap: 2rem;
 `;
 
-const RecipeCard = styled.div`
-  width: 100%;
-  height: auto;
-  border: var(--main-border);
-
-  cursor: pointer;
-
-  & div:nth-child(1) {
-    margin: 1rem;
-    height: 10rem;
-    width: auto;
-
-    padding: 1rem;
-
-    background-color: grey;
-
-    ${Flex()}
-    gap: 0.6rem;
-
-    & div:nth-child(1) {
-      height: 7rem;
-      min-width: 7rem;
-
-      background-color: blue;
-    }
-  }
-`;
-
 const SearchBar = styled.div`
   align-self: flex-end;
 
@@ -57,7 +34,7 @@ const SearchBar = styled.div`
   gap: 1.4rem;
 
   & label {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   & input {
@@ -67,51 +44,55 @@ const SearchBar = styled.div`
   }
 `;
 
+const NoRecipesMsg = styled.span`
+  grid-column: 1/4;
+
+  font-size: 2rem;
+`;
+
 const MyRecipes = () => {
+  const authCtx = useContext(AuthContext);
+  const [searchInput, setSearchInput] = useState('');
+
+  const { userDetails } = authCtx;
+
+  console.log(userDetails);
+
+  const filteredRecipes = userDetails.user?.recipes.map(recipe => {
+    if (recipe.name.toLowerCase().includes(searchInput)) return recipe;
+  });
+
+  const onChangeHandler = e => {
+    setSearchInput(e.target.value);
+  };
+
   return (
     <>
       <ContainerStyled>
         <SearchBar>
-          <label>Search:</label>
-          <input type="text" placeholder="tofu"></input>
+          <label htmlFor="search">Search:</label>
+          <input
+            id="search"
+            type="text"
+            placeholder="tofu"
+            value={searchInput}
+            onChange={onChangeHandler}
+          ></input>
         </SearchBar>
         <Results>
-          <RecipeCard>
-            <div>
-              <div></div>
-              <div>
-                <h2>Tofu burger</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Debitis, odit.
-                </p>
-              </div>
-            </div>
-          </RecipeCard>
-          <RecipeCard>
-            <div>
-              <div></div>
-              <div>
-                <h2>Tofu burger</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Debitis, odit.
-                </p>
-              </div>
-            </div>
-          </RecipeCard>
-          <RecipeCard>
-            <div>
-              <div></div>
-              <div>
-                <h2>Tofu burger</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Debitis, odit.
-                </p>
-              </div>
-            </div>
-          </RecipeCard>
+          {!filteredRecipes?.some(el => el === undefined) ? (
+            filteredRecipes?.map(recipe => (
+              <RecipeCard
+                key={recipe.id}
+                id={recipe.id}
+                photo={recipe.coverImage}
+                name={recipe.name}
+                desc={recipe.description}
+              />
+            ))
+          ) : (
+            <NoRecipesMsg>No recipes found!</NoRecipesMsg>
+          )}
         </Results>
       </ContainerStyled>
     </>

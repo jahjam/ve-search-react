@@ -217,7 +217,6 @@ const Result = () => {
   useEffect(() => {
     const receiver = data => {
       setResult(data);
-      console.log(data);
     };
 
     sendRequest({ url: `/api/v1/recipes/${params.resultId}` }, receiver);

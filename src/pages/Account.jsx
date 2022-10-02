@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { FlexColumn, Flex } from '../helpers/mixins';
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef } from 'react';
 import AuthContext from '../store/auth-context';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, Outlet } from 'react-router-dom';
 
+import useRequest from '../hooks/use-request';
+import { generateFramerElipsis } from '../helpers/generateFramerElipsis';
 import { ReactComponent as IngIcon } from '../imgs/svg/title-icon.svg';
 import { ReactComponent as Bookmark } from '../imgs/svg/bookmark.svg';
 import { ReactComponent as AddIcon } from '../imgs/svg/add.svg';
@@ -270,6 +272,11 @@ const Account = props => {
   const [editEmail, setEditEmail] = useState(false);
   const [editPass, setEditPass] = useState(false);
   const [editAvatar, setEditAvatar] = useState(false);
+  const email = useRef();
+  const emailForPassword = useRef();
+  const [passResetMsg, setPassResetMsg] = useState(null);
+
+  const { isLoading: resetRequestIsLoading, sendRequest } = useRequest();
 
   const { isLoading, userDetails } = authCtx;
 
@@ -279,6 +286,7 @@ const Account = props => {
 
   const editPassHandler = () => {
     setEditPass(!editPass);
+    setPassResetMsg(null);
   };
 
   const editAvatarHandler = () => {
@@ -289,7 +297,52 @@ const Account = props => {
     navigate('/me/my-recipes');
   };
 
-  if (isLoading) return <h1>loading...</h1>;
+  const changeEmailHandler = e => {
+    const reciever = data => {
+      authCtx.setUserDetailsHandler(data);
+    };
+
+    sendRequest(
+      {
+        url: '/api/v1/users/me',
+        method: 'PATCH',
+        headers: { 'content-type': 'application/json' },
+        body: {
+          email: email.current.value,
+        },
+      },
+      reciever
+    );
+
+    email.current.value = '';
+    setEditEmail(!editEmail);
+  };
+
+  const passwordResetHandler = () => {
+    const reciever = data => {
+      setPassResetMsg(data.message);
+
+      setTimeout(() => {
+        setPassResetMsg(null);
+      }, 6000);
+    };
+
+    sendRequest(
+      {
+        url: '/api/v1/users/forgotPassword',
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: {
+          email: emailForPassword.current.value,
+        },
+      },
+      reciever
+    );
+
+    setEditPass(!editPass);
+  };
+
+  if (isLoading) return <span>{generateFramerElipsis({ gap: '0.2rem' })}</span>;
 
   if (!isLoading)
     return (
@@ -362,8 +415,12 @@ const Account = props => {
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ opacity: 0 }}
                       >
-                        <input placeholder="Enter new email" />
-                        <Button display="flex" btnSize="small">
+                        <input ref={email} placeholder="Enter new email" />
+                        <Button
+                          display="flex"
+                          btnSize="small"
+                          onClick={changeEmailHandler}
+                        >
                           Update
                         </Button>
                       </motion.form>
@@ -391,13 +448,19 @@ const Account = props => {
                           enter below:
                         </span>
                         <form>
-                          <input placeholder="Email" />
-                          <Button display="flex" btnSize="small">
+                          <input ref={emailForPassword} placeholder="Email" />
+                          <Button
+                            display="flex"
+                            btnSize="small"
+                            onClick={passwordResetHandler}
+                          >
                             Send
                           </Button>
                         </form>
                       </EditPassDiv>
                     )}
+                    {resetRequestIsLoading && <span>Sending...</span>}
+                    {passResetMsg && <span>{passResetMsg}</span>}
                   </AnimatePresence>
                 </li>
               </ul>
