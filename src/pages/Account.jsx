@@ -3,7 +3,7 @@ import { FlexColumn, Flex } from '../helpers/mixins';
 import { useContext, useState, useRef } from 'react';
 import AuthContext from '../store/auth-context';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 
 import useRequest from '../hooks/use-request';
 import { generateFramerElipsis } from '../helpers/generateFramerElipsis';
@@ -100,6 +100,18 @@ const Details = styled.div`
     ${FlexColumn('flex-start')}
     gap: 2rem;
 
+    & li:nth-child(1) {
+      background-color: ${props => {
+        if (props.location.pathname === '/me/my-recipes') return '#58b15a';
+      }};
+    }
+
+    & li:nth-child(1) {
+      background-color: ${props => {
+        if (props.location.pathname === '/me/saved-recipes') return '#58b15a';
+      }};
+    }
+
     & li {
       ${Flex()}
       gap: 1rem;
@@ -112,8 +124,7 @@ const Details = styled.div`
 
       cursor: pointer;
 
-      &:hover,
-      &:active {
+      &:hover {
         background-color: #58b15a;
       }
 
@@ -266,7 +277,7 @@ const UploadForm = styled(motion.form)`
   }
 `;
 
-const Account = props => {
+const Account = () => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   const [editEmail, setEditEmail] = useState(false);
@@ -276,9 +287,11 @@ const Account = props => {
   const emailForPassword = useRef();
   const [passResetMsg, setPassResetMsg] = useState(null);
 
+  const location = useLocation();
+
   const { isLoading: resetRequestIsLoading, sendRequest } = useRequest();
 
-  const { isLoading, userDetails } = authCtx;
+  const { dataIsLoading, userDetails } = authCtx;
 
   const editEmailHandler = () => {
     setEditEmail(!editEmail);
@@ -342,9 +355,10 @@ const Account = props => {
     setEditPass(!editPass);
   };
 
-  if (isLoading) return <span>{generateFramerElipsis({ gap: '0.2rem' })}</span>;
+  if (dataIsLoading)
+    return <span>{generateFramerElipsis({ gap: '0.2rem' })}</span>;
 
-  if (!isLoading)
+  if (!dataIsLoading)
     return (
       <>
         <AccountContainerStyled
@@ -386,7 +400,7 @@ const Account = props => {
               </AnimatePresence>
             </Avatar>
 
-            <Details>
+            <Details location={location}>
               <ul>
                 <li onClick={myRecipesHandler}>
                   <IngIcon />

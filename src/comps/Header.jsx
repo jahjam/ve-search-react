@@ -4,7 +4,7 @@ import Button from './temps/Button';
 import { ReactComponent as TitleIcon } from '../imgs/svg/title-icon.svg';
 import { useState, useRef, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import AuthContext from '../store/auth-context';
 import { generateFramerElipsis } from '../helpers/generateFramerElipsis';
@@ -34,6 +34,10 @@ const ProfileStyles = styled.div`
 
   ${Flex('center', 'flex-end')};
   gap: 2rem;
+
+  background-color: ${props => {
+    if (props.location.pathname.startsWith('/me')) return '#58b15a';
+  }};
 
   &:hover {
     background-color: #58b15a;
@@ -169,6 +173,12 @@ const Alert = styled(motion.div)`
   }
 `;
 
+const LoggingInOnLoad = styled.span`
+  font-size: 1.6rem;
+
+  ${Flex()}
+`;
+
 const Header = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
@@ -176,7 +186,9 @@ const Header = () => {
   const password = useRef();
   const [toLogin, setToLogin] = useState(false);
 
-  const { userDetails } = authCtx;
+  const location = useLocation();
+
+  const { isLoading: authCtxLoading, userDetails } = authCtx;
 
   const { isLoading, isError, errorMsg, resetError, sendRequest } =
     useRequest();
@@ -246,7 +258,15 @@ const Header = () => {
       </Alert>
 
       <div>
-        {!toLogin && !authCtx.isLoggedIn && (
+        {authCtxLoading && !toLogin && (
+          <LoggingInOnLoad>
+            {generateFramerElipsis({
+              gap: '0.2rem',
+            })}
+          </LoggingInOnLoad>
+        )}
+
+        {!toLogin && !authCtx.isLoggedIn && !authCtxLoading && (
           <SigninSignupContainer>
             <HeaderLoginBtnStyles onClick={toLoginHandler} btnSize="medium">
               Login
@@ -288,7 +308,7 @@ const Header = () => {
         )}
 
         {authCtx.isLoggedIn && (
-          <ProfileStyles onClick={toAccountPageHandler}>
+          <ProfileStyles location={location} onClick={toAccountPageHandler}>
             <div>
               <img
                 src={`/public/img/users/${userDetails.user.photo}`}

@@ -1,17 +1,18 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FlexColumn, Flex } from '../helpers/mixins';
 
-import { useContext, useState } from 'react';
+import { useContext, useState, useMemo } from 'react';
 import AuthContext from '../store/auth-context';
+import Pagination from '../comps/temps/Pagination';
 
 import RecipeCard from '../comps/temps/RecipeCard';
 
 const ContainerStyled = styled(motion.section)`
   margin-top: 2rem;
-  width: 80%;
+  width: 100rem;
   height: auto;
-  padding: 1.6rem;
+  padding: 2rem;
   border: 0.2rem solid black;
 
   ${FlexColumn()}
@@ -24,7 +25,7 @@ const Results = styled.div`
   justify-items: center;
   align-items: center;
   row-gap: 2rem;
-  column-gap: 2rem;
+  column-gap: 1rem;
 `;
 
 const SearchBar = styled.div`
@@ -50,17 +51,24 @@ const NoRecipesMsg = styled.span`
   font-size: 2rem;
 `;
 
+let pageSize = 9;
+
 const MyRecipes = () => {
   const authCtx = useContext(AuthContext);
   const [searchInput, setSearchInput] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { userDetails } = authCtx;
-
-  console.log(userDetails);
 
   const filteredRecipes = userDetails.user?.recipes.map(recipe => {
     if (recipe.name.toLowerCase().includes(searchInput)) return recipe;
   });
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return filteredRecipes?.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, filteredRecipes]);
 
   const onChangeHandler = e => {
     setSearchInput(e.target.value);
@@ -68,7 +76,11 @@ const MyRecipes = () => {
 
   return (
     <>
-      <ContainerStyled>
+      <ContainerStyled
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
         <SearchBar>
           <label htmlFor="search">Search:</label>
           <input
@@ -81,7 +93,7 @@ const MyRecipes = () => {
         </SearchBar>
         <Results>
           {!filteredRecipes?.some(el => el === undefined) ? (
-            filteredRecipes?.map(recipe => (
+            currentTableData?.map(recipe => (
               <RecipeCard
                 key={recipe.id}
                 id={recipe.id}
@@ -94,6 +106,15 @@ const MyRecipes = () => {
             <NoRecipesMsg>No recipes found!</NoRecipesMsg>
           )}
         </Results>
+
+        {filteredRecipes && (
+          <Pagination
+            currentPage={currentPage}
+            totalCount={filteredRecipes.length}
+            pageSize={pageSize}
+            onPageChange={page => setCurrentPage(page)}
+          />
+        )}
       </ContainerStyled>
     </>
   );

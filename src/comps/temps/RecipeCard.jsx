@@ -6,7 +6,7 @@ import { Flex } from '../../helpers/mixins';
 import truncateParagraph from '../../helpers/truncateParagraph';
 
 const RecipeCardStyles = styled.div`
-  width: 100%;
+  width: 30rem;
   height: auto;
   border: var(--main-border);
 
@@ -32,7 +32,9 @@ const RecipeCardStyles = styled.div`
       height: 7rem;
       min-width: 7rem;
 
-      background-color: blue;
+      background-color: black;
+
+      border: var(--main-border);
 
       overflow: hidden;
 
