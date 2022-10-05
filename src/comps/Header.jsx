@@ -26,11 +26,20 @@ const HeaderStyled = styled(motion.header)`
   position: relative;
 `;
 
-const ProfileStyles = styled.div`
+const ProfileStyles = styled.button`
   padding: 0.8rem 3rem;
   border: var(--main-border);
 
   cursor: pointer;
+
+  background-color: var(--main-theme-color);
+
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.4rem var(--main-light-color);
+  }
 
   ${Flex('center', 'flex-end')};
   gap: 2rem;
@@ -65,11 +74,16 @@ const ProfileStyles = styled.div`
 `;
 
 const HeaderIconStyles = styled(TitleIcon)`
-  height: 40px;
-  width: 40px;
+  height: 4rem;
+  width: 4rem;
   color: var(--main-light-color);
 
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.4rem var(--main-light-color);
+  }
 `;
 
 const LoginFormStyles = styled.div`
@@ -243,7 +257,7 @@ const Header = () => {
       }}
       onClick={tryAgainHandler}
     >
-      <HeaderIconStyles onClick={returnHomeHandler} />
+      <HeaderIconStyles tabIndex="0" onClick={returnHomeHandler} />
 
       <Alert
         initial={{ opacity: 0 }}

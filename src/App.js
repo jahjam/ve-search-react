@@ -8,6 +8,7 @@ import Search from './pages/Search';
 import Result from './pages/Result';
 import Account from './pages/Account';
 import MyRecipes from './pages/MyRecipes';
+import AddRecipe from './pages/AddRecipe';
 
 const SearchStyles = styled.main`
   padding: 2rem;
@@ -31,6 +32,7 @@ function App() {
             </Route>
             <Route path="/me" element={<Account />}>
               <Route path="my-recipes" element={<MyRecipes />} />
+              <Route path="add-a-recipe" element={<AddRecipe />} />
             </Route>
           </Routes>
         </AnimatePresence>

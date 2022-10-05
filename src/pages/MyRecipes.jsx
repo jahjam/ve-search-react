@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FlexColumn, Flex } from '../helpers/mixins';
 
 import { useContext, useState, useMemo } from 'react';

@@ -224,10 +224,13 @@ const AddBtn = styled(Button)`
 
   background-color: var(--main-theme-color);
 
+  background-color: ${props => {
+    if (props.location.pathname === '/me/add-a-recipe') return '#58b15a';
+  }};
+
   cursor: pointer;
 
-  &:hover,
-  &:active {
+  &:hover {
     background-color: #58b15a;
   }
 
@@ -353,6 +356,10 @@ const Account = () => {
     );
 
     setEditPass(!editPass);
+  };
+
+  const addRecipeHandler = () => {
+    navigate('/me/add-a-recipe');
   };
 
   if (dataIsLoading)
@@ -481,7 +488,12 @@ const Account = () => {
             </Edit>
 
             <Add>
-              <AddBtn icon={true} btnSize="large">
+              <AddBtn
+                location={location}
+                onClick={addRecipeHandler}
+                icon={true}
+                btnSize="large"
+              >
                 <AddIconStyles />
                 <span>Add a recipe</span>
               </AddBtn>
