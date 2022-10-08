@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 
@@ -125,6 +125,8 @@ const Results = props => {
   const getResultHandler = id => {
     navigate(`/search/${id}`);
   };
+
+  console.log(results);
 
   return (
     <ResultsStyles

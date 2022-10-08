@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
+import useRequest from '../hooks/use-request';
 import { ReactComponent as Upload } from '../imgs/svg/upload.svg';
 import { FlexColumn, Flex } from '../helpers/mixins';
 import Button from '../comps/temps/Button';
@@ -271,9 +273,57 @@ const ButtonStyles = styled(Button)`
   background-color: var(--main-theme-color);
 `;
 
+const ImageUploadTag = styled.span`
+  font-size: 1.4rem;
+`;
+
+const ErrorMsg = styled.h3`
+  font-size: 1.4rem;
+  color: #e31212;
+`;
+
 const AddRecipe = () => {
+  const { isLoading, isError, errorMsg, sendRequest } = useRequest();
+
+  const navigate = useNavigate();
+
+  const initialStaticInputs = {
+    name: '',
+    difficulty: '',
+    description: '',
+    servings: '',
+    prepTime: '',
+    cookTime: '',
+    dietTags: '',
+    kcalAmount: '',
+    kcalMeasurement: '',
+    fatAmount: '',
+    fatMeasurement: '',
+    sugarsAmount: '',
+    sugarsMeasurement: '',
+    fibreAmount: '',
+    fibreMeasurement: '',
+    saturatesAmount: '',
+    saturatesMeasurement: '',
+    protienAmount: '',
+    protienMeasurement: '',
+    carbsAmount: '',
+    carbsMeasurement: '',
+    saltAmount: '',
+    saltMeasurement: '',
+    methodsAlternative: '',
+    coverImage: '',
+  };
+
+  const [staticInputs, setStaticInputs] = useState(initialStaticInputs);
   const [noochProvided, setNoochProvided] = useState(false);
+  const [ingredientInputs, setIngredientInputs] = useState([
+    { name: '', amount: '', measurement: '' },
+  ]);
+
   const [methodsProvided, setMethodsProvided] = useState(true);
+  const [methodsInputs, setMethodsInputs] = useState([{ id: 1, method: '' }]);
+  const [image, setImage] = useState(null);
 
   const noochHandler = () => {
     setNoochProvided(!noochProvided);
@@ -282,12 +332,6 @@ const AddRecipe = () => {
   const methodsHandler = () => {
     setMethodsProvided(!methodsProvided);
   };
-
-  const [ingredientInputs, setIngredientInputs] = useState([
-    { name: '', amount: '', measurement: '' },
-  ]);
-
-  const [methodsInputs, setMethodsInputs] = useState([{ id: 1, method: '' }]);
 
   const addIngredientHandler = () => {
     setIngredientInputs(prevState => [
@@ -310,23 +354,98 @@ const AddRecipe = () => {
     setter(newInputVals);
   };
 
+  const staticInputsChangeHandler = e => {
+    const { name, value, id, innerHTML, files } = e.target;
+
+    if (files) setImage(files[0]);
+
+    setStaticInputs(prevState => ({
+      ...prevState,
+      [name || id]: value || innerHTML,
+    }));
+  };
+
   const removeInputHandler = (i, array, setter) => {
     const newInputVals = [...array];
-
     const finalInputVals = newInputVals.map(input => {
       if (i + 1 === array.length) return input;
-
       if (input.id === 1) return input;
-
       if (input.id > i + 1) input.id -= 1;
-
       return input;
     });
     finalInputVals.splice(i, 1);
     setter([...finalInputVals]);
   };
 
-  const submitHandler = () => {};
+  const submitHandler = e => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append('name', staticInputs.name);
+    formData.append('prepTime', staticInputs.prepTime);
+    formData.append('cookTime', staticInputs.cookTime);
+    formData.append('difficulty', staticInputs.difficulty);
+    formData.append('servings', staticInputs.servings);
+    formData.append('description', staticInputs.description);
+    formData.append('dietTags', staticInputs.dietTags);
+    formData.append('nutritionProvided', JSON.stringify(noochProvided));
+    formData.append(
+      'nutrition',
+      JSON.stringify({
+        kcal: {
+          amount: staticInputs.kcalAmount,
+          measurement: staticInputs.kcalMeasurement,
+        },
+        fat: {
+          amount: staticInputs.fatAmount,
+          measurement: staticInputs.fatMeasurement,
+        },
+        saturates: {
+          amount: staticInputs.saturatesAmount,
+          measurement: staticInputs.saturatesMeasurement,
+        },
+        carbs: {
+          amount: staticInputs.carbsAmount,
+          measurement: staticInputs.carbsMeasurement,
+        },
+        sugars: {
+          amount: staticInputs.sugarsAmount,
+          measurement: staticInputs.sugarsMeasurement,
+        },
+        fibre: {
+          amount: staticInputs.fibreAmount,
+          measurement: staticInputs.fibreMeasurement,
+        },
+        protien: {
+          amount: staticInputs.protienAmount,
+          measurement: staticInputs.protienMeasurement,
+        },
+        salt: {
+          amount: staticInputs.saltAmount,
+          measurement: staticInputs.saltMeasurement,
+        },
+      })
+    );
+    formData.append('ingredients', JSON.stringify(ingredientInputs));
+    formData.append('methodsProvided', JSON.stringify(methodsProvided));
+    formData.append('methods', JSON.stringify(methodsInputs));
+    formData.append('methodsAlternative', staticInputs.methodsAlternative);
+    formData.append('photo', image);
+
+    const reciever = data => {
+      navigate(`/search/${data.data.recipe.id}`);
+    };
+
+    sendRequest(
+      {
+        url: '/api/v1/recipes',
+        method: 'POST',
+        body: formData,
+      },
+      reciever
+    );
+  };
 
   return (
     <ContainerStyled
@@ -341,25 +460,54 @@ const AddRecipe = () => {
         <RecipeMainInfo>
           <div>
             <NameLabel htmlFor="name">Name:</NameLabel>
-            <input type="text" id="name"></input>
+            <input
+              value={staticInputs.name}
+              onChange={staticInputsChangeHandler}
+              type="text"
+              name="name"
+            ></input>
           </div>
 
           <div>
-            <label htmlFor="difficulty">Difficulty:</label>
-            <span>(in minutes)</span>
-            <input type="text" id="difficulty"></input>
+            {errorMsg?.match(/\((.*?)\)/g).includes('(Difficulty error)') ? (
+              <label style={{ color: '#e31212' }} htmlFor="difficulty">
+                Difficulty:
+              </label>
+            ) : (
+              <label htmlFor="difficulty">Difficulty:</label>
+            )}
+            <span>
+              ('novice', 'beginner', 'competent', 'proficient', 'master chef')
+            </span>
+            <input
+              value={staticInputs.difficulty}
+              onChange={staticInputsChangeHandler}
+              type="text"
+              name="difficulty"
+            ></input>
           </div>
         </RecipeMainInfo>
 
         <ContentEditable>
           <label htmlFor="desc">Description:</label>
-          <span role="textbox" id="desc" contentEditable></span>
+          <span
+            value={staticInputs.description}
+            onInput={e => staticInputsChangeHandler(e)}
+            role="textbox"
+            id="description"
+            contentEditable
+          ></span>
         </ContentEditable>
 
         <RecipeNumberInfo>
           <div>
             <ServingsLabel htmlFor="servings">Servings:</ServingsLabel>
-            <input type="number" id="servings"></input>
+            <input
+              value={staticInputs.servings}
+              onChange={staticInputsChangeHandler}
+              type="number"
+              name="servings"
+            ></input>
           </div>
 
           <div>
@@ -367,7 +515,12 @@ const AddRecipe = () => {
               <label htmlFor="prepTime">Preperation time:</label>
               <span>(in minutes)</span>
             </div>
-            <input type="number" id="prepTime"></input>
+            <input
+              value={staticInputs.prepTime}
+              onChange={staticInputsChangeHandler}
+              type="number"
+              name="prepTime"
+            ></input>
           </div>
 
           <div>
@@ -375,13 +528,23 @@ const AddRecipe = () => {
               <label htmlFor="cookTime">Cook time:</label>
               <span>(in minutes)</span>
             </div>
-            <input type="number" id="cookTime"></input>
+            <input
+              value={staticInputs.cookTime}
+              onChange={staticInputsChangeHandler}
+              type="number"
+              name="cookTime"
+            ></input>
           </div>
         </RecipeNumberInfo>
 
         <DietTags>
           <label htmlFor="dietTags">Diet tags (seperated by a comma):</label>
-          <input type="text" id="dietTags"></input>
+          <input
+            value={staticInputs.dietTags}
+            onChange={staticInputsChangeHandler}
+            type="text"
+            name="dietTags"
+          ></input>
         </DietTags>
 
         <TitleWithBtn>
@@ -452,44 +615,84 @@ const AddRecipe = () => {
               <NoochItemContainer>
                 <div>
                   <label htmlFor="kcal">Kcal:</label>
-                  <input type="number" id="kcal"></input>
+                  <input
+                    value={staticInputs.kcalAmount}
+                    onChange={staticInputsChangeHandler}
+                    type="number"
+                    name="kcal"
+                  ></input>
                 </div>
                 <div>
                   <label htmlFor="measurmentKcal">Measurment:</label>
-                  <input type="text" id="measurmentKcal"></input>
+                  <input
+                    value={staticInputs.kcalMeasurement}
+                    onChange={staticInputsChangeHandler}
+                    type="text"
+                    name="measurmentKcal"
+                  ></input>
                 </div>
               </NoochItemContainer>
 
               <NoochItemContainer>
                 <div>
                   <label htmlFor="fat">Fat:</label>
-                  <input type="number" id="fat"></input>
+                  <input
+                    value={staticInputs.fatAmount}
+                    onChange={staticInputsChangeHandler}
+                    type="number"
+                    name="fat"
+                  ></input>
                 </div>
                 <div>
                   <label htmlFor="measurmentFat">Measurment:</label>
-                  <input type="text" id="measurmentFat"></input>
+                  <input
+                    value={staticInputs.fatMeasurement}
+                    onChange={staticInputsChangeHandler}
+                    type="text"
+                    name="measurmentFat"
+                  ></input>
                 </div>
               </NoochItemContainer>
 
               <NoochItemContainer>
                 <div>
                   <label htmlFor="saturates">Saturates:</label>
-                  <input type="number" id="saturates"></input>
+                  <input
+                    value={staticInputs.saturatesAmount}
+                    onChange={staticInputsChangeHandler}
+                    type="number"
+                    name="saturates"
+                  ></input>
                 </div>
                 <div>
                   <label htmlFor="measurmentSaturates">Measurment:</label>
-                  <input type="text" id="measurmentSaturates"></input>
+                  <input
+                    value={staticInputs.saturatesMeasurement}
+                    onChange={staticInputsChangeHandler}
+                    type="text"
+                    name="measurmentSaturates"
+                  ></input>
                 </div>
               </NoochItemContainer>
 
               <NoochItemContainer>
                 <div>
                   <label htmlFor="carbs">Carbs:</label>
-                  <input type="number" id="carbs"></input>
+                  <input
+                    value={staticInputs.carbsAmount}
+                    onChange={staticInputsChangeHandler}
+                    type="number"
+                    name="carbs"
+                  ></input>
                 </div>
                 <div>
                   <label htmlFor="measurmentCarbs">Measurment:</label>
-                  <input type="text" id="measurmentCarbs"></input>
+                  <input
+                    value={staticInputs.carbsMeasurement}
+                    onChange={staticInputsChangeHandler}
+                    type="text"
+                    name="measurmentCarbs"
+                  ></input>
                 </div>
               </NoochItemContainer>
             </div>
@@ -498,44 +701,84 @@ const AddRecipe = () => {
               <NoochItemContainer>
                 <div>
                   <label htmlFor="sugars">Sugars:</label>
-                  <input type="number" id="sugars"></input>
+                  <input
+                    value={staticInputs.sugarsAmount}
+                    onChange={staticInputsChangeHandler}
+                    type="number"
+                    name="sugars"
+                  ></input>
                 </div>
                 <div>
                   <label htmlFor="measurmentSugars">Measurment:</label>
-                  <input type="text" id="measurmentSugars"></input>
+                  <input
+                    value={staticInputs.sugarsMeasurement}
+                    onChange={staticInputsChangeHandler}
+                    type="text"
+                    name="measurmentSugars"
+                  ></input>
                 </div>
               </NoochItemContainer>
 
               <NoochItemContainer>
                 <div>
                   <label htmlFor="fibre">Fibre:</label>
-                  <input type="number" id="fibre"></input>
+                  <input
+                    value={staticInputs.fibreAmount}
+                    onChange={staticInputsChangeHandler}
+                    type="number"
+                    name="fibre"
+                  ></input>
                 </div>
                 <div>
                   <label htmlFor="measurmentFibre">Measurment:</label>
-                  <input type="text" id="measurmentFibre"></input>
+                  <input
+                    value={staticInputs.fibreMeasurement}
+                    onChange={staticInputsChangeHandler}
+                    type="text"
+                    name="measurmentFibre"
+                  ></input>
                 </div>
               </NoochItemContainer>
 
               <NoochItemContainer>
                 <div>
                   <label htmlFor="protient">Protien:</label>
-                  <input type="number" id="protient"></input>
+                  <input
+                    value={staticInputs.protienAmount}
+                    onChange={staticInputsChangeHandler}
+                    type="number"
+                    name="protient"
+                  ></input>
                 </div>
                 <div>
                   <label htmlFor="measurmentProtient">Measurment:</label>
-                  <input type="text" id="measurmentProtient"></input>
+                  <input
+                    value={staticInputs.protienMeasurement}
+                    onChange={staticInputsChangeHandler}
+                    type="text"
+                    name="measurmentProtient"
+                  ></input>
                 </div>
               </NoochItemContainer>
 
               <NoochItemContainer>
                 <div>
                   <label htmlFor="salt">Salt:</label>
-                  <input type="number" id="salt"></input>
+                  <input
+                    value={staticInputs.saltAmount}
+                    onChange={staticInputsChangeHandler}
+                    type="number"
+                    name="salt"
+                  ></input>
                 </div>
                 <div>
                   <label htmlFor="measurmentSalt">Measurment:</label>
-                  <input type="text" id="measurmentSalt"></input>
+                  <input
+                    value={staticInputs.saltMeasurement}
+                    onChange={staticInputsChangeHandler}
+                    type="text"
+                    name="measurmentSalt"
+                  ></input>
                 </div>
               </NoochItemContainer>
             </div>
@@ -545,19 +788,21 @@ const AddRecipe = () => {
         <TitleWithBtn>
           <h2>Methods</h2>
 
-          <ButtonStyles btnSize="small" onClick={() => addMethodHandler()}>
-            Add
-          </ButtonStyles>
+          {methodsProvided && (
+            <ButtonStyles btnSize="small" onClick={() => addMethodHandler()}>
+              Add
+            </ButtonStyles>
+          )}
         </TitleWithBtn>
 
         <Radio>
-          <label htmlFor="noochProvided">Methods provided:</label>
+          <label htmlFor="methodsProvided">Methods provided:</label>
           <input
             checked={methodsProvided}
             onClick={methodsHandler}
             readOnly
             type="radio"
-            id="noochProvided"
+            id="methodsProvided"
           ></input>
         </Radio>
 
@@ -588,12 +833,19 @@ const AddRecipe = () => {
 
         {!methodsProvided && (
           <MethodsNotProvided>
-            <label htmlFor="difficulty">Link to alternative methods:</label>
+            <label htmlFor="methodsAlternative">
+              Link to alternative methods:
+            </label>
             <span>
               (Please provide an alternative URL for methods on how to cook this
               recipes, such as, a personal blog.)
             </span>
-            <input type="text" id="difficulty"></input>
+            <input
+              value={staticInputs.methodsAlternative}
+              onChange={staticInputsChangeHandler}
+              type="text"
+              name="methodsAlternative"
+            ></input>
           </MethodsNotProvided>
         )}
 
@@ -602,68 +854,32 @@ const AddRecipe = () => {
         <UploadForm>
           <label>
             <UploadIconStyles />
-            <input type="file" placeholder="Upload a cover photo" />
+            <input
+              onChange={staticInputsChangeHandler}
+              type="file"
+              name="coverImage"
+              placeholder="Upload a cover photo"
+            />
             Upload
           </label>
         </UploadForm>
 
+        {image && <ImageUploadTag>Cover image: {image.name}</ImageUploadTag>}
+
         <h2>Submit</h2>
 
-        <ButtonStyles btnSize="large">Submit recipe!</ButtonStyles>
+        {isError && (
+          <ErrorMsg>
+            Error: {errorMsg?.replaceAll(/ *\([^)]*\) */g, ' ')}.
+          </ErrorMsg>
+        )}
+
+        <ButtonStyles type="submit" btnSize="large">
+          {isLoading ? 'Submitting...' : 'Submit recipe!'}
+        </ButtonStyles>
       </RecipeForm>
     </ContainerStyled>
   );
 };
 
 export default AddRecipe;
-
-/*
- "name": "Tofu noodles",
-    "prepTime": 30,
-    "cookTime": 20,
-    "difficulty": "competent",
-    "servings": 2,
-    "description": "One for any noodle lover!",
-    "dietTags": ["low-cal", "gluten-free"],
-    "nutritionProvided": true,
-    "nutrition": {
-        "kcal": {"amount": 500, "measurement": "g"},
-        "fat": {"amount": 60, "measurement": "g"},
-        "saturates": {"amount": 80, "measurement": "g"},
-        "carbs": {"amount": 15, "measurement": "g"},
-        "sugars": {"amount": 0.5, "measurement": "g"},
-        "fibre": {"amount": 100, "measurement": "g"},
-        "protien": {"amount": 200, "measurement": "g"},
-        "salt": {"amount": 0.2, "measurement": "g"}
-    },
-    "ingredients": [
-        {
-            "amount": 1,
-            "measurement": "cup",
-            "name": "Sliced carrots"
-        },
-        {
-            "amount": 240,
-            "measurement": "g",
-            "name": "tofu"
-        },
-         {
-            "amount": 2,
-            "measurement": "cloves",
-            "name": "Garlic"
-        },
-         {
-            "amount": 2,
-            "measurement": "tbs",
-            "name": "Turmeric"
-        },
-         {
-            "amount": 1,
-            "measurement": "thumb-sized",
-            "name": "Ginger"
-        }
-    ],
-    "methodsProvided": "false",
-    "methodsAlternative": "https://www.yummyrecipes.com",
-    "coverImage": "photo-of-tofu-noodles.jpeg"
-*/

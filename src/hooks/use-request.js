@@ -12,7 +12,7 @@ const useRequest = () => {
       const res = await fetch(requestConfig.url, {
         method: requestConfig.method || 'GET',
         headers: requestConfig.headers || {},
-        body: JSON.stringify(requestConfig.body) || null,
+        body: requestConfig.body || null,
       });
 
       if (!res.ok) {

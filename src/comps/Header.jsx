@@ -229,10 +229,10 @@ const Header = () => {
         url: '/api/v1/users/login',
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: {
+        body: JSON.stringify({
           email: email.current.value,
           password: password.current.value,
-        },
+        }),
       },
       reciever
     );

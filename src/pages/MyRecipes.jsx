@@ -60,15 +60,22 @@ const MyRecipes = () => {
 
   const { userDetails } = authCtx;
 
+  console.log(userDetails);
+
+  // eslint-disable-next-line array-callback-return
   const filteredRecipes = userDetails.user?.recipes.map(recipe => {
     if (recipe.name.toLowerCase().includes(searchInput)) return recipe;
   });
+
+  console.log(filteredRecipes);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     return filteredRecipes?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, filteredRecipes]);
+
+  console.log(currentTableData);
 
   const onChangeHandler = e => {
     setSearchInput(e.target.value);
@@ -92,16 +99,20 @@ const MyRecipes = () => {
           ></input>
         </SearchBar>
         <Results>
-          {!filteredRecipes?.some(el => el === undefined) ? (
-            currentTableData?.map(recipe => (
-              <RecipeCard
-                key={recipe.id}
-                id={recipe.id}
-                photo={recipe.coverImage}
-                name={recipe.name}
-                desc={recipe.description}
-              />
-            ))
+          {!filteredRecipes?.every(el => el === undefined) ? (
+            currentTableData?.map(recipe => {
+              if (!recipe) return;
+
+              return (
+                <RecipeCard
+                  key={recipe.id}
+                  id={recipe.id}
+                  photo={recipe.coverImage}
+                  name={recipe.name}
+                  desc={recipe.description}
+                />
+              );
+            })
           ) : (
             <NoRecipesMsg>No recipes found!</NoRecipesMsg>
           )}

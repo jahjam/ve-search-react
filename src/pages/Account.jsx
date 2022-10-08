@@ -296,6 +296,8 @@ const Account = () => {
 
   const { dataIsLoading, userDetails } = authCtx;
 
+  console.log(userDetails);
+
   const editEmailHandler = () => {
     setEditEmail(!editEmail);
   };
@@ -323,9 +325,9 @@ const Account = () => {
         url: '/api/v1/users/me',
         method: 'PATCH',
         headers: { 'content-type': 'application/json' },
-        body: {
+        body: JSON.stringify({
           email: email.current.value,
-        },
+        }),
       },
       reciever
     );
@@ -348,9 +350,9 @@ const Account = () => {
         url: '/api/v1/users/forgotPassword',
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: {
+        body: JSON.stringify({
           email: emailForPassword.current.value,
-        },
+        }),
       },
       reciever
     );

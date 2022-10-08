@@ -28,6 +28,10 @@ const RecipeCardStyles = styled.div`
       background-color: #58b15a;
     }
 
+    & p {
+      width: 16rem;
+    }
+
     & div:nth-child(1) {
       height: 7rem;
       min-width: 7rem;
