@@ -459,7 +459,13 @@ const AddRecipe = () => {
       <RecipeForm onSubmit={submitHandler}>
         <RecipeMainInfo>
           <div>
-            <NameLabel htmlFor="name">Name:</NameLabel>
+            {errorMsg?.match(/\((.*?)\)/g)?.includes('(Name error)') ? (
+              <NameLabel style={{ color: '#e31212' }} htmlFor="name">
+                Name:
+              </NameLabel>
+            ) : (
+              <NameLabel htmlFor="name">Name:</NameLabel>
+            )}
             <input
               value={staticInputs.name}
               onChange={staticInputsChangeHandler}
@@ -469,7 +475,7 @@ const AddRecipe = () => {
           </div>
 
           <div>
-            {errorMsg?.match(/\((.*?)\)/g).includes('(Difficulty error)') ? (
+            {errorMsg?.match(/\((.*?)\)/g)?.includes('(Difficulty error)') ? (
               <label style={{ color: '#e31212' }} htmlFor="difficulty">
                 Difficulty:
               </label>
@@ -501,7 +507,13 @@ const AddRecipe = () => {
 
         <RecipeNumberInfo>
           <div>
-            <ServingsLabel htmlFor="servings">Servings:</ServingsLabel>
+            {errorMsg?.match(/\((.*?)\)/g)?.includes('(Servings error)') ? (
+              <ServingsLabel style={{ color: '#e31212' }} htmlFor="servings">
+                Servings:
+              </ServingsLabel>
+            ) : (
+              <ServingsLabel htmlFor="servings">Servings:</ServingsLabel>
+            )}
             <input
               value={staticInputs.servings}
               onChange={staticInputsChangeHandler}
@@ -512,7 +524,15 @@ const AddRecipe = () => {
 
           <div>
             <div>
-              <label htmlFor="prepTime">Preperation time:</label>
+              {errorMsg
+                ?.match(/\((.*?)\)/g)
+                ?.includes('(Preperation time error)') ? (
+                <label style={{ color: '#e31212' }} htmlFor="prepTime">
+                  Preperation time:
+                </label>
+              ) : (
+                <label htmlFor="prepTime">Preperation time:</label>
+              )}
               <span>(in minutes)</span>
             </div>
             <input
@@ -525,7 +545,13 @@ const AddRecipe = () => {
 
           <div>
             <div>
-              <label htmlFor="cookTime">Cook time:</label>
+              {errorMsg?.match(/\((.*?)\)/g)?.includes('(Cook time error)') ? (
+                <label style={{ color: '#e31212' }} htmlFor="cookTime">
+                  Cook time:
+                </label>
+              ) : (
+                <label htmlFor="cookTime">Cook time:</label>
+              )}
               <span>(in minutes)</span>
             </div>
             <input
@@ -538,7 +564,13 @@ const AddRecipe = () => {
         </RecipeNumberInfo>
 
         <DietTags>
-          <label htmlFor="dietTags">Diet tags (seperated by a comma):</label>
+          {errorMsg?.match(/\((.*?)\)/g)?.includes('(Diet-tag error)') ? (
+            <label style={{ color: '#e31212' }} htmlFor="dietTags">
+              Diet tags (seperated by a comma):
+            </label>
+          ) : (
+            <label htmlFor="dietTags">Diet tags (seperated by a comma):</label>
+          )}
           <input
             value={staticInputs.dietTags}
             onChange={staticInputsChangeHandler}
@@ -548,7 +580,11 @@ const AddRecipe = () => {
         </DietTags>
 
         <TitleWithBtn>
-          <h2>Ingredients</h2>
+          {errorMsg?.match(/\((.*?)\)/g)?.includes('(Ingredient error)') ? (
+            <h2 style={{ color: '#e31212' }}>Ingredients</h2>
+          ) : (
+            <h2>Ingredients</h2>
+          )}
 
           <ButtonStyles btnSize="small" onClick={addIngredientHandler}>
             Add
@@ -596,10 +632,22 @@ const AddRecipe = () => {
           </IngredientInputContainer>
         ))}
 
-        <h2>Nutritional Information</h2>
+        {errorMsg?.match(/\((.*?)\)/g)?.includes('(Nutrition error)') ? (
+          <h2 style={{ color: '#e31212' }}>Nutritional Information</h2>
+        ) : (
+          <h2>Nutritional Information</h2>
+        )}
 
         <Radio>
-          <label htmlFor="noochProvided">Nutrition provided:</label>
+          {errorMsg
+            ?.match(/\((.*?)\)/g)
+            ?.includes('(Nutrition provided error)') ? (
+            <label style={{ color: '#e31212' }} htmlFor="noochProvided">
+              Nutrition provided:
+            </label>
+          ) : (
+            <label htmlFor="noochProvided">Nutrition provided:</label>
+          )}
           <input
             checked={noochProvided}
             onClick={noochHandler}
@@ -786,7 +834,11 @@ const AddRecipe = () => {
         )}
 
         <TitleWithBtn>
-          <h2>Methods</h2>
+          {errorMsg?.match(/\((.*?)\)/g)?.includes('(Methods error)') ? (
+            <h2 style={{ color: '#e31212' }}>Methods</h2>
+          ) : (
+            <h2>Methods</h2>
+          )}
 
           {methodsProvided && (
             <ButtonStyles btnSize="small" onClick={() => addMethodHandler()}>
@@ -796,7 +848,15 @@ const AddRecipe = () => {
         </TitleWithBtn>
 
         <Radio>
-          <label htmlFor="methodsProvided">Methods provided:</label>
+          {errorMsg
+            ?.match(/\((.*?)\)/g)
+            ?.includes('(Methods provided error)') ? (
+            <label style={{ color: '#e31212' }} htmlFor="methodsProvided">
+              Methods provided:
+            </label>
+          ) : (
+            <label htmlFor="methodsProvided">Methods provided:</label>
+          )}
           <input
             checked={methodsProvided}
             onClick={methodsHandler}
@@ -816,7 +876,7 @@ const AddRecipe = () => {
               >
                 &#x2715;
               </p>
-              <label htmlFor="desc">{input.id}:</label>
+              <label htmlFor="method">{input.id}:</label>
               <span
                 onInput={e =>
                   handleChange(i, e, methodsInputs, setMethodsInputs)
@@ -833,9 +893,18 @@ const AddRecipe = () => {
 
         {!methodsProvided && (
           <MethodsNotProvided>
-            <label htmlFor="methodsAlternative">
-              Link to alternative methods:
-            </label>
+            {errorMsg
+              ?.match(/\((.*?)\)/g)
+              ?.includes('(Methods alternative error)') ? (
+              <label style={{ color: '#e31212' }} htmlFor="methodsAlternative">
+                Link to alternative methods:
+              </label>
+            ) : (
+              <label htmlFor="methodsAlternative">
+                Link to alternative methods:
+              </label>
+            )}
+
             <span>
               (Please provide an alternative URL for methods on how to cook this
               recipes, such as, a personal blog.)
@@ -849,7 +918,11 @@ const AddRecipe = () => {
           </MethodsNotProvided>
         )}
 
-        <h2>Cover Image</h2>
+        {errorMsg?.match(/\((.*?)\)/g)?.includes('(Cover image error)') ? (
+          <h2 style={{ color: '#e31212' }}>Cover Image</h2>
+        ) : (
+          <h2>Cover Image</h2>
+        )}
 
         <UploadForm>
           <label>
