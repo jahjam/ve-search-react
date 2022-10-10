@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import AuthContext from '../store/auth-context';
 
 const SignUpContainer = styled(motion.section)`
+  margin-top: 2rem;
   width: 50rem;
   padding: 4rem;
   ${FlexColumn()}

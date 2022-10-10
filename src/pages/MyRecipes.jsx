@@ -60,22 +60,16 @@ const MyRecipes = () => {
 
   const { userDetails } = authCtx;
 
-  console.log(userDetails);
-
   // eslint-disable-next-line array-callback-return
   const filteredRecipes = userDetails.user?.recipes.map(recipe => {
     if (recipe.name.toLowerCase().includes(searchInput)) return recipe;
   });
-
-  console.log(filteredRecipes);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     return filteredRecipes?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, filteredRecipes]);
-
-  console.log(currentTableData);
 
   const onChangeHandler = e => {
     setSearchInput(e.target.value);

@@ -253,6 +253,10 @@ const Header = () => {
     navigate('/sign-up');
   };
 
+  const resetPasswordHandler = () => {
+    navigate('/reset-password');
+  };
+
   return (
     <HeaderStyled
       transition={{ duration: 1 }}
@@ -322,7 +326,7 @@ const Header = () => {
                     : 'Login'}
                 </HeaderLoginFormBtnStyles>
                 <span onClick={signUpHandler}>Sign up</span>
-                <span>Forgot username or password?</span>
+                <span onClick={resetPasswordHandler}>Forgot password?</span>
               </div>
             </form>
           </LoginFormStyles>

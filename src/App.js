@@ -10,6 +10,7 @@ import Account from './pages/Account';
 import MyRecipes from './pages/MyRecipes';
 import AddRecipe from './pages/AddRecipe';
 import SignUp from './pages/SignUp';
+import ResetPassword from './pages/ResetPassword';
 
 const SearchStyles = styled.main`
   padding: 2rem;
@@ -36,6 +37,7 @@ function App() {
               <Route path="add-a-recipe" element={<AddRecipe />} />
             </Route>
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </AnimatePresence>
       </SearchStyles>
