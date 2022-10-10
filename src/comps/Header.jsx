@@ -106,15 +106,18 @@ const LoginFormStyles = styled.div`
       ${FlexColumn}
       gap: 0.5rem;
 
-      & a {
+      & span {
         color: var(--main-dark-color);
         font-size: 1rem;
 
         align-self: center;
+        cursor: pointer;
+        text-decoration: underline;
 
         &:hover,
         &:active {
           color: var(--main-light-color);
+          text-decoration: none;
         }
       }
 
@@ -246,6 +249,10 @@ const Header = () => {
     if (isError) resetError(false);
   };
 
+  const signUpHandler = () => {
+    navigate('/sign-up');
+  };
+
   return (
     <HeaderStyled
       transition={{ duration: 1 }}
@@ -286,7 +293,7 @@ const Header = () => {
               Login
             </HeaderLoginBtnStyles>
 
-            <HeaderSignupBtnStyles btnSize="medium">
+            <HeaderSignupBtnStyles onClick={signUpHandler} btnSize="medium">
               Sign up
             </HeaderSignupBtnStyles>
           </SigninSignupContainer>
@@ -314,8 +321,8 @@ const Header = () => {
                       })
                     : 'Login'}
                 </HeaderLoginFormBtnStyles>
-                <a href="/">Sign up</a>
-                <a href="/">Forgot username or password?</a>
+                <span onClick={signUpHandler}>Sign up</span>
+                <span>Forgot username or password?</span>
               </div>
             </form>
           </LoginFormStyles>
