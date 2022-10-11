@@ -222,7 +222,7 @@ const Header = () => {
     e.preventDefault();
 
     const reciever = data => {
-      authCtx.setIsLoggedInHandler();
+      authCtx.setIsLoggedInHandler(true);
       authCtx.setUserDetailsHandler(data);
       setToLogin(false);
     };

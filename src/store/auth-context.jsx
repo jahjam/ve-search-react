@@ -27,11 +27,16 @@ export const AuthContextProvider = props => {
     sendRequest({ url: '/api/v1/users/whoami' }, reciever);
   }, [sendRequest]);
 
-  const setIsLoggedInHandler = () => {
-    setIsLoggedIn(true);
+  const setIsLoggedInHandler = bool => {
+    setIsLoggedIn(bool);
   };
 
   const setUserDetailsHandler = data => {
+    if (data === null) {
+      setUserDetails({});
+      return;
+    }
+
     setUserDetails(prevState => {
       return { ...prevState, user: data.data.user };
     });

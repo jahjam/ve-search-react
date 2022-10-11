@@ -212,6 +212,18 @@ const Add = styled.div`
   width: 100%;
 
   ${FlexColumn()}
+  gap: 2rem;
+
+  & span:first-child {
+    font-size: 1.8rem;
+    text-decoration: underline;
+
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 `;
 
 const AddIconStyles = styled(AddIcon)`
@@ -296,8 +308,6 @@ const Account = () => {
 
   const { dataIsLoading, userDetails } = authCtx;
 
-  console.log(userDetails);
-
   const editEmailHandler = () => {
     setEditEmail(!editEmail);
   };
@@ -362,6 +372,26 @@ const Account = () => {
 
   const addRecipeHandler = () => {
     navigate('/me/add-a-recipe');
+  };
+
+  const logoutHandler = e => {
+    e.preventDefault();
+
+    const reciever = data => {
+      if (data.status === 'success') {
+        authCtx.setIsLoggedInHandler(false);
+        authCtx.setUserDetailsHandler(null);
+      }
+    };
+
+    sendRequest(
+      {
+        url: '/api/v1/users/logout',
+      },
+      reciever
+    );
+
+    navigate('/');
   };
 
   if (dataIsLoading)
@@ -490,6 +520,7 @@ const Account = () => {
             </Edit>
 
             <Add>
+              <span onClick={logoutHandler}>Logout</span>
               <AddBtn
                 location={location}
                 onClick={addRecipeHandler}
