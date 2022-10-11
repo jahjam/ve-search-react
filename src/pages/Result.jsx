@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useContext, useRef } from 'react';
 import { motion } from 'framer-motion';
+import Pagination from '../comps/temps/Pagination';
 
+import AuthContext from '../store/auth-context';
 import Button from '../comps/temps/Button';
 import { FlexColumn } from '../helpers/mixins';
 import { ReactComponent as LeftArrow } from '../imgs/svg/left-arrow-servings.svg';
@@ -12,6 +14,7 @@ import Ingredient from '../comps/Ingredient';
 import LinkSection from '../comps/LinkSection';
 import GhostResult from '../comps/temps/GhostResult';
 import MethodCard from '../comps/temps/MethodCard';
+import ReviewCard from '../comps/temps/ReviewCard';
 
 const Container = styled(motion.section)`
   ${FlexColumn()}
@@ -228,8 +231,75 @@ const MethodsSection = styled.section`
   }
 `;
 
+const CommentsSection = styled.section`
+  width: 80%;
+  ${FlexColumn()}
+  gap: 2rem;
+
+  & h2 {
+    font-size: 2rem;
+  }
+`;
+
+const CommentBox = styled.div`
+  width: 60%;
+  padding: 3rem;
+  border: var(--main-border);
+
+  ${FlexColumn()}
+  gap: 1rem;
+
+  & h3 {
+    font-size: 1.6rem;
+  }
+
+  & form {
+    width: 100%;
+
+    ${FlexColumn()}
+    gap: 1rem;
+
+    & input {
+      width: 50%;
+      border: var(--main-border);
+      padding: 1rem;
+    }
+  }
+`;
+
+const CommentSpan = styled.span`
+  border: var(--main-border);
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  resize: both;
+  min-height: 8rem;
+  line-height: 2rem;
+
+  font-size: 1.6rem;
+
+  padding: 1.4rem;
+`;
+
+const LeaveCommentSpan = styled.span`
+  font-size: 1.6rem;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+const CommentSubmitBtn = styled(Button)`
+  background-color: var(--main-theme-color);
+`;
+
+const pageSize = 8;
+
 const Result = () => {
   const params = useParams();
+  const authCtx = useContext(AuthContext);
 
   const [result, setResult] = useState(null);
 
@@ -250,6 +320,77 @@ const Result = () => {
   const DAILY_SALT = 6;
   const calculateNutritionalPercs = (amount, base) => {
     return (amount / base) * 100;
+  };
+
+  const [reviews, setReviews] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [comment, setComment] = useState({ comment: '' });
+  const [leaveComment, setleaveComment] = useState(false);
+  const rating = useRef();
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return reviews?.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, reviews]);
+
+  const {
+    isLoading: commentsLoading,
+    isError: commentsError,
+    errorMsg: commentsErrorMsg,
+    sendRequest: commentsRequest,
+  } = useRequest();
+
+  useEffect(() => {
+    const receiver = data => {
+      setReviews(data.data.reviews);
+    };
+
+    commentsRequest(
+      { url: `/api/v1/recipes/${params.resultId}/reviews` },
+      receiver
+    );
+  }, [params.resultId, commentsRequest, authCtx.isLoggedIn]);
+
+  const commentChangeHandler = e => {
+    setComment(prevState => ({
+      ...prevState,
+      comment: e.target.innerHTML,
+    }));
+  };
+
+  const leaveCommentHandler = () => {
+    setleaveComment(!leaveComment);
+  };
+
+  const submitHandler = e => {
+    e.preventDefault();
+
+    const receiver = data => {
+      const review = {
+        comment: data.data.review.comment,
+        rating: data.data.review.rating,
+        author: { username: data.data.user.username },
+        _id: data.data.review._id,
+      };
+
+      setReviews(prevState => [...prevState, review]);
+    };
+
+    commentsRequest(
+      {
+        url: `/api/v1/recipes/${params.resultId}/reviews`,
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          rating: +rating.current.value,
+          comment: comment.comment,
+        }),
+      },
+      receiver
+    );
+
+    setleaveComment(!leaveComment);
   };
 
   return (
@@ -418,6 +559,58 @@ const Result = () => {
           url={result.data.recipe.methodsAlternative}
         />
       )}
+
+      <CommentsSection>
+        <h2>Comments</h2>
+
+        {!leaveComment ? (
+          <LeaveCommentSpan onClick={leaveCommentHandler}>
+            Leave a comment
+          </LeaveCommentSpan>
+        ) : (
+          <CommentBox>
+            <h3>Leave a comment and rating.</h3>
+
+            <form onSubmit={submitHandler}>
+              <label htmlFor="rating">Rating:</label>
+              <input ref={rating} name="rating" type="number"></input>
+
+              <label>Comment:</label>
+              <CommentSpan
+                value={comment.comment}
+                onInput={e => commentChangeHandler(e)}
+                role="textbox"
+                id="description"
+                contentEditable
+              ></CommentSpan>
+
+              <CommentSubmitBtn type="submit" btnSize="medium">
+                Submit
+              </CommentSubmitBtn>
+            </form>
+          </CommentBox>
+        )}
+
+        {!authCtx.isLoggedIn ? (
+          <h3>You must be logged in to view or leave a comment!</h3>
+        ) : (
+          currentTableData.map(review => (
+            <ReviewCard
+              key={review._id}
+              rating={review.rating}
+              comment={review.comment}
+              author={review.author.username}
+            />
+          ))
+        )}
+
+        <Pagination
+          currentPage={currentPage}
+          totalCount={reviews.length}
+          pageSize={pageSize}
+          onPageChange={page => setCurrentPage(page)}
+        />
+      </CommentsSection>
     </Container>
   );
 };

@@ -126,8 +126,6 @@ const Results = props => {
     navigate(`/search/${id}`);
   };
 
-  console.log(results);
-
   return (
     <ResultsStyles
       animate={{ opacity: 1 }}
