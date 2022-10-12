@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import useRequest from '../../hooks/use-request';
 
 const ResultsBox = styled(motion.div)`
   height: 18rem;
@@ -45,6 +46,12 @@ const ResultStyled = styled.div`
     font-size: 1.2rem;
     font-weight: 700;
   }
+
+  & span:nth-child(4) {
+    text-align: center;
+    margin-top: -0.8rem;
+    font-size: 1.2rem;
+  }
 `;
 
 const ImgContainerStyled = styled.div`
@@ -79,6 +86,20 @@ const ResultCard = props => {
     );
   }, [props]);
 
+  const { sendRequest } = useRequest();
+  const [recipeRating, setRecipeRating] = useState(null);
+
+  useEffect(() => {
+    const receiver = data => {
+      setRecipeRating(data.data.ratings[0].avgRatings);
+    };
+
+    sendRequest(
+      { url: `/api/v1/reviews/ratingsAverage/${props.id}` },
+      receiver
+    );
+  }, [sendRequest, props.id]);
+
   return (
     <ResultsBox
       onClick={onClickHandler}
@@ -91,6 +112,7 @@ const ResultCard = props => {
         </ImgContainerStyled>
         <span>{props.title}</span>
         <span>{props.author}</span>
+        <span>{recipeRating ? `Rating: ${recipeRating}` : ''}</span>
       </ResultStyled>
     </ResultsBox>
   );

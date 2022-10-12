@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import { useState, useEffect, useMemo, useContext, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Pagination from '../comps/temps/Pagination';
 
 import AuthContext from '../store/auth-context';
@@ -15,6 +15,7 @@ import LinkSection from '../comps/LinkSection';
 import GhostResult from '../comps/temps/GhostResult';
 import MethodCard from '../comps/temps/MethodCard';
 import ReviewCard from '../comps/temps/ReviewCard';
+import GhostReview from '../comps/temps/GhostReview';
 
 const Container = styled(motion.section)`
   ${FlexColumn()}
@@ -241,7 +242,7 @@ const CommentsSection = styled.section`
   }
 `;
 
-const CommentBox = styled.div`
+const CommentBox = styled(motion.div)`
   width: 60%;
   padding: 3rem;
   border: var(--main-border);
@@ -281,7 +282,7 @@ const CommentSpan = styled.span`
   padding: 1.4rem;
 `;
 
-const LeaveCommentSpan = styled.span`
+const LeaveCommentSpan = styled(motion.span)`
   font-size: 1.6rem;
   text-decoration: underline;
   cursor: pointer;
@@ -334,12 +335,8 @@ const Result = () => {
     return reviews?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, reviews]);
 
-  const {
-    isLoading: commentsLoading,
-    isError: commentsError,
-    errorMsg: commentsErrorMsg,
-    sendRequest: commentsRequest,
-  } = useRequest();
+  const { isLoading: commentsLoading, sendRequest: commentsRequest } =
+    useRequest();
 
   useEffect(() => {
     const receiver = data => {
@@ -563,33 +560,49 @@ const Result = () => {
       <CommentsSection>
         <h2>Comments</h2>
 
-        {!leaveComment ? (
-          <LeaveCommentSpan onClick={leaveCommentHandler}>
-            Leave a comment
-          </LeaveCommentSpan>
-        ) : (
-          <CommentBox>
-            <h3>Leave a comment and rating.</h3>
+        <AnimatePresence>
+          {!leaveComment && authCtx.isLoggedIn && (
+            <LeaveCommentSpan
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={leaveCommentHandler}
+            >
+              Leave a comment
+            </LeaveCommentSpan>
+          )}
 
-            <form onSubmit={submitHandler}>
-              <label htmlFor="rating">Rating:</label>
-              <input ref={rating} name="rating" type="number"></input>
+          {leaveComment && authCtx.isLoggedIn && (
+            <CommentBox
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <h3>Leave a comment and rating.</h3>
 
-              <label>Comment:</label>
-              <CommentSpan
-                value={comment.comment}
-                onInput={e => commentChangeHandler(e)}
-                role="textbox"
-                id="description"
-                contentEditable
-              ></CommentSpan>
+              <form onSubmit={submitHandler}>
+                <label htmlFor="rating">Rating:</label>
+                <input ref={rating} name="rating" type="number"></input>
 
-              <CommentSubmitBtn type="submit" btnSize="medium">
-                Submit
-              </CommentSubmitBtn>
-            </form>
-          </CommentBox>
-        )}
+                <label>Comment:</label>
+                <CommentSpan
+                  value={comment.comment}
+                  onInput={e => commentChangeHandler(e)}
+                  role="textbox"
+                  id="description"
+                  contentEditable
+                ></CommentSpan>
+
+                <CommentSubmitBtn type="submit" btnSize="medium">
+                  Submit
+                </CommentSubmitBtn>
+              </form>
+            </CommentBox>
+          )}
+        </AnimatePresence>
+
+        {commentsLoading &&
+          currentTableData.map((review, i) => <GhostReview key={i} />)}
 
         {!authCtx.isLoggedIn ? (
           <h3>You must be logged in to view or leave a comment!</h3>
