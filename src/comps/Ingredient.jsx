@@ -1,10 +1,4 @@
-import { ReactComponent as IngIcon } from '../imgs/svg/title-icon.svg';
-import styled from 'styled-components';
-
-const IngIconStyles = styled(IngIcon)`
-  height: 20px;
-  width: 20px;
-`;
+import { IngIconStyles } from '../styled/styledComps/styledIngredient';
 
 const Ingredient = props => {
   const seperator = () => {

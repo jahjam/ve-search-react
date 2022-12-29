@@ -1,55 +1,15 @@
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { FlexColumn, Flex } from '../helpers/mixins';
-
 import { useContext, useState, useMemo } from 'react';
 import AuthContext from '../store/auth-context';
 import Pagination from '../comps/temps/Pagination';
 
+import {
+  ContainerStyled,
+  Results,
+  SearchBar,
+  NoRecipesMsg,
+} from '../styled/styledPages/styledMyRecipes';
+
 import RecipeCard from '../comps/temps/RecipeCard';
-
-const ContainerStyled = styled(motion.section)`
-  margin-top: 2rem;
-  width: 100rem;
-  height: auto;
-  padding: 2rem;
-  border: 0.2rem solid black;
-
-  ${FlexColumn()}
-  gap: 2rem;
-`;
-
-const Results = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
-  align-items: center;
-  row-gap: 2rem;
-  column-gap: 1rem;
-`;
-
-const SearchBar = styled.div`
-  align-self: flex-end;
-
-  ${Flex()}
-  gap: 1.4rem;
-
-  & label {
-    font-size: 1.6rem;
-  }
-
-  & input {
-    font-family: inherit;
-    padding: 1rem;
-    border: var(--main-border);
-  }
-`;
-
-const NoRecipesMsg = styled.span`
-  grid-column: 1/4;
-
-  font-size: 2rem;
-`;
 
 let pageSize = 9;
 

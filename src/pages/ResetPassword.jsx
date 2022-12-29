@@ -1,69 +1,15 @@
-import styled from 'styled-components';
 import { useRef, useState } from 'react';
-import { FlexColumn } from '../helpers/mixins';
-import Button from '../comps/temps/Button';
 import useRequest from '../hooks/use-request';
 import validator from 'validator';
-import { motion } from 'framer-motion';
 
-const ResetPassContainer = styled(motion.section)`
-  margin-top: 2rem;
-  width: 50rem;
-  padding: 4rem;
-  ${FlexColumn()}
-  gap: 2rem;
-  border: var(--main-border);
-
-  h1 {
-    font-family: goodlife-brush, sans-serif;
-    font-size: 4rem;
-  }
-
-  p {
-    font-size: 1.8rem;
-    width: 40rem;
-    line-height: 2.6rem;
-    color: grey;
-  }
-`;
-
-const ResetForm = styled.form`
-  ${FlexColumn()}
-  gap: 2rem;
-
-  label {
-    font-size: 1.6rem;
-  }
-
-  input {
-    padding: 1rem;
-    height: 4rem;
-    width: 30rem;
-    border: none;
-    border: 0.2rem solid black;
-    background-color: var(--main-light-color);
-
-    font-family: inherit;
-  }
-`;
-
-const FormBtnStyles = styled(Button)`
-  background-color: var(--main-theme-color);
-`;
-
-const InputContainer = styled.div`
-  ${FlexColumn()}
-`;
-
-const ErrorMsg = styled.h3`
-  font-size: 1.4rem;
-  color: #e31212;
-`;
-
-const SuccessMsg = styled.h3`
-  font-size: 1.4rem;
-  color: var(--main-theme-color);
-`;
+import {
+  ResetPassContainer,
+  ResetForm,
+  FormBtnStyles,
+  InputContainer,
+  ErrorMsg,
+  SuccessMsg,
+} from '../styled/styledPages/styledResetPassword';
 
 const ResetPassword = () => {
   const email = useRef();

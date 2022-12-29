@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import { FlexColumn } from './helpers/mixins';
 import { AnimatePresence } from 'framer-motion';
+
+import { SearchStyles } from './styled/styledPages/styledApp';
 
 import Header from './comps/Header';
 import Search from './pages/Search';
@@ -11,12 +11,7 @@ import MyRecipes from './pages/MyRecipes';
 import AddRecipe from './pages/AddRecipe';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
-
-const SearchStyles = styled.main`
-  padding: 2rem;
-
-  ${FlexColumn()}
-`;
+import NewPassword from './pages/NewPassword';
 
 function App() {
   const location = useLocation();
@@ -38,6 +33,7 @@ function App() {
             </Route>
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/new-password/:resetId" element={<NewPassword />} />
           </Routes>
         </AnimatePresence>
       </SearchStyles>

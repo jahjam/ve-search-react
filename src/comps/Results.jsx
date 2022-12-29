@@ -1,69 +1,19 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
-
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
 
-import { Flex } from '../helpers/mixins';
+import {
+  ResultsStyles,
+  RecipeResults,
+  RecipeContainer,
+  ResultsBtnStyles,
+} from '../styled/styledComps/styledResults';
+
 import { ReactComponent as RightArrow } from '../imgs/svg/right-arrow.svg';
 import { ReactComponent as LeftArrow } from '../imgs/svg/left-arrow.svg';
-import Button from '../comps/temps/Button';
 import ResultsCard from '../comps/temps/ResultsCard';
 import GhostCard from '../comps/temps/GhostCard';
-
-const ResultsStyles = styled(motion.section)`
-  width: 80%;
-  height: auto;
-  transition: all 1s;
-  opacity: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-`;
-
-const RecipeResults = styled.div`
-  padding: 2rem;
-  width: 60rem;
-  height: auto;
-
-  overflow: hidden;
-  border: 0.2rem solid black;
-`;
-
-const RecipeContainer = styled(motion.div)`
-  height: auto;
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
-
-  & p {
-    margin: auto;
-    text-align: center;
-    font-size: 1.4rem;
-  }
-`;
-
-const ResultsBtnStyles = styled(Button)`
-  height: 20rem;
-  min-width: 8rem;
-  max-width: 8rem;
-  cursor: pointer;
-
-  ${Flex()}
-  background-color: var(--main-theme-color);
-
-  & :first-child {
-    height: 20px;
-    width: 20px;
-    line-height: 100%;
-  }
-`;
 
 const Results = props => {
   const navigate = useNavigate();
