@@ -80,6 +80,10 @@ export const Avatar = styled.div`
   }
 `;
 
+export const AvatarUploadTag = styled.span`
+  font-size: 1.4rem;
+`;
+
 export const Details = styled.div`
   grid-area: deets;
   height: auto;

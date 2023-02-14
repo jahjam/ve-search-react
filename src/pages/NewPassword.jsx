@@ -19,7 +19,9 @@ const NewPassword = () => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const reciever = data => {};
+    const reciever = data => {
+      return 0;
+    };
 
     sendRequest(
       {

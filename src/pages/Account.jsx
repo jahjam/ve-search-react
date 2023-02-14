@@ -23,6 +23,7 @@ import {
   Password,
   UploadIconStyles,
   UploadForm,
+  AvatarUploadTag,
 } from '../styled/styledPages/StyledAccount';
 
 import Button from '../comps/temps/Button';
@@ -36,6 +37,7 @@ const Account = () => {
   const email = useRef();
   const emailForPassword = useRef();
   const [passResetMsg, setPassResetMsg] = useState(null);
+  const [avatar, setAvatar] = useState(null);
 
   const location = useLocation();
 
@@ -129,14 +131,43 @@ const Account = () => {
     navigate('/');
   };
 
+  const avatarChangeHandler = e => {
+    setAvatar(e.target.files[0]);
+  };
+
+  const avatarUploadHandler = e => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('photo', avatar);
+
+    const reciever = data => {
+      if (data.status === 'success') {
+        authCtx.setUserDetailsHandler(data);
+      }
+    };
+
+    sendRequest(
+      {
+        url: '/api/v1/users/me',
+        method: 'PATCH',
+        body: formData,
+      },
+      reciever
+    );
+  };
+
   console.log(userDetails);
 
+  // Check if user is signed in
   if (Object.keys(userDetails).length === 0)
     return <span style={{ fontSize: '20px' }}>Please sign in.</span>;
 
+  // Loading
   if (dataIsLoading)
     return <span>{generateFramerElipsis({ gap: '0.2rem' })}</span>;
 
+  // Result
   if (!dataIsLoading)
     return (
       <>
@@ -167,8 +198,27 @@ const Account = () => {
               </div>
               <span onClick={editAvatarHandler}>Edit avatar</span>
 
+              {avatar && (
+                <>
+                  <AvatarUploadTag>Avatar image: {avatar.name}</AvatarUploadTag>
+
+                  <UploadForm
+                    initial={{ y: -40, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onSubmit={avatarUploadHandler}
+                  >
+                    <label>
+                      <UploadIconStyles />
+                      <input type="submit" />
+                      Upload
+                    </label>
+                  </UploadForm>
+                </>
+              )}
+
               <AnimatePresence>
-                {editAvatar && (
+                {editAvatar && !avatar && (
                   <UploadForm
                     initial={{ y: -40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -176,8 +226,8 @@ const Account = () => {
                   >
                     <label>
                       <UploadIconStyles />
-                      <input type="file" placeholder="Enter new email" />
-                      Upload
+                      <input onChange={avatarChangeHandler} type="file" />
+                      Add image
                     </label>
                   </UploadForm>
                 )}
