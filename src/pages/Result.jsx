@@ -33,7 +33,7 @@ import MethodCard from '../comps/temps/MethodCard';
 import ReviewCard from '../comps/temps/ReviewCard';
 import GhostReview from '../comps/temps/GhostReview';
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 4;
 
 const DAILY_KCALS = 2500;
 const DAILY_CARBS = 325;
@@ -113,6 +113,7 @@ const Result = () => {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PAGE_SIZE;
     const lastPageIndex = firstPageIndex + PAGE_SIZE;
+    reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
     return reviews?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, reviews]);
 
@@ -149,6 +150,7 @@ const Result = () => {
         comment: data.data.review.comment,
         rating: data.data.review.rating,
         author: { username: data.data.user.username },
+        date: data.data.review.date,
         _id: data.data.review._id,
       };
 
@@ -396,17 +398,15 @@ const Result = () => {
         {!authCtx.isLoggedIn ? (
           <h3>You must be logged in to view or leave a comment!</h3>
         ) : (
-          currentTableData
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .map(review => (
-              <ReviewCard
-                key={review._id}
-                rating={review.rating}
-                comment={review.comment}
-                date={review.date}
-                author={review.author.username}
-              />
-            ))
+          currentTableData.map(review => (
+            <ReviewCard
+              key={review._id}
+              rating={review.rating}
+              comment={review.comment}
+              date={review.date}
+              author={review.author.username}
+            />
+          ))
         )}
 
         <Pagination
