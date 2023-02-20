@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import Button from '../../comps/temps/Button';
-import { FlexColumn } from '../../helpers/mixins';
+import { FlexColumn, Flex } from '../../helpers/mixins';
 import { ReactComponent as LeftArrow } from '../../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../../imgs/svg/right-arrow-servings.svg';
+import { ReactComponent as Bookmark } from '../../imgs/svg/bookmark.svg';
 
 export const Container = styled(motion.section)`
   ${FlexColumn()}
@@ -30,13 +31,35 @@ export const RecipeListingContainer = styled.div`
     'nooch button';
   justify-items: center;
   row-gap: 2rem;
+`;
+
+export const HeaderContainer = styled.div`
+  grid-area: header;
+
+  ${Flex()}
+  gap: 2rem;
 
   & h2 {
-    grid-area: header;
     font-family: goodlife-serif, sans-serif;
     font-weight: 700;
     font-size: 3rem;
   }
+`;
+
+export const BookmarkButton = styled(Button)`
+  height: 40px;
+  width: 40px;
+  background-color: var(--main-theme-color);
+  border: var(--main-border);
+
+  ${Flex()}
+
+  cursor: pointer;
+`;
+
+export const BookmarkIconStyles = styled(Bookmark)`
+  height: 20px;
+  width: 20px;
 `;
 
 export const RecipeImageBox = styled.div`

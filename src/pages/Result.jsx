@@ -8,6 +8,9 @@ import {
   Container,
   RecipeListingSection,
   RecipeListingContainer,
+  HeaderContainer,
+  BookmarkIconStyles,
+  BookmarkButton,
   RecipeImageBox,
   RecipeServingsBox,
   ServingsBtn,
@@ -206,7 +209,15 @@ const Result = () => {
               />
             </RecipeImageBox>
 
-            <h2>{result.data.recipe.name}</h2>
+            <HeaderContainer>
+              <h2>{result.data.recipe.name}</h2>
+
+              {authCtx.isLoggedIn && (
+                <BookmarkButton icon="true" type="button" btnSize="small">
+                  <BookmarkIconStyles />
+                </BookmarkButton>
+              )}
+            </HeaderContainer>
 
             <RecipeServingsBox>
               <ServingsBtn
@@ -225,7 +236,6 @@ const Result = () => {
                 <ArrowRightIconStyles />
               </ServingsBtn>
             </RecipeServingsBox>
-
             {result.data.recipe.nutritionProvided && (
               <NutritionInfo>
                 <div>
@@ -306,13 +316,11 @@ const Result = () => {
                 </div>
               </NutritionInfo>
             )}
-
             {!result.data.recipe.nutritionProvided && (
               <NoNutritionInfo>
                 No nutritional information provided for this recipe.
               </NoNutritionInfo>
             )}
-
             <IngredientBox>
               <h2>Ingredients</h2>
 

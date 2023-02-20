@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Flex } from '../../../helpers/mixins';
 
 const btnSizes = {
   small: { height: '3rem', width: '6rem', fontSize: '1.2rem' },
@@ -21,6 +22,8 @@ export const BtnStyles = styled.button`
   background-color: transparent;
 
   color: var(--main-dark-color);
+
+  /* ${Flex()} */
 
   &:active,
   &:focus {
