@@ -4,7 +4,6 @@ import {
 } from '../../styled/styledComps/styledTemps/styledButton';
 
 const Button = ({ children, ...props }) => {
-  console.log(props);
   return (
     <BtnStyles
       className={props.className}
