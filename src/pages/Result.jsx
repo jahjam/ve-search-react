@@ -176,6 +176,22 @@ const Result = () => {
     setleaveComment(!leaveComment);
   };
 
+  const { sendRequest: bookmarkRequest } = useRequest();
+
+  const addBookmarkHandler = () => {
+    const receiver = data => {
+      console.log(data);
+    };
+
+    bookmarkRequest(
+      {
+        url: `/api/v1/users/addBookmark/${result.data.recipe.id}`,
+        method: 'PATCH',
+      },
+      receiver
+    );
+  };
+
   return (
     <Container>
       {isLoading && (
@@ -213,7 +229,12 @@ const Result = () => {
               <h2>{result.data.recipe.name}</h2>
 
               {authCtx.isLoggedIn && (
-                <BookmarkButton icon="true" type="button" btnSize="small">
+                <BookmarkButton
+                  onClick={addBookmarkHandler}
+                  icon="true"
+                  type="button"
+                  btnSize="small"
+                >
                   <BookmarkIconStyles />
                 </BookmarkButton>
               )}
