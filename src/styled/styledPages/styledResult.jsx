@@ -6,6 +6,7 @@ import { FlexColumn, Flex } from '../../helpers/mixins';
 import { ReactComponent as LeftArrow } from '../../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../../imgs/svg/right-arrow-servings.svg';
 import { ReactComponent as Bookmark } from '../../imgs/svg/bookmark.svg';
+import { ReactComponent as BookmarkSolid } from '../../imgs/svg/bookmark-solid.svg';
 
 export const Container = styled(motion.section)`
   ${FlexColumn()}
@@ -58,6 +59,11 @@ export const BookmarkButton = styled(Button)`
 `;
 
 export const BookmarkIconStyles = styled(Bookmark)`
+  height: 20px;
+  width: 20px;
+`;
+
+export const BookmarkSolidIconStyles = styled(BookmarkSolid)`
   height: 20px;
   width: 20px;
 `;

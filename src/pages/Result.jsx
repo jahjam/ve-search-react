@@ -11,6 +11,7 @@ import {
   HeaderContainer,
   BookmarkIconStyles,
   BookmarkButton,
+  BookmarkSolidIconStyles,
   RecipeImageBox,
   RecipeServingsBox,
   ServingsBtn,
@@ -250,7 +251,13 @@ const Result = () => {
                   type="button"
                   btnSize="small"
                 >
-                  <BookmarkIconStyles />
+                  {authCtx.userDetails.user.bookmarks.includes(
+                    result.data.recipe.id
+                  ) ? (
+                    <BookmarkSolidIconStyles />
+                  ) : (
+                    <BookmarkIconStyles />
+                  )}
                 </BookmarkButton>
               )}
             </HeaderContainer>
@@ -261,6 +268,7 @@ const Result = () => {
                 btnSize="small"
                 icon={true}
               >
+                {}
                 <ArrowLeftIconStyles />
               </ServingsBtn>
               <span>{serving} Servings</span>
