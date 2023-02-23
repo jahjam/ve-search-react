@@ -178,10 +178,25 @@ const Result = () => {
 
   const { sendRequest: bookmarkRequest } = useRequest();
 
-  const addBookmarkHandler = () => {
+  const bookmarkHandler = () => {
+    const recipeAlreadyBookmarked = authCtx.userDetails.user.bookmarks.includes(
+      result.data.recipe.id
+    );
+
     const receiver = data => {
       console.log(data);
+      authCtx.setUserDetailsHandler(data);
     };
+
+    if (recipeAlreadyBookmarked) {
+      return bookmarkRequest(
+        {
+          url: `/api/v1/users/removeBookmark/${result.data.recipe.id}`,
+          method: 'DELETE',
+        },
+        receiver
+      );
+    }
 
     bookmarkRequest(
       {
@@ -230,7 +245,7 @@ const Result = () => {
 
               {authCtx.isLoggedIn && (
                 <BookmarkButton
-                  onClick={addBookmarkHandler}
+                  onClick={bookmarkHandler}
                   icon="true"
                   type="button"
                   btnSize="small"
