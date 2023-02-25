@@ -13,14 +13,14 @@ import RecipeCard from '../comps/temps/RecipeCard';
 
 let PAGE_SIZE = 9;
 
-const MyRecipes = () => {
+const MyBookmarks = () => {
   const authCtx = useContext(AuthContext);
   const [searchInput, setSearchInput] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const { userDetails } = authCtx;
 
-  const filteredRecipes = userDetails.user?.recipes.filter(recipe =>
+  const filteredRecipes = userDetails.user?.bookmarks.filter(recipe =>
     recipe.name.toLowerCase().includes(searchInput)
   );
 
@@ -33,8 +33,6 @@ const MyRecipes = () => {
   const onChangeHandler = e => {
     setSearchInput(e.target.value);
   };
-
-  console.log(currentTableData);
 
   return (
     <>
@@ -56,7 +54,9 @@ const MyRecipes = () => {
         <Results>
           {!filteredRecipes?.every(el => el === undefined) ? (
             currentTableData?.map(recipe => {
-              /* if (!recipe) return; */
+              {
+                /* if (!recipe) return; */
+              }
 
               return (
                 <RecipeCard
@@ -86,4 +86,4 @@ const MyRecipes = () => {
   );
 };
 
-export default MyRecipes;
+export default MyBookmarks;

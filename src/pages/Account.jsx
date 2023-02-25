@@ -39,6 +39,8 @@ const Account = () => {
   const [passResetMsg, setPassResetMsg] = useState(null);
   const [avatar, setAvatar] = useState(null);
 
+  console.log(authCtx.userDetails);
+
   const location = useLocation();
 
   const { isLoading: resetRequestIsLoading, sendRequest } = useRequest();
@@ -60,6 +62,10 @@ const Account = () => {
 
   const myRecipesHandler = () => {
     navigate('/me/my-recipes');
+  };
+
+  const myBookmarksHandler = () => {
+    navigate('/me/my-bookmarks');
   };
 
   const changeEmailHandler = e => {
@@ -157,8 +163,6 @@ const Account = () => {
     );
   };
 
-  console.log(userDetails);
-
   // Check if user is signed in
   if (Object.keys(userDetails).length === 0)
     return <span style={{ fontSize: '20px' }}>Please sign in.</span>;
@@ -240,9 +244,9 @@ const Account = () => {
                   <IngIcon />
                   <span>My recipes</span>
                 </li>
-                <li>
+                <li onClick={myBookmarksHandler}>
                   <Bookmark />
-                  <span>My saved recipes</span>
+                  <span>My bookmarks</span>
                 </li>
               </ul>
             </Details>

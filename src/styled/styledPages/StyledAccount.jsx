@@ -113,7 +113,7 @@ export const Details = styled.div`
       ${Flex()}
       gap: 1rem;
       padding: 2rem;
-      width: 100%;
+      width: 20rem;
 
       border: var(--main-border);
 

@@ -8,6 +8,7 @@ import Search from './pages/Search';
 import Result from './pages/Result';
 import Account from './pages/Account';
 import MyRecipes from './pages/MyRecipes';
+import MyBookmarks from './pages/MyBookmarks';
 import AddRecipe from './pages/AddRecipe';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
@@ -29,6 +30,7 @@ function App() {
             </Route>
             <Route path="/me" element={<Account />}>
               <Route path="my-recipes" element={<MyRecipes />} />
+              <Route path="my-bookmarks" element={<MyBookmarks />} />
               <Route path="add-a-recipe" element={<AddRecipe />} />
             </Route>
             <Route path="/sign-up" element={<SignUp />} />
