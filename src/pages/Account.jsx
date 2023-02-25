@@ -238,6 +238,7 @@ const Account = () => {
               </AnimatePresence>
             </Avatar>
 
+            {/* location is used to determine background colour of button in styled comps */}
             <Details location={location}>
               <ul>
                 <li onClick={myRecipesHandler}>

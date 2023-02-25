@@ -103,9 +103,9 @@ export const Details = styled.div`
       }};
     }
 
-    & li:nth-child(1) {
+    & li:nth-child(2) {
       background-color: ${props => {
-        if (props.location.pathname === '/me/saved-recipes') return '#58b15a';
+        if (props.location.pathname === '/me/my-bookmarks') return '#58b15a';
       }};
     }
 
