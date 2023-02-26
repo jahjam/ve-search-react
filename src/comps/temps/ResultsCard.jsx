@@ -49,7 +49,7 @@ const ResultCard = props => {
         </ImgContainerStyled>
         <span>{props.title}</span>
         <span>{props.author}</span>
-        <span>{recipeRating ? `Rating: ${recipeRating}` : ''}</span>
+        <span>{recipeRating ? `Rating: ${recipeRating}/5` : ''}</span>
       </ResultStyled>
     </ResultsBox>
   );
