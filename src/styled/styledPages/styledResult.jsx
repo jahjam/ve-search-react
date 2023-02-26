@@ -192,7 +192,7 @@ export const NoNutritionInfo = styled.span`
   font-size: 1.6rem;
 `;
 
-export const IngredientBox = styled.div`
+export const StyledIngredientBox = styled.div`
   width: 100%;
   align-items: center;
 

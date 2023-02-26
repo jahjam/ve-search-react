@@ -9,7 +9,6 @@ import {
   RecipeListingSection,
   RecipeListingContainer,
   NoNutritionInfo,
-  IngredientBox,
   MethodsSection,
   CommentsSection,
   CommentBox,
@@ -19,7 +18,6 @@ import {
 } from '../styled/styledPages/styledResult';
 
 import AuthContext from '../store/auth-context';
-import Ingredient from '../comps/Ingredient';
 import LinkSection from '../comps/LinkSection';
 import GhostResult from '../comps/temps/GhostResult';
 import MethodCard from '../comps/temps/MethodCard';
@@ -29,6 +27,7 @@ import RecipeImageBox from '../comps/RecipeImageBox';
 import HeaderContainer from '../comps/HeaderContainer';
 import RecipeServingsBox from '../comps/RecipeServingsBox';
 import NutritionalInfo from '../comps/NutritionalInfo';
+import IngredientBox from '../comps/IngredientBox';
 
 const PAGE_SIZE = 4;
 
@@ -177,20 +176,7 @@ const Result = () => {
               </NoNutritionInfo>
             )}
 
-            <IngredientBox>
-              <h2>Ingredients</h2>
-
-              <ul>
-                {ings.map(ingredient => (
-                  <Ingredient
-                    key={ingredient._id}
-                    amount={ingredient.amount}
-                    measurement={ingredient.measurement}
-                    name={ingredient.name}
-                  />
-                ))}
-              </ul>
-            </IngredientBox>
+            <IngredientBox ings={result.data.recipe.ingredients} />
           </RecipeListingContainer>
         </RecipeListingSection>
       )}
