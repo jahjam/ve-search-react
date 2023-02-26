@@ -8,14 +8,8 @@ import {
   Container,
   RecipeListingSection,
   RecipeListingContainer,
-  RecipeServingsBox,
-  ServingsBtn,
-  ArrowLeftIconStyles,
-  ArrowRightIconStyles,
-  NutritionInfo,
   NoNutritionInfo,
   IngredientBox,
-  Kcal,
   MethodsSection,
   CommentsSection,
   CommentBox,
@@ -33,14 +27,10 @@ import ReviewCard from '../comps/temps/ReviewCard';
 import GhostReview from '../comps/temps/GhostReview';
 import RecipeImageBox from '../comps/RecipeImageBox';
 import HeaderContainer from '../comps/HeaderContainer';
+import RecipeServingsBox from '../comps/RecipeServingsBox';
+import NutritionalInfo from '../comps/NutritionalInfo';
 
 const PAGE_SIZE = 4;
-
-const DAILY_KCALS = 2500;
-const DAILY_CARBS = 325;
-const DAILY_FAT = 97;
-const DAILY_SATURATES = 30;
-const DAILY_SALT = 6;
 
 const Result = () => {
   const params = useParams();
@@ -62,47 +52,12 @@ const Result = () => {
     sendRequest({ url: `/api/v1/recipes/${params.resultId}` }, receiver);
   }, [params.resultId, sendRequest]);
 
-  // seperate ingedients to calculate servings...
-  const servingsIncreaseHandler = () => {
-    const newServing = serving + 1;
-
-    const newIngs = ings.map(ing => {
-      const newIng = {
-        _id: ing._id,
-        amount: (ing.amount * newServing) / serving,
-        measurement: ing.measurement,
-        name: ing.name,
-      };
-
-      return newIng;
-    });
-
-    setServing(newServing);
-    setIngs(newIngs);
+  const setServingHandler = serving => {
+    setServing(serving);
   };
 
-  const servingsDecreaseHandler = () => {
-    if (serving === 1) return;
-
-    const newServing = serving - 1;
-
-    const newIngs = ings.map(ing => {
-      const newIng = {
-        _id: ing._id,
-        amount: (ing.amount * newServing) / serving,
-        measurement: ing.measurement,
-        name: ing.name,
-      };
-
-      return newIng;
-    });
-
-    setServing(newServing);
-    setIngs(newIngs);
-  };
-
-  const calculateNutritionalPercs = (amount, base) => {
-    return (amount / base) * 100;
+  const setIngsHandler = ings => {
+    setIngs(ings);
   };
 
   const [reviews, setReviews] = useState([]);
@@ -207,109 +162,21 @@ const Result = () => {
               recipe={result.data.recipe}
             />
 
-            <RecipeServingsBox>
-              <ServingsBtn
-                onClick={servingsDecreaseHandler}
-                btnSize="small"
-                icon={true}
-              >
-                {}
-                <ArrowLeftIconStyles />
-              </ServingsBtn>
-              <span>{serving} Servings</span>
-              <ServingsBtn
-                onClick={servingsIncreaseHandler}
-                btnSize="small"
-                icon={true}
-              >
-                <ArrowRightIconStyles />
-              </ServingsBtn>
-            </RecipeServingsBox>
-            {result.data.recipe.nutritionProvided && (
-              <NutritionInfo>
-                <div>
-                  <h3>Nutritional Facts</h3>
-                  <h4>(Estimated per serving)</h4>
-                  <ul>
-                    <li>
-                      <p>Energy</p>
-                      <p>
-                        {result.data.recipe.nutrition.kcal.amount}
-                        <Kcal>kcal</Kcal>
-                      </p>
-                      <p>
-                        {calculateNutritionalPercs(
-                          result.data.recipe.nutrition.kcal.amount,
-                          DAILY_KCALS
-                        ).toFixed()}
-                        %
-                      </p>
-                    </li>
-                    <li>
-                      <p>Carb</p>
-                      <p>
-                        {result.data.recipe.nutrition.carbs.amount}
-                        {result.data.recipe.nutrition.carbs.measurement}
-                      </p>
-                      <p>
-                        {calculateNutritionalPercs(
-                          result.data.recipe.nutrition.carbs.amount,
-                          DAILY_CARBS
-                        ).toFixed()}
-                        %
-                      </p>
-                    </li>
-                    <li>
-                      <p>Fat</p>
-                      <p>
-                        {result.data.recipe.nutrition.fat.amount}
-                        {result.data.recipe.nutrition.fat.measurement}
-                      </p>
-                      <p>
-                        {calculateNutritionalPercs(
-                          result.data.recipe.nutrition.fat.amount,
-                          DAILY_FAT
-                        ).toFixed()}
-                        %
-                      </p>
-                    </li>
-                    <li>
-                      <p>Saturates</p>
-                      <p>
-                        {result.data.recipe.nutrition.saturates.amount}
-                        {result.data.recipe.nutrition.saturates.measurement}
-                      </p>
-                      <p>
-                        {calculateNutritionalPercs(
-                          result.data.recipe.nutrition.saturates.amount,
-                          DAILY_SATURATES
-                        ).toFixed()}
-                        %
-                      </p>
-                    </li>
-                    <li>
-                      <p>Salt</p>
-                      <p>
-                        {result.data.recipe.nutrition.salt.amount}
-                        {result.data.recipe.nutrition.salt.measurement}
-                      </p>
-                      <p>
-                        {calculateNutritionalPercs(
-                          result.data.recipe.nutrition.salt.amount,
-                          DAILY_SALT
-                        ).toFixed()}
-                        %
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </NutritionInfo>
-            )}
-            {!result.data.recipe.nutritionProvided && (
+            <RecipeServingsBox
+              serving={serving}
+              setServingHandler={setServingHandler}
+              ings={ings}
+              setIngsHandler={setIngsHandler}
+            />
+
+            {result.data.recipe.nutritionProvided ? (
+              <NutritionalInfo nutrition={result.data.recipe.nutrition} />
+            ) : (
               <NoNutritionInfo>
                 No nutritional information provided for this recipe.
               </NoNutritionInfo>
             )}
+
             <IngredientBox>
               <h2>Ingredients</h2>
 

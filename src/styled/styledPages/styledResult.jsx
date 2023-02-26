@@ -86,7 +86,7 @@ export const StyledRecipeImageBox = styled.div`
   }
 `;
 
-export const RecipeServingsBox = styled.div`
+export const StyledRecipeServingsBox = styled.div`
   grid-column: 2/3;
 
   display: flex;
@@ -119,7 +119,7 @@ export const ArrowRightIconStyles = styled(RightArrow)`
   width: 20px;
 `;
 
-export const NutritionInfo = styled.div`
+export const StyledNutritionalInfo = styled.div`
   grid-area: nooch;
 
   & div {
