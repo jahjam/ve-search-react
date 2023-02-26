@@ -34,7 +34,7 @@ export const RecipeListingContainer = styled.div`
   row-gap: 2rem;
 `;
 
-export const HeaderContainer = styled.div`
+export const StyledHeaderContainer = styled.div`
   grid-area: header;
 
   ${Flex()}
@@ -68,7 +68,7 @@ export const BookmarkSolidIconStyles = styled(BookmarkSolid)`
   width: 20px;
 `;
 
-export const RecipeImageBox = styled.div`
+export const StyledRecipeImageBox = styled.div`
   height: 40rem;
   width: 40rem;
   overflow: hidden;

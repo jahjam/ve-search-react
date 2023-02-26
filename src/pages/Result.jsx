@@ -8,11 +8,6 @@ import {
   Container,
   RecipeListingSection,
   RecipeListingContainer,
-  HeaderContainer,
-  BookmarkIconStyles,
-  BookmarkButton,
-  BookmarkSolidIconStyles,
-  RecipeImageBox,
   RecipeServingsBox,
   ServingsBtn,
   ArrowLeftIconStyles,
@@ -36,6 +31,8 @@ import GhostResult from '../comps/temps/GhostResult';
 import MethodCard from '../comps/temps/MethodCard';
 import ReviewCard from '../comps/temps/ReviewCard';
 import GhostReview from '../comps/temps/GhostReview';
+import RecipeImageBox from '../comps/RecipeImageBox';
+import HeaderContainer from '../comps/HeaderContainer';
 
 const PAGE_SIZE = 4;
 
@@ -177,37 +174,6 @@ const Result = () => {
     setleaveComment(!leaveComment);
   };
 
-  const { sendRequest: bookmarkRequest } = useRequest();
-
-  const bookmarkHandler = () => {
-    const recipeAlreadyBookmarked = authCtx.userDetails.user.bookmarks.includes(
-      result.data.recipe.id
-    );
-
-    const receiver = data => {
-      console.log(data);
-      authCtx.setUserDetailsHandler(data);
-    };
-
-    if (recipeAlreadyBookmarked) {
-      return bookmarkRequest(
-        {
-          url: `/api/v1/users/removeBookmark/${result.data.recipe.id}`,
-          method: 'DELETE',
-        },
-        receiver
-      );
-    }
-
-    bookmarkRequest(
-      {
-        url: `/api/v1/users/addBookmark/${result.data.recipe.id}`,
-        method: 'PATCH',
-      },
-      receiver
-    );
-  };
-
   return (
     <Container>
       {isLoading && (
@@ -234,33 +200,12 @@ const Result = () => {
           transition={{ type: 'spring', duration: 0.2 }}
         >
           <RecipeListingContainer>
-            <RecipeImageBox>
-              <img
-                src={`/public/img/recipes/${result.data.recipe.coverImage}`}
-                alt="Food"
-              />
-            </RecipeImageBox>
+            <RecipeImageBox coverImage={result.data.recipe.coverImage} />
 
-            <HeaderContainer>
-              <h2>{result.data.recipe.name}</h2>
-
-              {authCtx.isLoggedIn && (
-                <BookmarkButton
-                  onClick={bookmarkHandler}
-                  icon="true"
-                  type="button"
-                  btnSize="small"
-                >
-                  {authCtx.userDetails.user.bookmarks.includes(
-                    result.data.recipe.id
-                  ) ? (
-                    <BookmarkSolidIconStyles />
-                  ) : (
-                    <BookmarkIconStyles />
-                  )}
-                </BookmarkButton>
-              )}
-            </HeaderContainer>
+            <HeaderContainer
+              name={result.data.recipe.name}
+              recipe={result.data.recipe}
+            />
 
             <RecipeServingsBox>
               <ServingsBtn
