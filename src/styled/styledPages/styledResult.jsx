@@ -250,7 +250,7 @@ export const MethodsSection = styled.section`
   }
 `;
 
-export const CommentsSection = styled.section`
+export const StyledCommentsSection = styled.section`
   width: 80%;
   ${FlexColumn()}
   gap: 2rem;
