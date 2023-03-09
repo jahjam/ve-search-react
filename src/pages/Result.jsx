@@ -96,7 +96,7 @@ const Result = () => {
               </NoNutritionInfo>
             )}
 
-            <IngredientBox ings={result.data.recipe.ingredients} />
+            <IngredientBox ings={ings} />
           </RecipeListingContainer>
         </RecipeListingSection>
       )}
