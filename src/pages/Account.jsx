@@ -24,6 +24,7 @@ import {
   UploadIconStyles,
   UploadForm,
   AvatarUploadTag,
+  DeleteAccSpan,
 } from '../styled/styledPages/StyledAccount';
 
 import Button from '../comps/temps/Button';
@@ -38,8 +39,6 @@ const Account = () => {
   const emailForPassword = useRef();
   const [passResetMsg, setPassResetMsg] = useState(null);
   const [avatar, setAvatar] = useState(null);
-
-  console.log(authCtx.userDetails);
 
   const location = useLocation();
 
@@ -162,6 +161,8 @@ const Account = () => {
       reciever
     );
   };
+
+  const deleteAccHandler = e => {};
 
   // Check if user is signed in
   if (Object.keys(userDetails).length === 0)
@@ -315,6 +316,14 @@ const Account = () => {
                     {resetRequestIsLoading && <span>Sending...</span>}
                     {passResetMsg && <span>{passResetMsg}</span>}
                   </AnimatePresence>
+                </li>
+                <li>
+                  <div>
+                    <h2>Delete Account:</h2>
+                    <DeleteAccSpan onClick={deleteAccHandler}>
+                      Delete
+                    </DeleteAccSpan>
+                  </div>
                 </li>
               </ul>
             </Edit>
