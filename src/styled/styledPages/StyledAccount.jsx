@@ -10,8 +10,7 @@ export const AccountContainerStyled = styled(motion.section)`
   margin-top: 2rem;
   width: auto;
   height: auto;
-  padding: 1.6rem;
-  padding-bottom: 3rem;
+  padding: 2rem;
   border: 0.2rem solid black;
 `;
 
@@ -287,4 +286,9 @@ export const UploadForm = styled(motion.form)`
   &:hover {
     background-color: #58b15a;
   }
+`;
+
+export const DeleteAccSpan = styled.span`
+  align-self: flex-end;
+  color: #e31212;
 `;
