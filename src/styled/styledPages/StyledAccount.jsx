@@ -201,7 +201,7 @@ export const Edit = styled.div`
   }
 `;
 
-export const Add = styled.div`
+export const AddSection = styled.div`
   grid-area: add;
 
   height: 100%;

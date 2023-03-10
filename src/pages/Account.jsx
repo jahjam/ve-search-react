@@ -1,116 +1,32 @@
-import { useContext, useState, useRef } from 'react';
+import { useContext } from 'react';
 import AuthContext from '../store/auth-context';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
-import { format } from 'date-fns';
 
 import useRequest from '../hooks/use-request';
 import { generateFramerElipsis } from '../helpers/generateFramerElipsis';
-import { ReactComponent as IngIcon } from '../imgs/svg/title-icon.svg';
-import { ReactComponent as Bookmark } from '../imgs/svg/bookmark.svg';
 
 import {
   AccountContainerStyled,
   AccountGrid,
-  Name,
-  Avatar,
-  Details,
-  Edit,
-  Add,
+  AddSection,
   AddIconStyles,
   AddBtn,
-  EditPassDiv,
-  Password,
-  UploadIconStyles,
-  UploadForm,
-  AvatarUploadTag,
-  DeleteAccSpan,
 } from '../styled/styledPages/StyledAccount';
 
-import Button from '../comps/temps/Button';
+import NameSection from '../comps/accountPageComps/NameSection';
+import AvatarSection from '../comps/accountPageComps/AvatarSection';
+import DetailsSection from '../comps/accountPageComps/DetailsSection';
+import EditSection from '../comps/accountPageComps/EditSection';
 
 const Account = () => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  const [editEmail, setEditEmail] = useState(false);
-  const [editPass, setEditPass] = useState(false);
-  const [editAvatar, setEditAvatar] = useState(false);
-  const email = useRef();
-  const emailForPassword = useRef();
-  const [passResetMsg, setPassResetMsg] = useState(null);
-  const [avatar, setAvatar] = useState(null);
 
   const location = useLocation();
 
-  const { isLoading: resetRequestIsLoading, sendRequest } = useRequest();
+  const { sendRequest } = useRequest();
 
   const { dataIsLoading, userDetails } = authCtx;
-
-  const editEmailHandler = () => {
-    setEditEmail(!editEmail);
-  };
-
-  const editPassHandler = () => {
-    setEditPass(!editPass);
-    setPassResetMsg(null);
-  };
-
-  const editAvatarHandler = () => {
-    setEditAvatar(!editAvatar);
-  };
-
-  const myRecipesHandler = () => {
-    navigate('/me/my-recipes');
-  };
-
-  const myBookmarksHandler = () => {
-    navigate('/me/my-bookmarks');
-  };
-
-  const changeEmailHandler = e => {
-    const reciever = data => {
-      authCtx.setUserDetailsHandler(data);
-    };
-
-    sendRequest(
-      {
-        url: '/api/v1/users/me',
-        method: 'PATCH',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          email: email.current.value,
-        }),
-      },
-      reciever
-    );
-
-    email.current.value = '';
-    setEditEmail(!editEmail);
-  };
-
-  const passwordResetHandler = () => {
-    const reciever = data => {
-      setPassResetMsg(data.message);
-
-      setTimeout(() => {
-        setPassResetMsg(null);
-      }, 6000);
-    };
-
-    sendRequest(
-      {
-        url: '/api/v1/users/forgotPassword',
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          email: emailForPassword.current.value,
-        }),
-      },
-      reciever
-    );
-
-    setEditPass(!editPass);
-  };
 
   const addRecipeHandler = () => {
     navigate('/me/add-a-recipe');
@@ -136,54 +52,6 @@ const Account = () => {
     navigate('/');
   };
 
-  const avatarChangeHandler = e => {
-    setAvatar(e.target.files[0]);
-  };
-
-  const avatarUploadHandler = e => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('photo', avatar);
-
-    const reciever = data => {
-      if (data.status === 'success') {
-        authCtx.setUserDetailsHandler(data);
-      }
-    };
-
-    sendRequest(
-      {
-        url: '/api/v1/users/me',
-        method: 'PATCH',
-        body: formData,
-      },
-      reciever
-    );
-  };
-
-  const {
-    isLoading: deletingAccountIsLoading,
-    sendRequest: sendDeleteRequest,
-  } = useRequest();
-
-  const deleteAccHandler = e => {
-    e.preventDefault();
-
-    const reciever = data => {
-      console.log(data);
-      logoutHandler(e);
-    };
-
-    sendDeleteRequest(
-      {
-        url: '/api/v1/users/me',
-        method: 'DELETE',
-      },
-      reciever
-    );
-  };
-
   // Check if user is signed in
   if (Object.keys(userDetails).length === 0)
     return <span style={{ fontSize: '20px' }}>Please sign in.</span>;
@@ -202,157 +70,18 @@ const Account = () => {
           exit={{ opacity: 0 }}
         >
           <AccountGrid>
-            <Name>
-              <h1>Hi, {userDetails.user?.username}!</h1>
-              <span>
-                Member since{' '}
-                {(userDetails.user?.joinDate &&
-                  format(new Date(userDetails.user?.joinDate), 'dd/MM/yyyy')) ||
-                  '...'}
-              </span>
-            </Name>
+            <NameSection userDetails={userDetails} />
 
-            <Avatar>
-              <div>
-                {userDetails.user && (
-                  <img
-                    src={`/public/img/users/${userDetails.user.photo}`}
-                    alt="avatar"
-                  />
-                )}
-              </div>
-              <span onClick={editAvatarHandler}>Edit avatar</span>
+            <AvatarSection userDetails={userDetails} />
 
-              {avatar && (
-                <>
-                  <AvatarUploadTag>Avatar image: {avatar.name}</AvatarUploadTag>
+            <DetailsSection />
 
-                  <UploadForm
-                    initial={{ y: -40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onSubmit={avatarUploadHandler}
-                  >
-                    <label>
-                      <UploadIconStyles />
-                      <input type="submit" />
-                      Upload
-                    </label>
-                  </UploadForm>
-                </>
-              )}
+            <EditSection
+              userDetails={userDetails}
+              logoutHandler={logoutHandler}
+            />
 
-              <AnimatePresence>
-                {editAvatar && !avatar && (
-                  <UploadForm
-                    initial={{ y: -40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <label>
-                      <UploadIconStyles />
-                      <input onChange={avatarChangeHandler} type="file" />
-                      Add image
-                    </label>
-                  </UploadForm>
-                )}
-              </AnimatePresence>
-            </Avatar>
-
-            {/* location is used to determine background colour of button in styled comps */}
-            <Details location={location}>
-              <ul>
-                <li onClick={myRecipesHandler}>
-                  <IngIcon />
-                  <span>My recipes</span>
-                </li>
-                <li onClick={myBookmarksHandler}>
-                  <Bookmark />
-                  <span>My bookmarks</span>
-                </li>
-              </ul>
-            </Details>
-
-            <Edit>
-              <ul>
-                <li>
-                  <div>
-                    <h2>Email</h2>
-                    <span onClick={editEmailHandler}>Edit</span>
-                  </div>
-                  <span>{userDetails.user?.email}</span>
-
-                  <AnimatePresence>
-                    {editEmail && (
-                      <motion.form
-                        initial={{ y: -40, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                      >
-                        <input ref={email} placeholder="Enter new email" />
-                        <Button
-                          display="flex"
-                          btnSize="small"
-                          onClick={changeEmailHandler}
-                        >
-                          Update
-                        </Button>
-                      </motion.form>
-                    )}
-                  </AnimatePresence>
-                </li>
-                <li>
-                  <div>
-                    <h2>Password</h2>
-                    <span onClick={editPassHandler}>Edit</span>
-                  </div>
-                  <Password>
-                    &#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;
-                  </Password>
-
-                  <AnimatePresence>
-                    {editPass && (
-                      <EditPassDiv
-                        initial={{ y: -40, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                      >
-                        <span>
-                          A password reset link will be sent to the email you
-                          enter below:
-                        </span>
-                        <form>
-                          <input ref={emailForPassword} placeholder="Email" />
-                          <Button
-                            display="flex"
-                            btnSize="small"
-                            onClick={passwordResetHandler}
-                          >
-                            Send
-                          </Button>
-                        </form>
-                      </EditPassDiv>
-                    )}
-                    {resetRequestIsLoading && <span>Sending...</span>}
-                    {passResetMsg && <span>{passResetMsg}</span>}
-                  </AnimatePresence>
-                </li>
-                <li>
-                  <div>
-                    <h2>Delete Account:</h2>
-                    {deletingAccountIsLoading ? (
-                      <DeleteAccSpan>Deleting...</DeleteAccSpan>
-                    ) : (
-                      <DeleteAccSpan onClick={deleteAccHandler}>
-                        Delete
-                      </DeleteAccSpan>
-                    )}
-                  </div>
-                </li>
-              </ul>
-            </Edit>
-
-            <Add>
+            <AddSection>
               <span onClick={logoutHandler}>Logout</span>
               <AddBtn
                 location={location}
@@ -363,7 +92,7 @@ const Account = () => {
                 <AddIconStyles />
                 <span>Add a recipe</span>
               </AddBtn>
-            </Add>
+            </AddSection>
           </AccountGrid>
         </AccountContainerStyled>
 
