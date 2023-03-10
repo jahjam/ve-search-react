@@ -9,7 +9,7 @@ import {
   Password,
   EditPassDiv,
 } from '../../styled/styledPages/StyledAccount';
-import Button from '../../comps/temps/Button';
+import Button from '../temps/Button';
 import AuthContext from '../../store/auth-context';
 
 const EditSection = props => {

@@ -6,7 +6,7 @@ import {
   Results,
   SearchBar,
   NoRecipesMsg,
-} from '../../styled/styledPages/styledUserRecipeCards';
+} from '../../styled/styledComps/styledUserRecipeCards';
 
 import RecipeCard from '../temps/RecipeCard';
 
