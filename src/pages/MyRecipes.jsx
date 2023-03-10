@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../store/auth-context';
 
-import UserRecipeCards from '../comps/UserRecipeCards';
+import UserRecipeCards from '../comps/resultPageComps/UserRecipeCards';
 
 let PAGE_SIZE = 9;
 

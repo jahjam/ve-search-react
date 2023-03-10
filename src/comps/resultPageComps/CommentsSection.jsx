@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
-import useRequest from '../hooks/use-request';
+import useRequest from '../../hooks/use-request';
 import { useState, useEffect, useMemo, useContext, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Pagination from './temps/Pagination';
+import Pagination from '../temps/Pagination';
 
 import {
   StyledCommentsSection,
@@ -10,11 +10,11 @@ import {
   CommentSpan,
   LeaveCommentSpan,
   CommentSubmitBtn,
-} from '../styled/styledPages/styledResult';
+} from '../../styled/styledPages/styledResult';
 
-import AuthContext from '../store/auth-context';
-import ReviewCard from '../comps/temps/ReviewCard';
-import GhostReview from '../comps/temps/GhostReview';
+import AuthContext from '../../store/auth-context';
+import ReviewCard from '../temps/ReviewCard';
+import GhostReview from '../temps/GhostReview';
 
 const PAGE_SIZE = 4;
 

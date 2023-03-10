@@ -1,13 +1,13 @@
 import { useContext, useState, useEffect } from 'react';
-import AuthContext from '../store/auth-context';
-import useRequest from '../hooks/use-request';
+import AuthContext from '../../store/auth-context';
+import useRequest from '../../hooks/use-request';
 
 import {
   StyledHeaderContainer,
   BookmarkButton,
   BookmarkSolidIconStyles,
   BookmarkIconStyles,
-} from '../styled/styledPages/styledResult';
+} from '../../styled/styledPages/styledResult';
 
 const HeaderContainer = props => {
   const authCtx = useContext(AuthContext);

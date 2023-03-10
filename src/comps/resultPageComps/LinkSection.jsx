@@ -4,7 +4,7 @@ import {
   SourceLinkDesc,
   SourceRecipeCompany,
   SourceLinkButton,
-} from '../styled/styledComps/styledLinkSection';
+} from '../../styled/styledComps/styledLinkSection';
 
 const LinkSection = props => {
   return (

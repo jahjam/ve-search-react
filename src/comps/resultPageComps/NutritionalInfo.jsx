@@ -1,7 +1,7 @@
 import {
   StyledNutritionalInfo,
   Kcal,
-} from '../styled/styledPages/styledResult';
+} from '../../styled/styledPages/styledResult';
 
 const DAILY_KCALS = 2500;
 const DAILY_CARBS = 325;

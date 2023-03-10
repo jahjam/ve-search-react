@@ -3,7 +3,7 @@ import {
   ServingsBtn,
   ArrowLeftIconStyles,
   ArrowRightIconStyles,
-} from '../styled/styledPages/styledResult';
+} from '../../styled/styledPages/styledResult';
 
 const RecipeServingsBox = props => {
   // seperate ingedients to calculate servings...

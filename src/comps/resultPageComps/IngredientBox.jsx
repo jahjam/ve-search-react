@@ -1,6 +1,6 @@
-import { StyledIngredientBox } from '../styled/styledPages/styledResult';
+import { StyledIngredientBox } from '../../styled/styledPages/styledResult';
 
-import Ingredient from './Ingredient';
+import Ingredient from '../Ingredient';
 
 const IngredientBox = props => {
   return (

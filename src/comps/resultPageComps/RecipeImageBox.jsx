@@ -1,4 +1,4 @@
-import { StyledRecipeImageBox } from '../styled/styledPages/styledResult';
+import { StyledRecipeImageBox } from '../../styled/styledPages/styledResult';
 
 const RecipeImageBox = props => {
   return (

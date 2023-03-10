@@ -11,15 +11,15 @@ import {
   MethodsSection,
 } from '../styled/styledPages/styledResult';
 
-import LinkSection from '../comps/LinkSection';
+import LinkSection from '../comps/resultPageComps/LinkSection';
 import GhostResult from '../comps/temps/GhostResult';
 import MethodCard from '../comps/temps/MethodCard';
-import RecipeImageBox from '../comps/RecipeImageBox';
-import HeaderContainer from '../comps/HeaderContainer';
-import RecipeServingsBox from '../comps/RecipeServingsBox';
-import NutritionalInfo from '../comps/NutritionalInfo';
-import IngredientBox from '../comps/IngredientBox';
-import CommentsSection from '../comps/CommentsSection';
+import RecipeImageBox from '../comps/resultPageComps/RecipeImageBox';
+import HeaderContainer from '../comps/resultPageComps/HeaderContainer';
+import RecipeServingsBox from '../comps/resultPageComps/RecipeServingsBox';
+import NutritionalInfo from '../comps/resultPageComps/NutritionalInfo';
+import IngredientBox from '../comps/resultPageComps/IngredientBox';
+import CommentsSection from '../comps/resultPageComps/CommentsSection';
 
 const Result = () => {
   const params = useParams();

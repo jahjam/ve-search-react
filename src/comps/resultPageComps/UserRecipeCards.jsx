@@ -1,14 +1,14 @@
 import { useState, useMemo } from 'react';
-import Pagination from '../comps/temps/Pagination';
+import Pagination from '../temps/Pagination';
 
 import {
   ContainerStyled,
   Results,
   SearchBar,
   NoRecipesMsg,
-} from '../styled/styledPages/styledUserRecipeCards';
+} from '../../styled/styledPages/styledUserRecipeCards';
 
-import RecipeCard from '../comps/temps/RecipeCard';
+import RecipeCard from '../temps/RecipeCard';
 
 const UserRecipeCards = props => {
   const [currentPage, setCurrentPage] = useState(1);
