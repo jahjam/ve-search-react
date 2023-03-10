@@ -53,6 +53,7 @@ const Account = () => {
   };
 
   // Check if user is signed in
+  // TODO CHANGE THIS...
   if (Object.keys(userDetails).length === 0)
     return <span style={{ fontSize: '20px' }}>Please sign in.</span>;
 
