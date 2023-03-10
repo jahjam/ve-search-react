@@ -162,7 +162,27 @@ const Account = () => {
     );
   };
 
-  const deleteAccHandler = e => {};
+  const {
+    isLoading: deletingAccountIsLoading,
+    sendRequest: sendDeleteRequest,
+  } = useRequest();
+
+  const deleteAccHandler = e => {
+    e.preventDefault();
+
+    const reciever = data => {
+      console.log(data);
+      logoutHandler(e);
+    };
+
+    sendDeleteRequest(
+      {
+        url: '/api/v1/users/me',
+        method: 'DELETE',
+      },
+      reciever
+    );
+  };
 
   // Check if user is signed in
   if (Object.keys(userDetails).length === 0)
@@ -320,9 +340,13 @@ const Account = () => {
                 <li>
                   <div>
                     <h2>Delete Account:</h2>
-                    <DeleteAccSpan onClick={deleteAccHandler}>
-                      Delete
-                    </DeleteAccSpan>
+                    {deletingAccountIsLoading ? (
+                      <DeleteAccSpan>Deleting...</DeleteAccSpan>
+                    ) : (
+                      <DeleteAccSpan onClick={deleteAccHandler}>
+                        Delete
+                      </DeleteAccSpan>
+                    )}
                   </div>
                 </li>
               </ul>
