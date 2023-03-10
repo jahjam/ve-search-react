@@ -11,6 +11,7 @@ export const RecipeCardStyles = styled.div`
   & div:nth-child(1) {
     margin: 1rem;
     height: 10rem;
+    padding: 0.4rem;
     width: auto;
 
     background-color: var(--main-theme-color);
@@ -28,7 +29,7 @@ export const RecipeCardStyles = styled.div`
 
     & div:nth-child(1) {
       height: 7rem;
-      min-width: 7rem;
+      width: 7rem;
 
       background-color: black;
 
@@ -37,8 +38,8 @@ export const RecipeCardStyles = styled.div`
       overflow: hidden;
 
       & img {
-        height: 100%;
-        width: 100%;
+        height: 7rem;
+        width: 7rem;
       }
     }
   }
