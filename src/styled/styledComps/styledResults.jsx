@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 
 import Button from '../../comps/temps/Button';
 import { Flex } from '../../helpers/mixins';
+import { breakpoint } from '../breakpoints';
 
 export const ResultsStyles = styled(motion.section)`
-  width: 80%;
   height: auto;
   transition: all 1s;
   opacity: 0;
@@ -23,6 +23,10 @@ export const RecipeResults = styled.div`
 
   overflow: hidden;
   border: 0.2rem solid black;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 50rem;
+  }
 `;
 
 export const RecipeContainer = styled(motion.div)`
@@ -54,5 +58,9 @@ export const ResultsBtnStyles = styled(Button)`
     height: 20px;
     width: 20px;
     line-height: 100%;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 16rem;
   }
 `;

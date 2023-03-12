@@ -50,5 +50,5 @@ export const BtnText = styled.span`
     if (props.btnSize === 'large') return '1.8rem';
   }};
 
-  font-size: ${props => btnSizes[props.btnSize].fontSize} !important;
+  font-size: ${props => btnSizes[props.btnSize].fontSize};
 `;

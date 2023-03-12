@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Button from '../../comps/temps/Button';
+import { breakpoint } from '../breakpoints';
 
 export const SourceLinkSection = styled.section`
   width: 80%;
@@ -17,17 +18,29 @@ export const SourceLinkTitle = styled.h2`
   font-weight: 700;
   font-size: 3rem;
   text-align: center;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 2.5rem;
+  }
 `;
 
 export const SourceLinkDesc = styled.span`
   font-size: 1.8rem;
   width: 80%;
   text-align: center;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.4rem;
+  }
 `;
 
 export const SourceRecipeCompany = styled.span`
   font-weight: 700;
   font-size: 1.8rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.4rem;
+  }
 `;
 
 export const SourceLinkButton = styled(Button)`
@@ -38,4 +51,15 @@ export const SourceLinkButton = styled(Button)`
   line-height: 6rem;
 
   background-color: var(--main-theme-color);
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 4.5rem;
+    width: 10.5rem;
+
+    & span {
+      font-size: 1.6rem;
+    }
+
+    line-height: 4.7rem;
+  }
 `;

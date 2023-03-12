@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { breakpoint } from '../../breakpoints';
 
 export const PaginationContainer = styled.div`
   display: flex;
@@ -33,4 +34,9 @@ export const Page = styled.li`
   background-color: ${props => {
     if (props.DOTS) return 'transparent';
   }};
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.1rem;
+    height: 3rem;
+  }
 `;

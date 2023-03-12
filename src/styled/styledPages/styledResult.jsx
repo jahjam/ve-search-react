@@ -7,6 +7,7 @@ import { ReactComponent as LeftArrow } from '../../imgs/svg/left-arrow-servings.
 import { ReactComponent as RightArrow } from '../../imgs/svg/right-arrow-servings.svg';
 import { ReactComponent as Bookmark } from '../../imgs/svg/bookmark.svg';
 import { ReactComponent as BookmarkSolid } from '../../imgs/svg/bookmark-solid.svg';
+import { breakpoint } from '../breakpoints';
 
 export const Container = styled(motion.section)`
   ${FlexColumn()}
@@ -20,6 +21,10 @@ export const RecipeListingSection = styled(motion.section)`
   width: 100rem;
   padding: 1.6rem;
   border: 0.2rem solid black;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 80rem;
+  }
 `;
 
 export const RecipeListingContainer = styled.div`
@@ -45,6 +50,12 @@ export const StyledHeaderContainer = styled.div`
     font-weight: 700;
     font-size: 3rem;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & h2 {
+      font-size: 2.8rem;
+    }
+  }
 `;
 
 export const BookmarkButton = styled(Button)`
@@ -56,16 +67,31 @@ export const BookmarkButton = styled(Button)`
   ${Flex()}
 
   cursor: pointer;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 35px;
+    width: 35px;
+  }
 `;
 
 export const BookmarkIconStyles = styled(Bookmark)`
   height: 20px;
   width: 20px;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 15px;
+    width: 15px;
+  }
 `;
 
 export const BookmarkSolidIconStyles = styled(BookmarkSolid)`
   height: 20px;
   width: 20px;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 15px;
+    width: 15px;
+  }
 `;
 
 export const StyledRecipeImageBox = styled.div`
@@ -84,6 +110,15 @@ export const StyledRecipeImageBox = styled.div`
   & img {
     height: 40rem;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 30rem;
+    width: 30rem;
+
+    & img {
+      height: 30rem;
+    }
+  }
 `;
 
 export const StyledRecipeServingsBox = styled.div`
@@ -96,6 +131,12 @@ export const StyledRecipeServingsBox = styled.div`
   & span {
     font-size: 1.8rem;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & span {
+      font-size: 1.6rem;
+    }
+  }
 `;
 
 export const ServingsBtn = styled(Button)`
@@ -107,16 +148,31 @@ export const ServingsBtn = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 3rem;
+    width: 7rem;
+  }
 `;
 
 export const ArrowLeftIconStyles = styled(LeftArrow)`
   height: 20px;
   width: 20px;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 15px;
+    width: 15px;
+  }
 `;
 
 export const ArrowRightIconStyles = styled(RightArrow)`
   height: 20px;
   width: 20px;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 15px;
+    width: 15px;
+  }
 `;
 
 export const StyledNutritionalInfo = styled.div`
@@ -184,12 +240,50 @@ export const StyledNutritionalInfo = styled.div`
       }
     }
   }
+
+    @media (${breakpoint('maxBreakOne')}) {
+
+      & div {
+      gap: 0.4rem;
+  
+      & h3 {
+        font-size: 1.8rem;
+      }
+      & h4 {
+        font-size: 0.8rem;
+      }
+
+       & ul {
+        & li {
+        height 8rem;
+        width: 5rem;
+        padding: 0.2rem;
+
+        & p:nth-child(1) {
+          font-size: 0.8rem;
+        }
+
+        & p:nth-child(2) {
+          font-size 1.2rem;
+        }
+
+        & p:nth-child(3) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  }
 `;
 
 export const NoNutritionInfo = styled.span`
   grid-area: nooch;
 
   font-size: 1.6rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.4rem;
+  }
 `;
 
 export const StyledIngredientBox = styled.div`
@@ -232,10 +326,28 @@ export const StyledIngredientBox = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & h2 {
+      font-size: 2.5rem;
+    }
+
+    & ul {
+      & li {
+        & span {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
 `;
 
 export const Kcal = styled.span`
   font-size: 1rem;
+
+  @media ${breakpoint('maxBreakOne')} {
+    font-size: 0.8rem;
+  }
 `;
 
 export const MethodsSection = styled.section`
@@ -248,6 +360,12 @@ export const MethodsSection = styled.section`
     font-family: goodlife-serif, sans-serif;
     font-size: 3rem;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & h2 {
+      font-size: 2.5rem;
+    }
+  }
 `;
 
 export const StyledCommentsSection = styled.section`
@@ -257,6 +375,12 @@ export const StyledCommentsSection = styled.section`
 
   & h2 {
     font-size: 2rem;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & h2 {
+      font-size: 1.8rem;
+    }
   }
 `;
 
@@ -284,6 +408,20 @@ export const CommentBox = styled(motion.div)`
       padding: 1rem;
     }
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 50%;
+
+    & h3 {
+      font-size: 1.4rem;
+    }
+
+    & form {
+      & label {
+        font-size: 1.2rem;
+      }
+    }
+  }
 `;
 
 export const CommentSpan = styled.span`
@@ -298,6 +436,10 @@ export const CommentSpan = styled.span`
   font-size: 1.6rem;
 
   padding: 1.4rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.4rem;
+  }
 `;
 
 export const LeaveCommentSpan = styled(motion.span)`
@@ -307,6 +449,10 @@ export const LeaveCommentSpan = styled(motion.span)`
 
   &:hover {
     text-decoration: none;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.4rem;
   }
 `;
 

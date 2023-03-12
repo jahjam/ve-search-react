@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { breakpoint } from '../../breakpoints';
 
 export const ResultsBox = styled(motion.div)`
   height: 18rem;
@@ -16,6 +17,12 @@ export const ResultsBox = styled(motion.div)`
 
   &:hover {
     background-color: #58b15a;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 16rem;
+    min-width: 10rem;
+    max-width: 10rem;
   }
 `;
 
@@ -36,6 +43,10 @@ export const ResultStyled = styled.div`
     text-align: center;
     line-height: 1.7rem;
     font-size: 1.2rem;
+
+    @media (${breakpoint('maxBreakOne')}) {
+      font-size: 1rem;
+    }
   }
 
   & span:nth-child(3) {
@@ -43,12 +54,20 @@ export const ResultStyled = styled.div`
     margin-top: -0.6rem;
     font-size: 1.2rem;
     font-weight: 700;
+
+    @media (${breakpoint('maxBreakOne')}) {
+      font-size: 1rem;
+    }
   }
 
   & span:nth-child(4) {
     text-align: center;
     margin-top: -0.8rem;
     font-size: 1.2rem;
+
+    @media (${breakpoint('maxBreakOne')}) {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -66,5 +85,10 @@ export const ImgContainerStyled = styled.div`
   & img {
     height: 120%;
     width: 120%;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 4rem;
+    width: 4rem;
   }
 `;

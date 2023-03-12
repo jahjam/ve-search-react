@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FlexColumn } from '../../../helpers/mixins';
+import { breakpoint } from '../../breakpoints';
 
 export const CommentContainer = styled.div`
   border: var(--main-border);
@@ -21,6 +22,20 @@ export const CommentContainer = styled.div`
   & span {
     font-size: 1.4rem;
     font-weight: 700;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & h2 {
+      font-size: 2rem;
+    }
+
+    & p {
+      font-size: 1.4rem;
+    }
+
+    & span {
+      font-size: 1.2rem;
+    }
   }
 `;
 

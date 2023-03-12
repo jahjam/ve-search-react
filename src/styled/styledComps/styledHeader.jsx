@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Flex, FlexColumn } from '../../helpers/mixins';
 import Button from '../../comps/temps/Button';
 import { ReactComponent as TitleIcon } from '../../imgs/svg/title-icon.svg';
+import { breakpoint } from '../breakpoints';
 
 export const HeaderStyled = styled(motion.header)`
   width: 100%;

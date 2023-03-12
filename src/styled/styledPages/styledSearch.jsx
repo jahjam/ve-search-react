@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 import Button from '../../comps/temps/Button';
 import { Flex, FlexColumn } from '../../helpers/mixins';
+import { breakpoint } from '../breakpoints';
 
 export const SearchStyles = styled(motion.section)`
   margin-top: -2rem;
