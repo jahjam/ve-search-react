@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 
 import { Flex, FlexColumn } from '../../helpers/mixins';
 
+import { breakpoint } from '../breakpoints';
+
 export const ContainerStyled = styled(motion.section)`
   margin-top: 2rem;
   width: 100rem;
@@ -12,6 +14,10 @@ export const ContainerStyled = styled(motion.section)`
 
   ${FlexColumn()}
   gap: 2rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 86rem;
+  }
 `;
 
 export const Results = styled.div`
@@ -38,10 +44,25 @@ export const SearchBar = styled.div`
     padding: 1rem;
     border: var(--main-border);
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & label {
+      font-size: 1.4rem;
+    }
+
+    & input {
+      width: 15rem;
+      height: 4rem;
+    }
+  }
 `;
 
 export const NoRecipesMsg = styled.span`
   grid-column: 1/4;
 
   font-size: 2rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.8rem;
+  }
 `;

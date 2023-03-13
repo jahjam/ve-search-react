@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Flex } from '../../../helpers/mixins';
 
+import { breakpoint } from '../../breakpoints';
+
 export const RecipeCardStyles = styled.div`
   width: 30rem;
   height: auto;
@@ -38,6 +40,25 @@ export const RecipeCardStyles = styled.div`
       overflow: hidden;
 
       & img {
+        height: 7rem;
+        width: 7rem;
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 25.5rem;
+
+    & div:nth-child(1) {
+      & h2 {
+        font-size: 1.2rem;
+      }
+
+      & p {
+        width: 12rem;
+      }
+
+      & div:nth-child(1) {
         height: 7rem;
         width: 7rem;
       }
