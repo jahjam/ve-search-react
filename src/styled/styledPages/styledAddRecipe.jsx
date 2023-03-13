@@ -5,6 +5,8 @@ import { ReactComponent as Upload } from '../../imgs/svg/upload.svg';
 import Button from '../../comps/temps/Button';
 import { Flex, FlexColumn } from '../../helpers/mixins';
 
+import { breakpoint } from '../breakpoints';
+
 export const ContainerStyled = styled(motion.section)`
   margin-top: 2rem;
   margin-bottom: 4rem;
@@ -24,6 +26,18 @@ export const ContainerStyled = styled(motion.section)`
   & h2 {
     font-family: goodlife-brush, sans-serif;
     font-size: 3rem;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 70rem;
+
+    & h1 {
+      font-size: 2.8rem;
+    }
+
+    & h2 {
+      font-size: 2.8rem;
+    }
   }
 `;
 
@@ -47,6 +61,23 @@ export const RecipeForm = styled.form`
     font-size: 1.6rem;
 
     padding: 2rem;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & label {
+      font-size: 1.6rem;
+    }
+
+    & input {
+      font-size: 1.4rem;
+    }
+
+    & button {
+      width: 15rem;
+      & span {
+        font-size: 1.6rem;
+      }
+    }
   }
 `;
 
@@ -74,6 +105,12 @@ export const RecipeMainInfo = styled.div`
     & span {
       align-self: flex-start;
       margin-top: -0.6rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & div {
+      width: 70%;
     }
   }
 `;
@@ -110,6 +147,16 @@ export const ContentEditable = styled.div`
     top: 0rem;
     right: 0rem;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & span {
+      font-size: 1.4rem;
+    }
+
+    & p {
+      font-size: 1.8rem;
+    }
+  }
 `;
 
 export const RecipeNumberInfo = styled.div`
@@ -131,6 +178,14 @@ export const RecipeNumberInfo = styled.div`
 
     & span {
       margin-top: -0.6rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & div {
+      & label {
+        font-size: 1.6rem;
+      }
     }
   }
 `;
@@ -203,11 +258,33 @@ export const NoochItemContainer = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & div {
+      & label {
+        font-size: 1.4rem;
+      }
+
+      & input {
+        font-size: 1.2rem;
+      }
+    }
+  }
 `;
 
 export const TitleWithBtn = styled.div`
   ${Flex()}
   gap: 2rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & button {
+      width: 8rem;
+      height: 3.4rem;
+      & span {
+        font-size: 1.4rem;
+      }
+    }
+  }
 `;
 
 export const IngredientInputContainer = styled.div`
@@ -228,6 +305,12 @@ export const IngredientInputContainer = styled.div`
     top: 0.5rem;
     right: 2rem;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & span {
+      font-size: 2.8rem;
+    }
+  }
 `;
 
 export const MethodsNotProvided = styled.div`
@@ -241,6 +324,10 @@ export const MethodsNotProvided = styled.div`
 
 export const UploadIconStyles = styled(Upload)`
   height: 2rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 1.8rem;
+  }
 `;
 
 export const UploadForm = styled.div`
@@ -264,6 +351,10 @@ export const UploadForm = styled.div`
   &:hover {
     background-color: #58b15a;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const ButtonStyles = styled(Button)`
@@ -272,9 +363,17 @@ export const ButtonStyles = styled(Button)`
 
 export const ImageUploadTag = styled.span`
   font-size: 1.4rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const ErrorMsg = styled.h3`
   font-size: 1.4rem;
   color: #e31212;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.2rem;
+  }
 `;
