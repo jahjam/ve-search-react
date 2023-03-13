@@ -5,6 +5,7 @@ import Button from '../../comps/temps/Button';
 import { Flex, FlexColumn } from '../../helpers/mixins';
 import { ReactComponent as AddIcon } from '../../imgs/svg/add.svg';
 import { ReactComponent as Upload } from '../../imgs/svg/upload.svg';
+import { breakpoint } from '../breakpoints';
 
 export const AccountContainerStyled = styled(motion.section)`
   margin-top: 2rem;
@@ -39,6 +40,16 @@ export const Name = styled.div`
 
   & span {
     font-size: 1.4rem;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & h1 {
+      font-size: 3.5rem;
+    }
+
+    & span {
+      font-size: 1.2rem;
+    }
   }
 `;
 
@@ -75,6 +86,22 @@ export const Avatar = styled.div`
     &:hover,
     &:active {
       text-decoration: none;
+    }
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & div {
+      width: 11rem;
+      height: 11rem;
+
+      & img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    & span {
+      font-size: 1.4rem;
     }
   }
 `;
@@ -131,6 +158,17 @@ export const Details = styled.div`
       & span {
         margin-top: 0.35rem;
         font-size: 1.4rem;
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & ul {
+      & li {
+        width: 18rem;
+        & span {
+          font-size: 1.2rem;
+        }
       }
     }
   }
@@ -199,6 +237,37 @@ export const Edit = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 25rem;
+    & ul {
+      & li {
+        & div {
+          & h2 {
+            font-size: 1.4rem;
+          }
+
+          & span {
+            font-size: 1.4rem;
+          }
+        }
+        & form {
+          & input {
+            width: 14rem;
+          }
+
+          & button {
+            & span {
+              font-size: 1.2rem;
+            }
+          }
+        }
+        & span {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
 `;
 
 export const AddSection = styled.div`
@@ -220,10 +289,20 @@ export const AddSection = styled.div`
       text-decoration: none;
     }
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & span:first-child {
+      font-size: 1.6rem;
+    }
+  }
 `;
 
 export const AddIconStyles = styled(AddIcon)`
   height: 2rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 1.8rem;
+  }
 `;
 
 export const AddBtn = styled(Button)`
@@ -245,6 +324,14 @@ export const AddBtn = styled(Button)`
   & span {
     margin-top: 0.2rem;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 15rem;
+
+    & span {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const EditPassDiv = styled(motion.div)`
@@ -255,6 +342,12 @@ export const EditPassDiv = styled(motion.div)`
     text-decoration: none !important;
     font-size: 1.2rem !important;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const Password = styled.span`
@@ -263,6 +356,10 @@ export const Password = styled.span`
 
 export const UploadIconStyles = styled(Upload)`
   height: 2rem;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 1.8rem;
+  }
 `;
 
 export const UploadForm = styled(motion.form)`
@@ -285,6 +382,10 @@ export const UploadForm = styled(motion.form)`
 
   &:hover {
     background-color: #58b15a;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    font-size: 1.2rem;
   }
 `;
 
