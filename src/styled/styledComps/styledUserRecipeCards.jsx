@@ -22,6 +22,10 @@ export const ContainerStyled = styled(motion.section)`
   @media (${breakpoint('maxBreakTwo')}) {
     width: 74rem;
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 30rem;
+  }
 `;
 
 export const Results = styled.div`
@@ -31,6 +35,10 @@ export const Results = styled.div`
   align-items: center;
   row-gap: 2rem;
   column-gap: 1rem;
+
+  @media (${breakpoint('maxBreakThree')}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const SearchBar = styled.div`
