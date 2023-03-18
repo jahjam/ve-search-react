@@ -27,7 +27,7 @@ export const ResultsBox = styled(motion.div)`
   }
 
   @media (${breakpoint('maxBreakTwo')}) {
-    padding: 1.2rem;
+    padding: 0.8rem;
     min-width: 8.4rem;
     max-width: 8.4rem;
   }
@@ -75,6 +75,7 @@ export const ResultStyled = styled.div`
     text-align: center;
     margin-top: -0.8rem;
     font-size: 1.2rem;
+    text-decoration: underline;
 
     @media (${breakpoint('maxBreakOne')}) {
       font-size: 1rem;
