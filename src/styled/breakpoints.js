@@ -1,5 +1,6 @@
 const breakpoints = {
   maxBreakOne: '65.35em',
+  maxBreakTwo: '51em',
 };
 
 export const breakpoint = name => {
