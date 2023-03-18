@@ -37,6 +37,22 @@ export const CommentContainer = styled.div`
       font-size: 1.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 20rem;
+
+    & h2 {
+      font-size: 1.8rem;
+    }
+
+    & p {
+      font-size: 1.4rem;
+    }
+
+    & span {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const ReviewDetails = styled.div`
