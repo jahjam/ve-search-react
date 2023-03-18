@@ -25,6 +25,10 @@ export const RecipeListingSection = styled(motion.section)`
   @media (${breakpoint('maxBreakOne')}) {
     width: 80rem;
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    width: 64rem;
+  }
 `;
 
 export const RecipeListingContainer = styled.div`
@@ -56,6 +60,12 @@ export const StyledHeaderContainer = styled.div`
       font-size: 2.8rem;
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & h2 {
+      font-size: 2.6rem;
+    }
+  }
 `;
 
 export const BookmarkButton = styled(Button)`
@@ -72,6 +82,11 @@ export const BookmarkButton = styled(Button)`
     height: 35px;
     width: 35px;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 32px;
+    width: 32px;
+  }
 `;
 
 export const BookmarkIconStyles = styled(Bookmark)`
@@ -82,6 +97,11 @@ export const BookmarkIconStyles = styled(Bookmark)`
     height: 15px;
     width: 15px;
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    height: 14px;
+    width: 14px;
+  }
 `;
 
 export const BookmarkSolidIconStyles = styled(BookmarkSolid)`
@@ -91,6 +111,11 @@ export const BookmarkSolidIconStyles = styled(BookmarkSolid)`
   @media (${breakpoint('maxBreakOne')}) {
     height: 15px;
     width: 15px;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    height: 14px;
+    width: 14px;
   }
 `;
 
@@ -119,6 +144,15 @@ export const StyledRecipeImageBox = styled.div`
       height: 30rem;
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    height: 28rem;
+    width: 28rem;
+
+    & img {
+      height: 28rem;
+    }
+  }
 `;
 
 export const StyledRecipeServingsBox = styled.div`
@@ -137,6 +171,12 @@ export const StyledRecipeServingsBox = styled.div`
       font-size: 1.6rem;
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & span {
+      font-size: 1.4rem;
+    }
+  }
 `;
 
 export const ServingsBtn = styled(Button)`
@@ -152,6 +192,11 @@ export const ServingsBtn = styled(Button)`
   @media (${breakpoint('maxBreakOne')}) {
     height: 3rem;
     width: 7rem;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 2.8rem;
+    width: 6.8rem;
   }
 `;
 
@@ -241,11 +286,10 @@ export const StyledNutritionalInfo = styled.div`
     }
   }
 
-    @media (${breakpoint('maxBreakOne')}) {
-
-      & div {
+  @media (${breakpoint('maxBreakOne')}) {
+    & div {
       gap: 0.4rem;
-  
+
       & h3 {
         font-size: 1.8rem;
       }
@@ -253,26 +297,60 @@ export const StyledNutritionalInfo = styled.div`
         font-size: 0.8rem;
       }
 
-       & ul {
+      & ul {
         & li {
-        height 8rem;
-        width: 5rem;
-        padding: 0.2rem;
+          height: 8rem;
+          width: 5rem;
+          padding: 0.2rem;
 
-        & p:nth-child(1) {
-          font-size: 0.8rem;
-        }
+          & p:nth-child(1) {
+            font-size: 0.8rem;
+          }
 
-        & p:nth-child(2) {
-          font-size 1.2rem;
-        }
+          & p:nth-child(2) {
+            font-size: 1.2rem;
+          }
 
-        & p:nth-child(3) {
-          font-size: 1.2rem;
+          & p:nth-child(3) {
+            font-size: 1.2rem;
+          }
         }
       }
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & div {
+      gap: 0.4rem;
+
+      & h3 {
+        font-size: 1.6rem;
+      }
+      & h4 {
+        font-size: 0.8rem;
+      }
+
+      & ul {
+        & li {
+          height: 7rem;
+          width: 4.2rem;
+          padding: 0.2rem;
+
+          & p:nth-child(1) {
+            font-size: 0.8rem;
+          }
+
+          & p:nth-child(2) {
+            font-size: 1rem;
+          }
+
+          & p:nth-child(3) {
+            font-size: 1.2rem;
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -283,6 +361,10 @@ export const NoNutritionInfo = styled.span`
 
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.4rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    font-size: 1.2rem;
   }
 `;
 
@@ -340,12 +422,26 @@ export const StyledIngredientBox = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & h2 {
+      font-size: 2.2rem;
+    }
+
+    & ul {
+      & li {
+        & span {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
 `;
 
 export const Kcal = styled.span`
   font-size: 1rem;
 
-  @media ${breakpoint('maxBreakOne')} {
+  @media (${breakpoint('maxBreakOne')}) {
     font-size: 0.8rem;
   }
 `;
@@ -364,6 +460,12 @@ export const MethodsSection = styled.section`
   @media (${breakpoint('maxBreakOne')}) {
     & h2 {
       font-size: 2.5rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & h2 {
+      font-size: 2.2rem;
     }
   }
 `;
