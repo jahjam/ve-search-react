@@ -38,6 +38,16 @@ export const TitleStyles = styled.div`
       font-size: 1.4rem;
     }
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    & h1 {
+      font-size: 3.2rem;
+    }
+
+    & span {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const TitleIconStyles = styled(TitleIcon)`
@@ -56,5 +66,10 @@ export const TitleIconStyles = styled(TitleIcon)`
   @media (${breakpoint('maxBreakTwo')}) {
     height: 28px;
     width: 28px;
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    height: 24px;
+    width: 24px;
   }
 `;
