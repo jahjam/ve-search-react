@@ -24,6 +24,17 @@ export const AccountGrid = styled.div`
     'deets edit avatar'
     'deets edit avatar';
   row-gap: 4rem;
+
+  @media (${breakpoint('maxBreakThree')}) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'name'
+      'avatar'
+      'add'
+      'edit'
+      'deets';
+    row-gap: 3rem;
+  }
 `;
 
 export const Name = styled.div`
