@@ -64,4 +64,23 @@ export const RecipeCardStyles = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    width: 24rem;
+
+    & div:nth-child(1) {
+      & h2 {
+        font-size: 1.2rem;
+      }
+
+      & p {
+        width: 10rem;
+      }
+
+      & div:nth-child(1) {
+        height: 7rem;
+        width: 7rem;
+      }
+    }
+  }
 `;
