@@ -25,4 +25,14 @@ export const MethodCardStyled = styled.div`
       font-size: 1.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & h2 {
+      font-size: 1.8rem;
+    }
+
+    & p {
+      font-size: 1.2rem;
+    }
+  }
 `;
