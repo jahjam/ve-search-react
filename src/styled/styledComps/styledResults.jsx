@@ -14,6 +14,10 @@ export const ResultsStyles = styled(motion.section)`
   align-items: center;
   justify-content: center;
   gap: 2rem;
+
+  @media (${breakpoint('maxBreakThree')}) {
+    gap: 1rem;
+  }
 `;
 
 export const RecipeResults = styled.div`
@@ -31,6 +35,11 @@ export const RecipeResults = styled.div`
   @media (${breakpoint('maxBreakTwo')}) {
     width: 43.8rem;
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    padding: 1rem 1rem;
+    width: 31.5rem;
+  }
 `;
 
 export const RecipeContainer = styled(motion.div)`
@@ -46,6 +55,10 @@ export const RecipeContainer = styled(motion.div)`
     margin: auto;
     text-align: center;
     font-size: 1.4rem;
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    gap: 1rem;
   }
 `;
 
@@ -71,5 +84,11 @@ export const ResultsBtnStyles = styled(Button)`
   @media (${breakpoint('maxBreakTwo')}) {
     min-width: 6rem;
     max-width: 6rem;
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    height: 10rem;
+    min-width: 4rem;
+    max-width: 4rem;
   }
 `;
