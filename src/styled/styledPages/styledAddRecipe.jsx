@@ -51,6 +51,18 @@ export const ContainerStyled = styled(motion.section)`
       font-size: 2.6rem;
     }
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 34rem;
+
+    & h1 {
+      font-size: 2.2rem;
+    }
+
+    & h2 {
+      font-size: 2.2rem;
+    }
+  }
 `;
 
 export const RecipeForm = styled.form`
@@ -101,6 +113,17 @@ export const RecipeForm = styled.form`
       font-size: 1.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    & label {
+      font-size: 1.6rem;
+    }
+
+    & input {
+      height: 2rem;
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const RecipeMainInfo = styled.div`
@@ -139,6 +162,17 @@ export const RecipeMainInfo = styled.div`
   @media (${breakpoint('maxBreakTwo')}) {
     & div {
       width: 60%;
+    }
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    ${FlexColumn()}
+    & div {
+      width: 100%;
+
+      &:nth-child(2) {
+        width: 100%;
+      }
     }
   }
 `;
@@ -195,6 +229,16 @@ export const ContentEditable = styled.div`
       font-size: 1.6rem;
     }
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    & span {
+      font-size: 1.2rem;
+    }
+
+    & p {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const RecipeNumberInfo = styled.div`
@@ -231,6 +275,15 @@ export const RecipeNumberInfo = styled.div`
     & div {
       & label {
         font-size: 1.4rem;
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    ${FlexColumn()}
+    & div {
+      & label {
+        font-size: 1.2rem;
       }
     }
   }
@@ -376,7 +429,15 @@ export const IngredientInputContainer = styled.div`
     }
   }
 
-  @media (${breakpoint('maxBreakOne')}) {
+  @media (${breakpoint('maxBreakTwo')}) {
+    & span {
+      font-size: 2.6rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 30rem;
+
     & span {
       font-size: 2.6rem;
     }
