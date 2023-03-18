@@ -18,6 +18,10 @@ export const ContainerStyled = styled(motion.section)`
   @media (${breakpoint('maxBreakOne')}) {
     width: 86rem;
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    width: 74rem;
+  }
 `;
 
 export const Results = styled.div`
@@ -55,6 +59,17 @@ export const SearchBar = styled.div`
       height: 4rem;
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & label {
+      font-size: 1.4rem;
+    }
+
+    & input {
+      width: 14rem;
+      height: 3.8rem;
+    }
+  }
 `;
 
 export const NoRecipesMsg = styled.span`
@@ -64,5 +79,9 @@ export const NoRecipesMsg = styled.span`
 
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.8rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    font-size: 1.6rem;
   }
 `;
