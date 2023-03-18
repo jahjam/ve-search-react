@@ -51,6 +51,12 @@ export const Name = styled.div`
       font-size: 1.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & h1 {
+      font-size: 3.2rem;
+    }
+  }
 `;
 
 export const Avatar = styled.div`
@@ -172,6 +178,14 @@ export const Details = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & ul {
+      & li {
+        width: 16rem;
+      }
+    }
+  }
 `;
 
 export const Edit = styled.div`
@@ -259,6 +273,39 @@ export const Edit = styled.div`
           & button {
             & span {
               font-size: 1.2rem;
+            }
+          }
+        }
+        & span {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    width: 22rem;
+    & ul {
+      & li {
+        & div {
+          & h2 {
+            font-size: 1.4rem;
+          }
+
+          & span {
+            font-size: 1.4rem;
+          }
+        }
+        & form {
+          & input {
+            font-size: 1.2rem;
+            width: 12rem;
+          }
+
+          & button {
+            width: 5rem;
+            & span {
+              font-size: 1rem;
             }
           }
         }
