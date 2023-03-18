@@ -20,9 +20,16 @@ export const ResultsBox = styled(motion.div)`
   }
 
   @media (${breakpoint('maxBreakOne')}) {
+    padding: 1.4rem;
     height: 16rem;
     min-width: 10rem;
     max-width: 10rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    padding: 1.2rem;
+    min-width: 8.4rem;
+    max-width: 8.4rem;
   }
 `;
 
@@ -45,7 +52,11 @@ export const ResultStyled = styled.div`
     font-size: 1.2rem;
 
     @media (${breakpoint('maxBreakOne')}) {
-      font-size: 1rem;
+      font-size: 1.2rem;
+    }
+
+    @media (${breakpoint('maxBreakTwo')}) {
+      font-size: 1.1rem;
     }
   }
 
@@ -88,7 +99,12 @@ export const ImgContainerStyled = styled.div`
   }
 
   @media (${breakpoint('maxBreakOne')}) {
-    height: 4rem;
-    width: 4rem;
+    height: 5.5rem;
+    width: 5.5rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    height: 5rem;
+    width: 5rem;
   }
 `;
