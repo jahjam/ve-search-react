@@ -27,6 +27,10 @@ export const RecipeResults = styled.div`
   @media (${breakpoint('maxBreakOne')}) {
     width: 50rem;
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    width: 43.8rem;
+  }
 `;
 
 export const RecipeContainer = styled(motion.div)`
@@ -62,5 +66,10 @@ export const ResultsBtnStyles = styled(Button)`
 
   @media (${breakpoint('maxBreakOne')}) {
     height: 16rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    min-width: 6rem;
+    max-width: 6rem;
   }
 `;
