@@ -39,6 +39,18 @@ export const ContainerStyled = styled(motion.section)`
       font-size: 2.8rem;
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    width: 65rem;
+
+    & h1 {
+      font-size: 2.6rem;
+    }
+
+    & h2 {
+      font-size: 2.6rem;
+    }
+  }
 `;
 
 export const RecipeForm = styled.form`
@@ -79,6 +91,16 @@ export const RecipeForm = styled.form`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & label {
+      font-size: 1.4rem;
+    }
+
+    & input {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const RecipeMainInfo = styled.div`
@@ -111,6 +133,12 @@ export const RecipeMainInfo = styled.div`
   @media (${breakpoint('maxBreakOne')}) {
     & div {
       width: 70%;
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & div {
+      width: 60%;
     }
   }
 `;
@@ -157,6 +185,16 @@ export const ContentEditable = styled.div`
       font-size: 1.8rem;
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & span {
+      font-size: 1.2rem;
+    }
+
+    & p {
+      font-size: 1.6rem;
+    }
+  }
 `;
 
 export const RecipeNumberInfo = styled.div`
@@ -185,6 +223,14 @@ export const RecipeNumberInfo = styled.div`
     & div {
       & label {
         font-size: 1.6rem;
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & div {
+      & label {
+        font-size: 1.4rem;
       }
     }
   }
@@ -270,6 +316,18 @@ export const NoochItemContainer = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & div {
+      & label {
+        font-size: 1.2rem;
+      }
+
+      & input {
+        font-size: 1rem;
+      }
+    }
+  }
 `;
 
 export const TitleWithBtn = styled.div`
@@ -283,6 +341,12 @@ export const TitleWithBtn = styled.div`
       & span {
         font-size: 1.4rem;
       }
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & button {
+      width: 7.5rem;
     }
   }
 `;
@@ -311,6 +375,12 @@ export const IngredientInputContainer = styled.div`
       font-size: 2.8rem;
     }
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & span {
+      font-size: 2.6rem;
+    }
+  }
 `;
 
 export const MethodsNotProvided = styled.div`
@@ -327,6 +397,10 @@ export const UploadIconStyles = styled(Upload)`
 
   @media (${breakpoint('maxBreakOne')}) {
     height: 1.8rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    height: 1.6rem;
   }
 `;
 
@@ -355,6 +429,10 @@ export const UploadForm = styled.div`
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.2rem;
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    font-size: 1rem;
+  }
 `;
 
 export const ButtonStyles = styled(Button)`
@@ -367,6 +445,10 @@ export const ImageUploadTag = styled.span`
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.2rem;
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    font-size: 1rem;
+  }
 `;
 
 export const ErrorMsg = styled.h3`
@@ -375,5 +457,9 @@ export const ErrorMsg = styled.h3`
 
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.2rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    font-size: 1rem;
   }
 `;
