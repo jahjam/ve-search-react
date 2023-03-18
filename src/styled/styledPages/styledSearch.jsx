@@ -30,6 +30,12 @@ export const SearchInputStyles = styled.div`
 
     font-family: inherit;
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & input {
+      height: 3.6rem;
+    }
+  }
 `;
 
 export const ButtonStyles = styled(Button)`
@@ -42,4 +48,14 @@ export const ButtonStyles = styled(Button)`
   cursor: pointer;
 
   line-height: 4rem;
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    height: 3.6rem;
+    width: 7rem;
+
+    & span {
+      margin-top: -0.2rem !important;
+      font-size: 1.4rem;
+    }
+  }
 `;
