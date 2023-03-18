@@ -29,6 +29,10 @@ export const RecipeListingSection = styled(motion.section)`
   @media (${breakpoint('maxBreakTwo')}) {
     width: 64rem;
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 38rem;
+  }
 `;
 
 export const RecipeListingContainer = styled.div`
@@ -41,6 +45,16 @@ export const RecipeListingContainer = styled.div`
     'nooch button';
   justify-items: center;
   row-gap: 2rem;
+
+  @media (${breakpoint('maxBreakThree')}) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
+      'photo'
+      'ing'
+      'button'
+      'nooch';
+  }
 `;
 
 export const StyledHeaderContainer = styled.div`
@@ -156,7 +170,7 @@ export const StyledRecipeImageBox = styled.div`
 `;
 
 export const StyledRecipeServingsBox = styled.div`
-  grid-column: 2/3;
+  grid-area: button;
 
   display: flex;
   align-items: center;
@@ -468,6 +482,12 @@ export const MethodsSection = styled.section`
       font-size: 2.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    & h2 {
+      font-size: 2.2rem;
+    }
+  }
 `;
 
 export const StyledCommentsSection = styled.section`
@@ -516,6 +536,20 @@ export const CommentBox = styled(motion.div)`
 
     & h3 {
       font-size: 1.4rem;
+    }
+
+    & form {
+      & label {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 25rem;
+
+    & h3 {
+      font-size: 1.2rem;
     }
 
     & form {
