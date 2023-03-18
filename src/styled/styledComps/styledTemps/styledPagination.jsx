@@ -27,7 +27,6 @@ export const Page = styled.li`
   }
 
   background-color: ${props => {
-    console.log(props);
     if (props.curPage === props.pageNum) return '#00000014';
   }};
 
