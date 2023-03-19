@@ -33,6 +33,10 @@ export const RecipeListingSection = styled(motion.section)`
   @media (${breakpoint('maxBreakThree')}) {
     width: 38rem;
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    width: 30rem;
+  }
 `;
 
 export const RecipeListingContainer = styled.div`
@@ -80,6 +84,14 @@ export const StyledHeaderContainer = styled.div`
       font-size: 2.6rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    ${FlexColumn()}
+    gap: 1rem;
+    & h2 {
+      font-size: 2rem;
+    }
+  }
 `;
 
 export const BookmarkButton = styled(Button)`
@@ -97,9 +109,14 @@ export const BookmarkButton = styled(Button)`
     width: 35px;
   }
 
-  @media (${breakpoint('maxBreakOne')}) {
+  @media (${breakpoint('maxBreakTwo')}) {
     height: 32px;
     width: 32px;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 30px;
+    width: 30px;
   }
 `;
 
@@ -116,6 +133,11 @@ export const BookmarkIconStyles = styled(Bookmark)`
     height: 14px;
     width: 14px;
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 12px;
+    width: 12px;
+  }
 `;
 
 export const BookmarkSolidIconStyles = styled(BookmarkSolid)`
@@ -130,6 +152,11 @@ export const BookmarkSolidIconStyles = styled(BookmarkSolid)`
   @media (${breakpoint('maxBreakTwo')}) {
     height: 14px;
     width: 14px;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 12px;
+    width: 12px;
   }
 `;
 
@@ -167,6 +194,11 @@ export const StyledRecipeImageBox = styled.div`
       height: 28rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 23rem;
+    width: 23rem;
+  }
 `;
 
 export const StyledRecipeServingsBox = styled.div`
@@ -191,6 +223,12 @@ export const StyledRecipeServingsBox = styled.div`
       font-size: 1.4rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & span {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const ServingsBtn = styled(Button)`
@@ -208,9 +246,14 @@ export const ServingsBtn = styled(Button)`
     width: 7rem;
   }
 
-  @media (${breakpoint('maxBreakOne')}) {
+  @media (${breakpoint('maxBreakTwo')}) {
     height: 2.8rem;
     width: 6.8rem;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 2.4rem;
+    width: 6rem;
   }
 `;
 
@@ -222,6 +265,11 @@ export const ArrowLeftIconStyles = styled(LeftArrow)`
     height: 15px;
     width: 15px;
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 12px;
+    width: 12px;
+  }
 `;
 
 export const ArrowRightIconStyles = styled(RightArrow)`
@@ -231,6 +279,11 @@ export const ArrowRightIconStyles = styled(RightArrow)`
   @media (${breakpoint('maxBreakOne')}) {
     height: 15px;
     width: 15px;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 12px;
+    width: 12px;
   }
 `;
 
@@ -450,6 +503,20 @@ export const StyledIngredientBox = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & h2 {
+      font-size: 2rem;
+    }
+
+    & ul {
+      & li {
+        & span {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
 `;
 
 export const Kcal = styled.span`
@@ -483,9 +550,9 @@ export const MethodsSection = styled.section`
     }
   }
 
-  @media (${breakpoint('maxBreakThree')}) {
+  @media (${breakpoint('maxBreakFour')}) {
     & h2 {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
   }
 `;
@@ -502,6 +569,12 @@ export const StyledCommentsSection = styled.section`
   @media (${breakpoint('maxBreakOne')}) {
     & h2 {
       font-size: 1.8rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & h2 {
+      font-size: 1.6rem;
     }
   }
 `;
@@ -528,6 +601,8 @@ export const CommentBox = styled(motion.div)`
       width: 50%;
       border: var(--main-border);
       padding: 1rem;
+
+      font-family: inherit;
     }
   }
 
@@ -546,6 +621,28 @@ export const CommentBox = styled(motion.div)`
   }
 
   @media (${breakpoint('maxBreakThree')}) {
+    width: 25rem;
+
+    & h3 {
+      font-size: 1.2rem;
+    }
+
+    & form {
+      & label {
+        font-size: 1.2rem;
+      }
+
+      & input {
+        width: 5rem;
+        height: 4rem;
+        border: var(--main-border);
+        padding: 1rem;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
     width: 25rem;
 
     & h3 {
@@ -576,6 +673,10 @@ export const CommentSpan = styled.span`
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.4rem;
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const LeaveCommentSpan = styled(motion.span)`
@@ -594,4 +695,14 @@ export const LeaveCommentSpan = styled(motion.span)`
 
 export const CommentSubmitBtn = styled(Button)`
   background-color: var(--main-theme-color);
+
+  @media (${breakpoint('maxBreakFour')}) {
+    margin-top: 1rem;
+    width: 10rem;
+    height: 3rem;
+
+    & span {
+      font-size: 1.2rem;
+    }
+  }
 `;
