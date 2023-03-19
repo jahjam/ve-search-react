@@ -63,6 +63,18 @@ export const ContainerStyled = styled(motion.section)`
       font-size: 2.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    width: 30rem;
+
+    & h1 {
+      font-size: 2rem;
+    }
+
+    & h2 {
+      font-size: 2rem;
+    }
+  }
 `;
 
 export const RecipeForm = styled.form`
@@ -124,6 +136,24 @@ export const RecipeForm = styled.form`
       font-size: 1rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & label {
+      font-size: 1.4rem;
+    }
+
+    & input {
+      height: 1rem;
+      font-size: 0.8rem;
+    }
+
+    & button {
+      width: 14rem;
+      & span {
+        font-size: 1.4rem;
+      }
+    }
+  }
 `;
 
 export const RecipeMainInfo = styled.div`
@@ -169,6 +199,11 @@ export const RecipeMainInfo = styled.div`
     ${FlexColumn()}
     & div {
       width: 100%;
+
+      & input {
+        padding: 1.4rem;
+        height: 1rem;
+      }
 
       &:nth-child(2) {
         width: 100%;
@@ -239,6 +274,16 @@ export const ContentEditable = styled.div`
       font-size: 1.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & span {
+      font-size: 1rem;
+    }
+
+    & p {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const RecipeNumberInfo = styled.div`
@@ -284,6 +329,18 @@ export const RecipeNumberInfo = styled.div`
     & div {
       & label {
         font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & div {
+      & input {
+        padding: 1.2rem;
+      }
+
+      & label {
+        font-size: 1.4rem;
       }
     }
   }
@@ -381,6 +438,19 @@ export const NoochItemContainer = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & div {
+      & label {
+        font-size: 1rem;
+      }
+
+      & input {
+        padding: 1.2rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
 `;
 
 export const TitleWithBtn = styled.div`
@@ -390,9 +460,9 @@ export const TitleWithBtn = styled.div`
   @media (${breakpoint('maxBreakOne')}) {
     & button {
       width: 8rem;
-      height: 3.4rem;
+      height: 3rem;
       & span {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
       }
     }
   }
@@ -400,6 +470,12 @@ export const TitleWithBtn = styled.div`
   @media (${breakpoint('maxBreakTwo')}) {
     & button {
       width: 7.5rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & button {
+      width: 6.5rem;
     }
   }
 `;
@@ -442,6 +518,18 @@ export const IngredientInputContainer = styled.div`
       font-size: 2.6rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    width: 24rem;
+
+    & span {
+      font-size: 2.4rem;
+    }
+
+    & input {
+      padding: 1.4rem;
+    }
+  }
 `;
 
 export const MethodsNotProvided = styled.div`
@@ -462,6 +550,10 @@ export const UploadIconStyles = styled(Upload)`
 
   @media (${breakpoint('maxBreakTwo')}) {
     height: 1.6rem;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 1.4rem;
   }
 `;
 
