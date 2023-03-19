@@ -22,6 +22,12 @@ export const HeaderStyled = styled(motion.header)`
   }
 
   position: relative;
+
+  @media (${breakpoint('maxBreakThree')}) {
+    ${FlexColumn()};
+    gap: 2rem;
+    height: auto !important;
+  }
 `;
 
 export const ProfileStyles = styled.button`
@@ -123,6 +129,18 @@ export const LoginFormStyles = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    & form {
+      ${FlexColumn()}
+
+      & input {
+        height: 3.4rem;
+        width: 18rem;
+        font-size: 1.2rem;
+      }
+    }
+  }
 `;
 
 export const SigninSignupContainer = styled.div`
@@ -158,6 +176,10 @@ export const HeaderLoginFormBtnStyles = styled(Button)`
   &:hover {
     background-color: var(--main-light-color);
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    height: 3.4rem;
+  }
 `;
 
 export const HeaderSignupBtnStyles = styled(Button)`
@@ -167,6 +189,14 @@ export const HeaderSignupBtnStyles = styled(Button)`
 
   &:hover {
     background-color: var(--main-light-color);
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 9rem;
+
+    & span {
+      font-size: 1.2rem;
+    }
   }
 `;
 
