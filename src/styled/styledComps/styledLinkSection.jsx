@@ -22,6 +22,10 @@ export const SourceLinkTitle = styled.h2`
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 2.5rem;
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    font-size: 2rem;
+  }
 `;
 
 export const SourceLinkDesc = styled.span`
@@ -32,6 +36,10 @@ export const SourceLinkDesc = styled.span`
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.4rem;
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const SourceRecipeCompany = styled.span`
@@ -40,6 +48,10 @@ export const SourceRecipeCompany = styled.span`
 
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.4rem;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    font-size: 1.2rem;
   }
 `;
 
@@ -61,5 +73,16 @@ export const SourceLinkButton = styled(Button)`
     }
 
     line-height: 4.7rem;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 4rem;
+    width: 10rem;
+
+    & span {
+      font-size: 1.4rem;
+    }
+
+    line-height: 4rem;
   }
 `;
