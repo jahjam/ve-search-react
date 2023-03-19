@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { breakpoint } from '../../breakpoints';
+import { Flex } from '../../../helpers/mixins';
 
 export const ResultsBox = styled(motion.div)`
   height: 18rem;
@@ -14,6 +15,8 @@ export const ResultsBox = styled(motion.div)`
   border: 0.2rem solid black;
   background-color: #a4d2ac;
   cursor: pointer;
+
+  ${Flex()}
 
   &:hover {
     background-color: #58b15a;
