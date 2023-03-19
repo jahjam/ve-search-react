@@ -68,6 +68,12 @@ export const Name = styled.div`
       font-size: 3.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & h1 {
+      font-size: 3rem;
+    }
+  }
 `;
 
 export const Avatar = styled.div`
@@ -119,6 +125,17 @@ export const Avatar = styled.div`
 
     & span {
       font-size: 1.4rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & div {
+      width: 10rem;
+      height: 10rem;
+    }
+
+    & span {
+      font-size: 1.2rem;
     }
   }
 `;
@@ -194,6 +211,18 @@ export const Details = styled.div`
     & ul {
       & li {
         width: 16rem;
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & ul {
+      & li {
+        height: 6rem;
+
+        & span {
+          font-size: 1.1rem;
+        }
       }
     }
   }
@@ -326,6 +355,39 @@ export const Edit = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    width: 22rem;
+    & ul {
+      & li {
+        & div {
+          & h2 {
+            font-size: 1.2rem;
+          }
+
+          & span {
+            font-size: 1.2rem;
+          }
+        }
+        & form {
+          & input {
+            font-size: 1rem;
+            height: 2.2rem;
+          }
+
+          & button {
+            height: 2.2rem;
+            & span {
+              font-size: 0.8rem;
+            }
+          }
+        }
+        & span {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
 `;
 
 export const AddSection = styled.div`
@@ -351,6 +413,12 @@ export const AddSection = styled.div`
   @media (${breakpoint('maxBreakOne')}) {
     & span:first-child {
       font-size: 1.6rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & span:first-child {
+      font-size: 1.4rem;
     }
   }
 `;
@@ -390,6 +458,14 @@ export const AddBtn = styled(Button)`
       font-size: 1.2rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    width: 14rem;
+
+    & span {
+      font-size: 1.1rem;
+    }
+  }
 `;
 
 export const EditPassDiv = styled(motion.div)`
@@ -403,7 +479,13 @@ export const EditPassDiv = styled(motion.div)`
 
   @media (${breakpoint('maxBreakOne')}) {
     & span {
-      font-size: 1rem;
+      font-size: 1rem !important;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & span {
+      font-size: 0.8rem !important;
     }
   }
 `;
@@ -444,6 +526,10 @@ export const UploadForm = styled(motion.form)`
 
   @media (${breakpoint('maxBreakOne')}) {
     font-size: 1.2rem;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    font-size: 1rem;
   }
 `;
 
