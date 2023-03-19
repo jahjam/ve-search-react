@@ -43,6 +43,15 @@ export const SearchInputStyles = styled.div`
       height: 3rem;
     }
   }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    margin-top: -2rem;
+    & input {
+      width: 14rem;
+      height: 2.8rem;
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const ButtonStyles = styled(Button)`
@@ -73,6 +82,16 @@ export const ButtonStyles = styled(Button)`
     & span {
       margin-top: -0.5rem !important;
       font-size: 1.2rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 2.8rem;
+    width: 6rem;
+
+    & span {
+      margin-top: -0.7rem !important;
+      font-size: 1rem;
     }
   }
 `;
