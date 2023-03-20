@@ -2,12 +2,29 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { ReactComponent as LeftArrow } from '../../../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../../../imgs/svg/right-arrow-servings.svg';
+import { breakpoint } from '../../breakpoints';
 
 export const RecipeListingSection = styled.div`
   margin-top: 2rem;
   width: 100rem;
   padding: 1.6rem;
   border: 0.2rem solid black;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    width: 80rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    width: 64rem;
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 38rem;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    width: 30rem;
+  }
 `;
 
 export const RecipeListingContainer = styled.div`
@@ -29,6 +46,34 @@ export const RecipeListingContainer = styled.div`
 
     display: flex;
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & h2 {
+      font-size: 2.8rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & h2 {
+      font-size: 2.6rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
+      'photo'
+      'ing'
+      'button'
+      'nooch';
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & h2 {
+      font-size: 2rem;
+    }
+  }
 `;
 
 export const RecipeImageBox = styled.div`
@@ -43,10 +88,33 @@ export const RecipeImageBox = styled.div`
   justify-content: center;
 
   background-color: #e3e3e3;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 30rem;
+    width: 30rem;
+
+    & img {
+      height: 30rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    height: 28rem;
+    width: 28rem;
+
+    & img {
+      height: 28rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 23rem;
+    width: 23rem;
+  }
 `;
 
 export const RecipeServingsBox = styled.div`
-  grid-column: 2/3;
+  grid-area: button;
 
   display: flex;
   align-items: center;
@@ -55,6 +123,24 @@ export const RecipeServingsBox = styled.div`
   & span {
     font-size: 1.8rem;
     display: flex;
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & span {
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & span {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & span {
+      font-size: 1.2rem;
+    }
   }
 `;
 
@@ -69,6 +155,21 @@ export const ServingsBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 3rem;
+    width: 7rem;
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    height: 2.8rem;
+    width: 6.8rem;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 2.4rem;
+    width: 6rem;
+  }
 `;
 
 export const NutritionInfo = styled.div`
@@ -137,6 +238,73 @@ export const NutritionInfo = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & div {
+      gap: 0.4rem;
+
+      & h3 {
+        font-size: 1.8rem;
+      }
+      & h4 {
+        font-size: 0.8rem;
+      }
+
+      & ul {
+        & li {
+          height: 8rem;
+          width: 5rem;
+          padding: 0.2rem;
+
+          & p:nth-child(1) {
+            font-size: 0.8rem;
+          }
+
+          & p:nth-child(2) {
+            font-size: 1.2rem;
+          }
+
+          & p:nth-child(3) {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & div {
+      gap: 0.4rem;
+
+      & h3 {
+        font-size: 1.6rem;
+      }
+      & h4 {
+        font-size: 0.8rem;
+      }
+
+      & ul {
+        & li {
+          height: 7rem;
+          width: 4.2rem;
+          padding: 0.2rem;
+
+          & p:nth-child(1) {
+            font-size: 0.8rem;
+          }
+
+          & p:nth-child(2) {
+            font-size: 1rem;
+          }
+
+          & p:nth-child(3) {
+            font-size: 1.2rem;
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+  }
 `;
 
 export const IngredientBox = styled.div`
@@ -178,16 +346,78 @@ export const IngredientBox = styled.div`
       }
     }
   }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    & h2 {
+      font-size: 2.5rem;
+    }
+
+    & ul {
+      & li {
+        & span {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    & h2 {
+      font-size: 2.2rem;
+    }
+
+    & ul {
+      & li {
+        & span {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    & h2 {
+      font-size: 2rem;
+    }
+
+    & ul {
+      & li {
+        & span {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
 `;
 
 export const ArrowLeftIconStyles = styled(LeftArrow)`
   height: 20px;
   width: 20px;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 15px;
+    width: 15px;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 12px;
+    width: 12px;
+  }
 `;
 
 export const ArrowRightIconStyles = styled(RightArrow)`
   height: 20px;
   width: 20px;
+
+  @media (${breakpoint('maxBreakOne')}) {
+    height: 15px;
+    width: 15px;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    height: 12px;
+    width: 12px;
+  }
 `;
 
 export const MotionLinearGradientGreen = styled(motion.div)`
