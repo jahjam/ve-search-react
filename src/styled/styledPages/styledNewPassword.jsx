@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 import Button from '../../comps/temps/Button';
 import { FlexColumn } from '../../helpers/mixins';
+import { breakpoint } from '../breakpoints';
 
 export const Container = styled(motion.section)`
   margin-top: 2rem;
@@ -23,6 +24,32 @@ export const Container = styled(motion.section)`
     width: 40rem;
     line-height: 2.6rem;
     color: grey;
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    width: 40rem;
+
+    h1 {
+      font-size: 3.4rem;
+    }
+
+    p {
+      font-size: 1.4rem;
+      width: 30rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    width: 30rem;
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      width: 20rem;
+    }
   }
 `;
 
@@ -45,6 +72,30 @@ export const FormStyles = styled.form`
     background-color: var(--main-light-color);
 
     font-family: inherit;
+  }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    input {
+      width: 20rem;
+    }
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    label {
+      font-size: 1.4rem;
+    }
+
+    span:nth-child(2) {
+      font-size: 0.8rem;
+    }
+
+    span:nth-child(1) {
+      font-size: 1.8rem;
+    }
+
+    input {
+      width: 18rem;
+    }
   }
 `;
 
