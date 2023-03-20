@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { breakpoint } from '../../breakpoints';
-import { Flex } from '../../../helpers/mixins';
 
 export const ResultsBox = styled(motion.div)`
   height: 18rem;
