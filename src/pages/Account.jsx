@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import AuthContext from '../store/auth-context';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
+import { API } from '../config';
 
 import useRequest from '../hooks/use-request';
 import { generateFramerElipsis } from '../helpers/generateFramerElipsis';
@@ -44,7 +45,7 @@ const Account = () => {
 
     sendRequest(
       {
-        url: '/api/v1/users/logout',
+        url: API + '/api/v1/users/logout',
       },
       reciever
     );

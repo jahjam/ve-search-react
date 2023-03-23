@@ -3,6 +3,7 @@ import useRequest from '../../hooks/use-request';
 import { useState, useEffect, useMemo, useContext, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Pagination from '../temps/Pagination';
+import { API } from '../../config';
 
 import {
   StyledCommentsSection,
@@ -44,7 +45,7 @@ const CommentsSection = () => {
     };
 
     commentsRequest(
-      { url: `/api/v1/recipes/${params.resultId}/reviews` },
+      { url: API + `/api/v1/recipes/${params.resultId}/reviews` },
       receiver
     );
   }, [params.resultId, commentsRequest, authCtx.isLoggedIn]);
@@ -77,7 +78,7 @@ const CommentsSection = () => {
 
     commentsRequest(
       {
-        url: `/api/v1/recipes/${params.resultId}/reviews`,
+        url: `API + '/api/v1/recipes/${params.resultId}/reviews`,
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({

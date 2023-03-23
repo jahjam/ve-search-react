@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useRef, useContext } from 'react';
+import { API } from '../../config';
 
 import useRequest from '../../hooks/use-request';
 
@@ -33,7 +34,7 @@ const EditSection = props => {
 
     sendRequest(
       {
-        url: '/api/v1/users/me',
+        url: API + '/api/v1/users/me',
         method: 'PATCH',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -63,7 +64,7 @@ const EditSection = props => {
 
     sendRequest(
       {
-        url: '/api/v1/users/forgotPassword',
+        url: API + '/api/v1/users/forgotPassword',
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -95,7 +96,7 @@ const EditSection = props => {
 
     sendDeleteRequest(
       {
-        url: '/api/v1/users/me',
+        url: API + '/api/v1/users/me',
         method: 'DELETE',
       },
       reciever

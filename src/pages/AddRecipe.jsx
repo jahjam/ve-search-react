@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API } from '../config';
 
 import useRequest from '../hooks/use-request';
 
@@ -181,7 +182,7 @@ const AddRecipe = () => {
 
     sendRequest(
       {
-        url: '/api/v1/recipes',
+        url: API + '/api/v1/recipes',
         method: 'POST',
         body: formData,
       },

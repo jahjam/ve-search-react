@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import useRequest from '../hooks/use-request';
 import validator from 'validator';
+import { API } from '../config';
 
 import {
   ResetPassContainer,
@@ -35,7 +36,7 @@ const ResetPassword = () => {
 
     sendRequest(
       {
-        url: '/api/v1/users/forgotPassword',
+        url: API + '/api/v1/users/forgotPassword',
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({

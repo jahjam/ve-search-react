@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
+import { API } from '../config';
 
 import {
   Container,
@@ -25,7 +26,7 @@ const NewPassword = () => {
 
     sendRequest(
       {
-        url: `/api/v1/users/resetPassword/${params.resetId}`,
+        url: API + `/api/v1/users/resetPassword/${params.resetId}`,
         method: 'PATCH',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({

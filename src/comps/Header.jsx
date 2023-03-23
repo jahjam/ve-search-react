@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import AuthContext from '../store/auth-context';
 import { generateFramerElipsis } from '../helpers/generateFramerElipsis';
+import { API } from '../config';
 
 import {
   HeaderStyled,
@@ -50,7 +51,7 @@ const Header = () => {
 
     sendRequest(
       {
-        url: '/api/v1/users/login',
+        url: API + '/api/v1/users/login',
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -157,7 +158,7 @@ const Header = () => {
           <ProfileStyles location={location} onClick={toAccountPageHandler}>
             <div>
               <img
-                src={`/public/img/users/${userDetails.user.photo}`}
+                src={`${API}/public/img/users/${userDetails.user.photo}`}
                 alt="avatar"
               />
             </div>

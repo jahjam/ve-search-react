@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import AuthContext from '../../store/auth-context';
 import useRequest from '../../hooks/use-request';
+import { API } from '../../config';
 
 import {
   StyledHeaderContainer,
@@ -39,7 +40,7 @@ const HeaderContainer = props => {
     if (recipeBookmarked.isBookmarked) {
       return bookmarkRequest(
         {
-          url: `/api/v1/users/removeBookmark/${props.recipe.id}`,
+          url: API + `/api/v1/users/removeBookmark/${props.recipe.id}`,
           method: 'DELETE',
         },
         receiver
@@ -48,7 +49,7 @@ const HeaderContainer = props => {
 
     bookmarkRequest(
       {
-        url: `/api/v1/users/addBookmark/${props.recipe.id}`,
+        url: `API + '/api/v1/users/addBookmark/${props.recipe.id}`,
         method: 'PATCH',
       },
       receiver

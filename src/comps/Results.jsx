@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import { motion } from 'framer-motion';
+import { API } from '../config';
 
 import {
   ResultsStyles,
@@ -27,7 +28,7 @@ const Results = props => {
       setResults(data);
     };
 
-    sendRequest({ url: `/api/v1/recipes?name=${inputResult}` }, receiver);
+    sendRequest({ url: API + `/api/v1/recipes?name=${inputResult}` }, receiver);
   }, [inputResult, sendRequest]);
 
   // retrieve data for calculating dom elements widths

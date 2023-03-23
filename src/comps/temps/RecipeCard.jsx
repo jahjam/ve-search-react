@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { API } from '../../config';
 
 import truncateParagraph from '../../helpers/truncateParagraph';
 
@@ -15,7 +16,7 @@ const RecipeCard = props => {
     <RecipeCardStyles onClick={onClickHandler}>
       <div>
         <div>
-          <img src={`/public/img/recipes/${props.photo}`} alt="recipe" />
+          <img src={`${API}/public/img/recipes/${props.photo}`} alt="recipe" />
         </div>
         <div>
           <h2>{props.name}</h2>

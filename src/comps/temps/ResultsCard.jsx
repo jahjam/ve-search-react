@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { API } from '../../config';
 
 import useRequest from '../../hooks/use-request';
 
@@ -32,7 +33,7 @@ const ResultCard = props => {
     };
 
     sendRequest(
-      { url: `/api/v1/reviews/ratingsAverage/${props.id}` },
+      { url: API + `/api/v1/reviews/ratingsAverage/${props.id}` },
       receiver
     );
   }, [sendRequest, props.id]);
@@ -45,7 +46,7 @@ const ResultCard = props => {
     >
       <ResultStyled>
         <ImgContainerStyled>
-          <img src={`/public/img/recipes/${props.image}`} alt="food" />
+          <img src={`${API}/public/img/recipes/${props.image}`} alt="food" />
         </ImgContainerStyled>
         <span>{props.title}</span>
         <span>{props.author}</span>

@@ -3,6 +3,7 @@ import useRequest from '../hooks/use-request';
 import validator from 'validator';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../store/auth-context';
+import { API } from '../config';
 
 import {
   SignUpContainer,
@@ -40,7 +41,7 @@ const SignUp = () => {
 
     sendRequest(
       {
-        url: '/api/v1/users/signup',
+        url: API + '/api/v1/users/signup',
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({

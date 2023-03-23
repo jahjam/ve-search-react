@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { API } from '../config';
 
 import {
   Container,
@@ -37,7 +38,7 @@ const Result = () => {
       setServing(data.data.recipe.servings);
     };
 
-    sendRequest({ url: `/api/v1/recipes/${params.resultId}` }, receiver);
+    sendRequest({ url: API + `/api/v1/recipes/${params.resultId}` }, receiver);
   }, [params.resultId, sendRequest]);
 
   const setServingHandler = serving => {

@@ -1,9 +1,10 @@
 import { StyledRecipeImageBox } from '../../styled/styledPages/styledResult';
+import { API } from '../../config';
 
 const RecipeImageBox = props => {
   return (
     <StyledRecipeImageBox>
-      <img src={`/public/img/recipes/${props.coverImage}`} alt="Food" />
+      <img src={`${API}/public/img/recipes/${props.coverImage}`} alt="Food" />
     </StyledRecipeImageBox>
   );
 };

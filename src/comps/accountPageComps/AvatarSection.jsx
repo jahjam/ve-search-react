@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { API } from '../../config';
 
 import useRequest from '../../hooks/use-request';
 import AuthContext from '../../store/auth-context';
@@ -39,7 +40,7 @@ const AvatarSection = props => {
 
     sendRequest(
       {
-        url: '/api/v1/users/me',
+        url: API + '/api/v1/users/me',
         method: 'PATCH',
         body: formData,
       },
@@ -52,7 +53,7 @@ const AvatarSection = props => {
       <div>
         {props.userDetails.user && (
           <img
-            src={`/public/img/users/${props.userDetails.user.photo}`}
+            src={`${API}/public/img/users/${props.userDetails.user.photo}`}
             alt="avatar"
           />
         )}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useRequest from '../hooks/use-request';
+import { API } from '../config';
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -24,7 +25,7 @@ export const AuthContextProvider = props => {
         });
     };
 
-    sendRequest({ url: '/api/v1/users/whoami' }, reciever);
+    sendRequest({ url: `${API}API + '/api/v1/users/whoami` }, reciever);
   }, [sendRequest]);
 
   const setIsLoggedInHandler = bool => {
