@@ -49,7 +49,7 @@ const HeaderContainer = props => {
 
     bookmarkRequest(
       {
-        url: `API + '/api/v1/users/addBookmark/${props.recipe.id}`,
+        url: API + `/api/v1/users/addBookmark/${props.recipe.id}`,
         method: 'PATCH',
       },
       receiver
