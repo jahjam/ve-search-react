@@ -216,6 +216,18 @@ export const Alert = styled(motion.div)`
   & h2 {
     font-weight: 400;
   }
+
+  @media (${breakpoint('maxBreakTwo')}) {
+    width: 40rem;
+  }
+
+  @media (${breakpoint('maxBreakFour')}) {
+    width: 30rem;
+
+    & h2 {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 export const LoggingInOnLoad = styled.span`
