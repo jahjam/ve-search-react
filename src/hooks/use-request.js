@@ -12,6 +12,7 @@ const useRequest = () => {
       const res = await fetch(requestConfig.url, {
         method: requestConfig.method || 'GET',
         headers: requestConfig.headers || {},
+        credentials: 'include',
         body: requestConfig.body || null,
       });
 
