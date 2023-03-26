@@ -11,7 +11,7 @@ const MyRecipes = () => {
 
   const { userDetails } = authCtx;
 
-  const filteredRecipes = userDetails.user?.recipes.filter(recipe =>
+  const filteredRecipes = userDetails.user.recipes.filter(recipe =>
     recipe.name.toLowerCase().includes(searchInput)
   );
 

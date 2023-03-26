@@ -11,7 +11,7 @@ const MyBookmarks = () => {
 
   const { userDetails } = authCtx;
 
-  const filteredRecipes = userDetails.user?.bookmarks.filter(recipe =>
+  const filteredRecipes = userDetails.user.bookmarks.filter(recipe =>
     recipe.name.toLowerCase().includes(searchInput)
   );
 
