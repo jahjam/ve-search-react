@@ -25,7 +25,7 @@ export const AuthContextProvider = props => {
         });
     };
 
-    sendRequest({ url: `${API}API + '/api/v1/users/whoami` }, reciever);
+    sendRequest({ url: `${API}/api/v1/users/whoami` }, reciever);
   }, [sendRequest]);
 
   const setIsLoggedInHandler = bool => {
