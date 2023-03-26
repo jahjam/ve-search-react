@@ -51,7 +51,7 @@ const Header = () => {
 
     sendRequest(
       {
-        url: API + '/api/v1/users/login',
+        url: `${API}/api/v1/users/login`,
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
