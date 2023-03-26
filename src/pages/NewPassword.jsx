@@ -15,12 +15,12 @@ const NewPassword = () => {
   const passwordConfirm = useRef();
   const params = useParams();
 
-  const { isLoading, isError, errorMsg, sendRequest } = useRequest();
+  const { sendRequest } = useRequest();
 
   const onSubmit = e => {
     e.preventDefault();
 
-    const reciever = data => {
+    const reciever = () => {
       return 0;
     };
 
