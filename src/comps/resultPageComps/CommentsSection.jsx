@@ -78,7 +78,7 @@ const CommentsSection = () => {
 
     commentsRequest(
       {
-        url: `API + '/api/v1/recipes/${params.resultId}/reviews`,
+        url: `${API}/api/v1/recipes/${params.resultId}/reviews`,
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
