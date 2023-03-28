@@ -2,4 +2,4 @@
 
 A vegan recipe search engine made in react (currently in development).
 
-Take a look at the prototype here 👉 [VESearch](https://vesearch.netlify.app/search)!
+Take a look at the prototype here 👉 [VESearch](https://vesearch-app.onrender.com)!
