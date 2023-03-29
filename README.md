@@ -1,6 +1,6 @@
 # VESEARCH | Vegan Recipe Search Engine
 
-VESearch is a fully responsive, vegan recipe search engine, where you can not only search for tasty user made recipes, but also create your own account and add your own, as well as bookmarks others.
+VESearch is a fully responsive, vegan recipe search engine, where you can not only search for tasty user-made recipes, but also create your own account and add your own, as well as bookmarks others.
 
 (VESearch is currently in development)
 
