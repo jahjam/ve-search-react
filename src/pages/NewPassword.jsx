@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import useRequest from '../hooks/use-request';
 import { API } from '../config';
 
@@ -14,14 +14,15 @@ const NewPassword = () => {
   const password = useRef();
   const passwordConfirm = useRef();
   const params = useParams();
+  const navigate = useNavigate();
 
-  const { sendRequest } = useRequest();
+  const { isLoading, sendRequest } = useRequest();
 
   const onSubmit = e => {
     e.preventDefault();
 
     const reciever = () => {
-      return 0;
+      navigate('/');
     };
 
     sendRequest(
@@ -56,7 +57,7 @@ const NewPassword = () => {
           placeholder="Confirm password"
         />
         <FormBtnStyles btnSize="large" type="submit">
-          Submit
+          {isLoading ? 'Resetting...' : 'Reset password!'}
         </FormBtnStyles>
       </FormStyles>
     </Container>
