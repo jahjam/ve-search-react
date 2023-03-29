@@ -1,6 +1,8 @@
 # VESEARCH | Vegan Recipe Search Engine
 
-A vegan recipe search engine made in react (currently in development).
+VESearch is a fully responsive, vegan recipe search engine, where you can not only search for tasty user made recipes, but also create your own account and add your own, as well as bookmarks others.
+
+(VESearch is currently in development)
 
 Take a look at the prototype here 👉 [VESearch](https://vesearch-app.onrender.com)!
 
