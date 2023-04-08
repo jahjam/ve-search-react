@@ -1,33 +1,7 @@
-// Need to refactor this as it's the same as MyRecipes
-import { useContext, useState } from 'react';
-import AuthContext from '../store/auth-context';
-
-import UserRecipeCards from '../comps/resultPageComps/UserRecipeCards';
-
-let PAGE_SIZE = 9;
+import RecipeCardContainer from '../comps/RecipeCardContainer';
 
 const MyBookmarks = () => {
-  const authCtx = useContext(AuthContext);
-  const [searchInput, setSearchInput] = useState('');
-
-  const { userDetails } = authCtx;
-
-  const filteredRecipes = userDetails.user.bookmarks.filter(recipe =>
-    recipe.name.toLowerCase().includes(searchInput)
-  );
-
-  const onChangeHandler = e => {
-    setSearchInput(e.target.value);
-  };
-
-  return (
-    <UserRecipeCards
-      filteredRecipes={filteredRecipes}
-      PAGE_SIZE={PAGE_SIZE}
-      onChangeHandler={onChangeHandler}
-      searchInput={searchInput}
-    />
-  );
+  return <RecipeCardContainer pageType="bookmarks" />;
 };
 
 export default MyBookmarks;
