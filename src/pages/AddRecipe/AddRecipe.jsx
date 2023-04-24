@@ -111,7 +111,7 @@ const AddRecipe = () => {
     formData.append('difficulty', staticInputs.difficulty);
     formData.append('servings', staticInputs.servings);
     formData.append('description', staticInputs.description);
-    formData.append('dietTags', staticInputs.dietTags);
+    formData.append('dietTags', JSON.stringify([staticInputs.dietTags]));
     formData.append('nutritionProvided', JSON.stringify(noochProvided));
     formData.append(
       'nutrition',
@@ -160,11 +160,9 @@ const AddRecipe = () => {
       navigate(`/search/${data.data.recipe.id}`);
     };
 
-    console.log(formData);
-
     sendRequest(
       {
-        url: API + '/api/v1/recipes',
+        url: `${API}/api/v1/recipes`,
         method: 'POST',
         body: formData,
       },
