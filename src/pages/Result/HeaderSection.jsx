@@ -3,9 +3,9 @@ import AuthContext from '../../store/auth-context';
 import useRequest from '../../hooks/use-request';
 import { API } from '../../config';
 
-import * as Styled from '../../pages/Result/styles';
+import * as Styled from './styles';
 
-const HeaderContainer = props => {
+const HeaderSection = props => {
   const authCtx = useContext(AuthContext);
   const [recipeBookmarked, setRecipeBookmarked] = useState({
     isBookmarked: false,
@@ -52,7 +52,7 @@ const HeaderContainer = props => {
   };
 
   return (
-    <Styled.StyledHeaderContainer>
+    <Styled.StyledHeaderSection>
       <h2>{props.name}</h2>
 
       {authCtx.isLoggedIn && (
@@ -69,8 +69,8 @@ const HeaderContainer = props => {
           )}
         </Styled.BookmarkButton>
       )}
-    </Styled.StyledHeaderContainer>
+    </Styled.StyledHeaderSection>
   );
 };
 
-export default HeaderContainer;
+export default HeaderSection;

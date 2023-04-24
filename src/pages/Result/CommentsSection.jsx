@@ -30,19 +30,18 @@ const CommentsSection = () => {
     return reviews?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, reviews]);
 
-  const { isLoading: commentsLoading, sendRequest: commentsRequest } =
-    useRequest();
+  const { isLoading, sendRequest } = useRequest();
 
   useEffect(() => {
     const receiver = data => {
       setReviews(data.data.reviews);
     };
 
-    commentsRequest(
+    sendRequest(
       { url: API + `/api/v1/recipes/${params.resultId}/reviews` },
       receiver
     );
-  }, [params.resultId, commentsRequest, authCtx.isLoggedIn]);
+  }, [params.resultId, sendRequest, authCtx.isLoggedIn]);
 
   const commentChangeHandler = e => {
     setComment(prevState => ({
@@ -70,7 +69,7 @@ const CommentsSection = () => {
       setReviews(prevState => [...prevState, review]);
     };
 
-    commentsRequest(
+    sendRequest(
       {
         url: `${API}/api/v1/recipes/${params.resultId}/reviews`,
         method: 'POST',
@@ -131,7 +130,7 @@ const CommentsSection = () => {
         )}
       </AnimatePresence>
 
-      {commentsLoading &&
+      {isLoading &&
         currentTableData.map((_review, i) => <GhostReview key={i} />)}
 
       {!authCtx.isLoggedIn ? (

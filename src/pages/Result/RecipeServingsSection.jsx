@@ -1,6 +1,6 @@
-import * as Styled from '../../pages/Result/styles';
+import * as Styled from './styles';
 
-const RecipeServingsBox = props => {
+const RecipeServingsSection = props => {
   // seperate ingedients to calculate servings...
   const servingsIncreaseHandler = () => {
     const newServing = props.serving + 1;
@@ -41,7 +41,7 @@ const RecipeServingsBox = props => {
   };
 
   return (
-    <Styled.StyledRecipeServingsBox>
+    <Styled.StyledRecipeServingsSection>
       <Styled.ServingsBtn
         onClick={servingsDecreaseHandler}
         btnSize="small"
@@ -57,8 +57,8 @@ const RecipeServingsBox = props => {
       >
         <Styled.ArrowRightIcon />
       </Styled.ServingsBtn>
-    </Styled.StyledRecipeServingsBox>
+    </Styled.StyledRecipeServingsSection>
   );
 };
 
-export default RecipeServingsBox;
+export default RecipeServingsSection;

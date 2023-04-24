@@ -61,7 +61,7 @@ export const RecipeListingContainer = styled.div`
   }
 `;
 
-export const StyledHeaderContainer = styled.div`
+export const StyledHeaderSection = styled.div`
   grid-area: header;
 
   ${Flex()}
@@ -160,7 +160,7 @@ export const BookmarkSolidIcon = styled(BookmarkSolid)`
   }
 `;
 
-export const StyledRecipeImageBox = styled.div`
+export const StyledRecipeImageSection = styled.div`
   height: 40rem;
   width: 40rem;
   overflow: hidden;
@@ -201,7 +201,7 @@ export const StyledRecipeImageBox = styled.div`
   }
 `;
 
-export const StyledRecipeServingsBox = styled.div`
+export const StyledRecipeServingsSection = styled.div`
   grid-area: button;
 
   display: flex;
@@ -287,7 +287,7 @@ export const ArrowRightIcon = styled(RightArrow)`
   }
 `;
 
-export const StyledNutritionalInfo = styled.div`
+export const StyledNutritionalSection = styled.div`
   grid-area: nooch;
 
   & div {
@@ -435,7 +435,7 @@ export const NoNutritionInfo = styled.span`
   }
 `;
 
-export const StyledIngredientBox = styled.div`
+export const StyledIngredientSection = styled.div`
   width: 100%;
   align-items: center;
 

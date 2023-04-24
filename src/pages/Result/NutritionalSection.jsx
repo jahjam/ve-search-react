@@ -6,13 +6,13 @@ const DAILY_FAT = 97;
 const DAILY_SATURATES = 30;
 const DAILY_SALT = 6;
 
-const NutritionalInfo = props => {
+const NutritionalSection = props => {
   const calculateNutritionalPercs = (amount, base) => {
     return (amount / base) * 100;
   };
 
   return (
-    <Styled.StyledNutritionalInfo>
+    <Styled.StyledNutritionalSection>
       <div>
         <h3>Nutritional Facts</h3>
         <h4>(Estimated per serving)</h4>
@@ -90,8 +90,8 @@ const NutritionalInfo = props => {
           </li>
         </ul>
       </div>
-    </Styled.StyledNutritionalInfo>
+    </Styled.StyledNutritionalSection>
   );
 };
 
-export default NutritionalInfo;
+export default NutritionalSection;

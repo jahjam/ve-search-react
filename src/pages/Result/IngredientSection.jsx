@@ -2,9 +2,9 @@ import * as Styled from './styles';
 
 import Ingredient from '../../components/Ingredient/Ingredient';
 
-const IngredientBox = props => {
+const IngredientSection = props => {
   return (
-    <Styled.StyledIngredientBox>
+    <Styled.StyledIngredientSection>
       <h2>Ingredients</h2>
 
       <ul>
@@ -17,8 +17,8 @@ const IngredientBox = props => {
           />
         ))}
       </ul>
-    </Styled.StyledIngredientBox>
+    </Styled.StyledIngredientSection>
   );
 };
 
-export default IngredientBox;
+export default IngredientSection;

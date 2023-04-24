@@ -9,11 +9,11 @@ import * as Styled from './styles';
 import LinkSection from './LinkSection';
 import GhostResult from '../../components/temporaries/GhostResult/GhostResult';
 import MethodCard from '../../components/temporaries/MethodCard/MethodCard';
-import RecipeImageBox from './RecipeImageBox';
-import HeaderContainer from './HeaderContainer';
-import RecipeServingsBox from './RecipeServingsBox';
-import NutritionalInfo from './NutritionalInfo';
-import IngredientBox from './IngredientBox';
+import RecipeImageBox from './RecipeImageSection';
+import HeaderContainer from './HeaderSection';
+import RecipeServingsBox from './RecipeServingsSection';
+import NutritionalInfo from './NutritionalSection';
+import IngredientBox from './IngredientSection';
 import CommentsSection from './CommentsSection';
 
 const Result = () => {

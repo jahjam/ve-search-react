@@ -1,12 +1,12 @@
 import * as Styled from './styles';
 import { API } from '../../config';
 
-const RecipeImageBox = props => {
+const RecipeImageSection = props => {
   return (
-    <Styled.StyledRecipeImageBox>
+    <Styled.StyledRecipeImageSection>
       <img src={`${API}/public/img/recipes/${props.coverImage}`} alt="Food" />
-    </Styled.StyledRecipeImageBox>
+    </Styled.StyledRecipeImageSection>
   );
 };
 
-export default RecipeImageBox;
+export default RecipeImageSection;
