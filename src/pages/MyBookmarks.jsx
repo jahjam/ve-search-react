@@ -1,4 +1,4 @@
-import RecipeCardContainer from '../comps/RecipeCardContainer';
+import RecipeCardContainer from '../components/RecipeCardContainer';
 
 const MyBookmarks = () => {
   return <RecipeCardContainer pageType="bookmarks" />;

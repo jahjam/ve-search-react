@@ -1,6 +1,6 @@
 import * as Styled from './styles';
 
-import Ingredient from '../../comps/Ingredient/Ingredient';
+import Ingredient from '../../components/Ingredient/Ingredient';
 
 const IngredientBox = props => {
   return (

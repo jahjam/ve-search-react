@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom';
 
 import * as Styled from './styles';
 
-import Title from '../../comps/Title/Title';
-import Results from '../../comps/Results/Results';
+import Title from '../../components/Title/Title';
+import Results from '../../components/Results/Results';
 
 const Search = () => {
   const inputEl = useRef();

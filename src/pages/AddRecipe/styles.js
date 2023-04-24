@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { ReactComponent as UploadSVG } from '../../imgs/svg/upload.svg';
-import ButtonStyles from '../../comps/temps/Button/Button';
+import ButtonStyles from '../../components/temporaries/Button/Button';
 import { Flex, FlexColumn } from '../../styled-utils/mixins';
 
 import { breakpoint } from '../../styled-utils/breakpoints';
@@ -203,6 +203,7 @@ export const RecipeMainInfo = styled.div`
       & input {
         padding: 1.4rem;
         height: 1rem;
+        font-size: 1rem;
       }
 
       &:nth-child(2) {
@@ -337,6 +338,7 @@ export const RecipeNumberInfo = styled.div`
     & div {
       & input {
         padding: 1.2rem;
+        font-size: 1rem;
       }
 
       & label {
@@ -355,6 +357,7 @@ export const DietTags = styled.div`
 
   & input {
     width: 100%;
+    font-size: 1.2rem;
   }
 `;
 

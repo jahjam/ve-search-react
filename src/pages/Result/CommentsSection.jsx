@@ -2,14 +2,14 @@ import { useParams } from 'react-router-dom';
 import useRequest from '../../hooks/use-request';
 import { useState, useEffect, useMemo, useContext, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Pagination from '../../comps/temps/Pagination/Pagination';
+import Pagination from '../../components/temporaries/Pagination/Pagination';
 import { API } from '../../config';
 
 import * as Styled from './styles';
 
 import AuthContext from '../../store/auth-context';
-import ReviewCard from '../../comps/temps/ReviewCard/ReviewCard';
-import GhostReview from '../../comps/temps/GhostReview/GhostReview';
+import ReviewCard from '../../components/temporaries/ReviewCard/ReviewCard';
+import GhostReview from '../../components/temporaries/GhostReview/GhostReview';
 
 const PAGE_SIZE = 4;
 

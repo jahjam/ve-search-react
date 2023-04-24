@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
-import Pagination from '../temps/Pagination/Pagination';
+import Pagination from '../temporaries/Pagination/Pagination';
 
 import * as Styled from './styles';
 
-import RecipeCard from '../temps/RecipeCard/RecipeCard';
+import RecipeCard from '../temporaries/RecipeCard/RecipeCard';
 
 const UserRecipeCards = props => {
   const [currentPage, setCurrentPage] = useState(1);

@@ -160,6 +160,8 @@ const AddRecipe = () => {
       navigate(`/search/${data.data.recipe.id}`);
     };
 
+    console.log(formData);
+
     sendRequest(
       {
         url: API + '/api/v1/recipes',
@@ -390,84 +392,84 @@ const AddRecipe = () => {
             <div>
               <Styled.NoochItemContainer>
                 <div>
-                  <label htmlFor="kcal">Kcal:</label>
+                  <label htmlFor="kcalAmount">Kcal:</label>
                   <input
                     value={staticInputs.kcalAmount}
                     onChange={staticInputsChangeHandler}
                     type="number"
-                    name="kcal"
+                    name="kcalAmount"
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="measurmentKcal">Measurment:</label>
+                  <label htmlFor="kcalMeasurement">Measurment:</label>
                   <input
                     value={staticInputs.kcalMeasurement}
                     onChange={staticInputsChangeHandler}
                     type="text"
-                    name="measurmentKcal"
+                    name="kcalMeasurement"
                   ></input>
                 </div>
               </Styled.NoochItemContainer>
 
               <Styled.NoochItemContainer>
                 <div>
-                  <label htmlFor="fat">Fat:</label>
+                  <label htmlFor="fatAmount">Fat:</label>
                   <input
                     value={staticInputs.fatAmount}
                     onChange={staticInputsChangeHandler}
                     type="number"
-                    name="fat"
+                    name="fatAmount"
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="measurmentFat">Measurment:</label>
+                  <label htmlFor="fatMeasurement">Measurment:</label>
                   <input
                     value={staticInputs.fatMeasurement}
                     onChange={staticInputsChangeHandler}
                     type="text"
-                    name="measurmentFat"
+                    name="fatMeasurement"
                   ></input>
                 </div>
               </Styled.NoochItemContainer>
 
               <Styled.NoochItemContainer>
                 <div>
-                  <label htmlFor="saturates">Saturates:</label>
+                  <label htmlFor="saturatesAmount">Saturates:</label>
                   <input
                     value={staticInputs.saturatesAmount}
                     onChange={staticInputsChangeHandler}
                     type="number"
-                    name="saturates"
+                    name="saturatesAmount"
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="measurmentSaturates">Measurment:</label>
+                  <label htmlFor="saturatesMeasurement">Measurment:</label>
                   <input
                     value={staticInputs.saturatesMeasurement}
                     onChange={staticInputsChangeHandler}
                     type="text"
-                    name="measurmentSaturates"
+                    name="saturatesMeasurement"
                   ></input>
                 </div>
               </Styled.NoochItemContainer>
 
               <Styled.NoochItemContainer>
                 <div>
-                  <label htmlFor="carbs">Carbs:</label>
+                  <label htmlFor="carbsAmount">Carbs:</label>
                   <input
                     value={staticInputs.carbsAmount}
                     onChange={staticInputsChangeHandler}
                     type="number"
-                    name="carbs"
+                    name="carbsAmount"
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="measurmentCarbs">Measurment:</label>
+                  <label htmlFor="carbsMeasurement">Measurment:</label>
                   <input
                     value={staticInputs.carbsMeasurement}
                     onChange={staticInputsChangeHandler}
                     type="text"
-                    name="measurmentCarbs"
+                    name="carbsMeasurement"
                   ></input>
                 </div>
               </Styled.NoochItemContainer>
@@ -476,84 +478,84 @@ const AddRecipe = () => {
             <div>
               <Styled.NoochItemContainer>
                 <div>
-                  <label htmlFor="sugars">Sugars:</label>
+                  <label htmlFor="sugarsAmount">Sugars:</label>
                   <input
                     value={staticInputs.sugarsAmount}
                     onChange={staticInputsChangeHandler}
                     type="number"
-                    name="sugars"
+                    name="sugarsAmount"
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="measurmentSugars">Measurment:</label>
+                  <label htmlFor="sugarsMeasurement">Measurment:</label>
                   <input
                     value={staticInputs.sugarsMeasurement}
                     onChange={staticInputsChangeHandler}
                     type="text"
-                    name="measurmentSugars"
+                    name="sugarsMeasurement"
                   ></input>
                 </div>
               </Styled.NoochItemContainer>
 
               <Styled.NoochItemContainer>
                 <div>
-                  <label htmlFor="fibre">Fibre:</label>
+                  <label htmlFor="fibreAmount">Fibre:</label>
                   <input
                     value={staticInputs.fibreAmount}
                     onChange={staticInputsChangeHandler}
                     type="number"
-                    name="fibre"
+                    name="fibreAmount"
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="measurmentFibre">Measurment:</label>
+                  <label htmlFor="fibreMeasurement">Measurment:</label>
                   <input
                     value={staticInputs.fibreMeasurement}
                     onChange={staticInputsChangeHandler}
                     type="text"
-                    name="measurmentFibre"
+                    name="fibreMeasurement"
                   ></input>
                 </div>
               </Styled.NoochItemContainer>
 
               <Styled.NoochItemContainer>
                 <div>
-                  <label htmlFor="protient">Protien:</label>
+                  <label htmlFor="protienAmount">Protien:</label>
                   <input
                     value={staticInputs.protienAmount}
                     onChange={staticInputsChangeHandler}
                     type="number"
-                    name="protient"
+                    name="protienAmount"
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="measurmentProtient">Measurment:</label>
+                  <label htmlFor="protienMeasurement">Measurment:</label>
                   <input
                     value={staticInputs.protienMeasurement}
                     onChange={staticInputsChangeHandler}
                     type="text"
-                    name="measurmentProtient"
+                    name="protienMeasurement"
                   ></input>
                 </div>
               </Styled.NoochItemContainer>
 
               <Styled.NoochItemContainer>
                 <div>
-                  <label htmlFor="salt">Salt:</label>
+                  <label htmlFor="saltAmount">Salt:</label>
                   <input
                     value={staticInputs.saltAmount}
                     onChange={staticInputsChangeHandler}
                     type="number"
-                    name="salt"
+                    name="saltAmount"
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="measurmentSalt">Measurment:</label>
+                  <label htmlFor="saltMeasurement">Measurment:</label>
                   <input
                     value={staticInputs.saltMeasurement}
                     onChange={staticInputsChangeHandler}
                     type="text"
-                    name="measurmentSalt"
+                    name="saltMeasurement"
                   ></input>
                 </div>
               </Styled.NoochItemContainer>
@@ -675,7 +677,7 @@ const AddRecipe = () => {
 
         {isError && (
           <Styled.ErrorMsg>
-            Error: {errorMsg?.replaceAll(/ *\([^)]*\) */g, ' ')}.
+            Error: {errorMsg?.replaceAll(/ *\([^)]*\) */g, ' ')}
           </Styled.ErrorMsg>
         )}
 

@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import * as Styled from './styles';
 
-import Header from './comps/Header/Header';
+import Header from './components/Header/Header';
 import Search from './pages/Search/Search';
 import Result from './pages/Result/Result';
 import Account from './pages/Account/Account';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import Button from '../../comps/temps/Button/Button';
+import Button from '../../components/temporaries/Button/Button';
 import { FlexColumn, Flex } from '../../styled-utils/mixins';
 import { ReactComponent as LeftArrow } from '../../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../../imgs/svg/right-arrow-servings.svg';

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { Flex, FlexColumn } from '../../styled-utils/mixins';
-import Button from '../temps/Button/Button';
+import Button from '../temporaries/Button/Button';
 import { ReactComponent as TitleIcon } from '../../imgs/svg/title-icon.svg';
 import { breakpoint } from '../../styled-utils/breakpoints';
 

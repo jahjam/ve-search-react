@@ -5,7 +5,7 @@ import { API } from '../../config';
 import useRequest from '../../hooks/use-request';
 
 import * as Styled from './styles';
-import Button from '../../comps/temps/Button/Button';
+import Button from '../../components/temporaries/Button/Button';
 import AuthContext from '../../store/auth-context';
 
 const EditSection = props => {

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import ButtonTemp from '../../comps/temps/Button/Button';
+import ButtonTemp from '../../components/temporaries/Button/Button';
 import { Flex, FlexColumn } from '../../styled-utils/mixins';
 import { breakpoint } from '../../styled-utils/breakpoints';
 
@@ -43,15 +43,6 @@ export const SearchInput = styled.div`
       height: 3rem;
     }
   }
-
-  @media (${breakpoint('maxBreakFour')}) {
-    margin-top: -2rem;
-    & input {
-      width: 14rem;
-      height: 2.8rem;
-      font-size: 1rem;
-    }
-  }
 `;
 
 export const Button = styled(ButtonTemp)`
@@ -82,16 +73,6 @@ export const Button = styled(ButtonTemp)`
     & span {
       margin-top: -0.5rem !important;
       font-size: 1.2rem;
-    }
-  }
-
-  @media (${breakpoint('maxBreakFour')}) {
-    height: 2.8rem;
-    width: 6rem;
-
-    & span {
-      margin-top: -0.7rem !important;
-      font-size: 1rem;
     }
   }
 `;
