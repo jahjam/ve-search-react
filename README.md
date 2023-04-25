@@ -3,7 +3,7 @@
 VESearch is a fully responsive, vegan recipe search engine, where you can not only search for tasty user-made recipes, but also create your own account and add your own, as well as bookmarks others.
 
 > **Warning**
-> This app is currently in development.
+> This web app is at a fully functioning MVP stage, however, is constantly under development.
 > Search "burger" to find the test recipe.
 
 Take a look at the prototype here 👉 [VESearch](https://vesearch-app.onrender.com)!
