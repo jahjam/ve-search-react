@@ -14,12 +14,73 @@ import SignUp from './pages/SignUp/SignUp';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import NewPassword from './pages/NewPassword/NewPassword';
 import NotFound from './pages/NotFound/NotFound';
+import { useEffect, useState } from 'react';
+
+const Modal = ({ handleModelClick }) => {
+  const handleClick = () => {
+    handleModelClick(true);
+  };
+
+  return (
+    <Styled.Modal
+      transition={{ duration: 1 }}
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+      }}
+    >
+      <Styled.InnerModal
+        transition={{ duration: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+        }}
+      >
+        <Styled.XMarkIcon onClick={handleClick} />
+        <h3>Welcome to VESearch!</h3>
+
+        <p>
+          This is just a quick message to let you know that VESearch is
+          currently just a prototype. There is only one recipe available at the
+          moment, which is found by searching for <code>burger</code>. There
+          will be more recipes added soon - or, you could make an account and
+          add one yourself, the app is fully functional to a MVP standard!
+        </p>
+        <p>
+          When creating an account, please remember this app isn't fully quality
+          checked, and so we cannot be liable for any database issues,
+          especially in regard to any recipes you create - please don't make
+          this the place you store your only copy of your most tastiest recipe
+          ever!
+        </p>
+        <p>The mobile styles are still being tweaked too.</p>
+        <p>
+          Thanks for using VESearch, and please come back in the future, there
+          will likely be many new, tasty features!
+        </p>
+      </Styled.InnerModal>
+    </Styled.Modal>
+  );
+};
 
 function App() {
+  const [hideModal, setHideModal] = useState(true);
+
+  const handleModelClick = () => {
+    setHideModal(true);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setHideModal(false);
+    }, 2000);
+  }, []);
+
   const location = useLocation();
 
   return (
     <>
+      {!hideModal && <Modal handleModelClick={handleModelClick} />}
       <Header />
 
       <Styled.SearchStyles>
