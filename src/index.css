@@ -4,6 +4,7 @@
   --main-theme-color: #a4d2ac;
   --main-dark-color: #171616;
   --main-light-color: #ffffff;
+  --main-grey-color-transparent: rgba(209, 201, 201, 0.756);
   --main-border: 0.2rem solid var(--main-dark-color);
 }
 
@@ -27,5 +28,8 @@ html {
 }
 
 body {
+  height: 100vh;
   font-family: 'bookmania', serif;
+
+  position: relative;
 }
