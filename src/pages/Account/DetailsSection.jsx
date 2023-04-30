@@ -9,11 +9,15 @@ const DetailsSection = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const myRecipesHandler = () => {
+  const myRecipesHandler = e => {
+    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
+
     navigate('/me/my-recipes');
   };
 
-  const myBookmarksHandler = () => {
+  const myBookmarksHandler = e => {
+    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
+
     navigate('/me/my-bookmarks');
   };
 
@@ -21,11 +25,19 @@ const DetailsSection = () => {
   return (
     <Styled.Details location={location}>
       <ul>
-        <li onClick={myRecipesHandler}>
+        <li
+          onClick={myRecipesHandler}
+          tabIndex="0"
+          onKeyDown={myRecipesHandler}
+        >
           <IngIcon />
           <span>My recipes</span>
         </li>
-        <li onClick={myBookmarksHandler}>
+        <li
+          onClick={myBookmarksHandler}
+          tabIndex="0"
+          onKeyDown={myBookmarksHandler}
+        >
           <Bookmark />
           <span>My bookmarks</span>
         </li>
