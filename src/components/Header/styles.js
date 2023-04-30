@@ -118,6 +118,11 @@ export const LoginForm = styled.div`
         cursor: pointer;
         text-decoration: underline;
 
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 0.4rem var(--main-light-color);
+        }
+
         &:hover,
         &:active {
           color: var(--main-light-color);
@@ -161,6 +166,11 @@ export const HeaderLoginBtn = styled(Button)`
     background-color: transparent;
     text-decoration: none;
   }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.4rem var(--main-light-color);
+  }
 `;
 
 export const HeaderLoginFormBtn = styled(Button)`
@@ -172,6 +182,11 @@ export const HeaderLoginFormBtn = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.4rem var(--main-light-color);
+  }
 
   &:hover {
     background-color: var(--main-light-color);
@@ -186,6 +201,11 @@ export const HeaderSignupBtn = styled(Button)`
   padding: 0.3rem;
 
   background-color: transparent;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.4rem var(--main-light-color);
+  }
 
   &:hover {
     background-color: var(--main-light-color);
