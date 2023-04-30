@@ -67,32 +67,38 @@ const SignUp = () => {
       <Styled.SignUpForm onSubmit={submitHandler}>
         <Styled.InputContainer>
           {errorMsg?.match(/\((.*?)\)/g)?.includes('(Username error)') ? (
-            <label style={{ color: '#e31212' }}>Display name:</label>
+            <label htmlFor="username" style={{ color: '#e31212' }}>
+              Display name:
+            </label>
           ) : (
-            <label>Display name:</label>
+            <label htmlFor="username">Display name:</label>
           )}
           <span>(This is the name that will appear on all your recipes!)</span>
-          <input ref={username}></input>
+          <input name="username" ref={username}></input>
         </Styled.InputContainer>
 
         <Styled.InputContainer>
           {errorMsg?.match(/\((.*?)\)/g)?.includes('(Email error)') ? (
-            <label style={{ color: '#e31212' }}>Email:</label>
+            <label htmlFor="email" style={{ color: '#e31212' }}>
+              Email:
+            </label>
           ) : (
-            <label>Email:</label>
+            <label htmlFor="email">Email:</label>
           )}
-          <input ref={email}></input>
+          <input name="email" ref={email}></input>
         </Styled.InputContainer>
 
         <Styled.InputContainer>
           {errorMsg
             ?.match(/\((.*?)\)/g)
             ?.includes('(Password error)' || '(Password match error)') ? (
-            <label style={{ color: '#e31212' }}>Password:</label>
+            <label htmlFor="password" style={{ color: '#e31212' }}>
+              Password:
+            </label>
           ) : (
-            <label>Password:</label>
+            <label htmlFor="password">Password:</label>
           )}
-          <input type="password" ref={password}></input>
+          <input name="password" type="password" ref={password}></input>
         </Styled.InputContainer>
 
         <Styled.InputContainer>
@@ -101,11 +107,17 @@ const SignUp = () => {
             ?.includes(
               '(Password confirmation error)' || '(Password match error)'
             ) ? (
-            <label style={{ color: '#e31212' }}>Confirm password:</label>
+            <label htmlFor="passwordConfirm" style={{ color: '#e31212' }}>
+              Confirm password:
+            </label>
           ) : (
-            <label>Confirm password:</label>
+            <label htmlFor="passwordConfirm">Confirm password:</label>
           )}
-          <input type="password" ref={passwordConfirm}></input>
+          <input
+            name="passwordConfirm"
+            type="password"
+            ref={passwordConfirm}
+          ></input>
         </Styled.InputContainer>
 
         {isError && (
