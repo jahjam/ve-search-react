@@ -78,6 +78,9 @@ const AddRecipe = () => {
   };
 
   const staticInputsChangeHandler = e => {
+    console.log(e);
+    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
+
     const { name, value, id, innerHTML, files } = e.target;
 
     if (files) setImage(files[0]);
@@ -653,16 +656,16 @@ const AddRecipe = () => {
         )}
 
         <Styled.UploadForm>
-          <label>
+          <label htmlFor="coverImage">
             <Styled.UploadIcon />
-            <input
-              onChange={staticInputsChangeHandler}
-              type="file"
-              name="coverImage"
-              placeholder="Upload a cover photo"
-            />
-            Upload
           </label>
+          <input
+            onChange={staticInputsChangeHandler}
+            type="file"
+            name="coverImage"
+            placeholder="Upload a cover photo"
+            tabIndex="0"
+          />
         </Styled.UploadForm>
 
         {image && (
