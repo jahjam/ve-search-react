@@ -56,11 +56,13 @@ const ResetPassword = () => {
       <Styled.ResetForm onSubmit={submitHandler}>
         <Styled.InputContainer>
           {errorMsg?.match(/\((.*?)\)/g)?.includes('(Email error)') ? (
-            <label style={{ color: '#e31212' }}>Email:</label>
+            <label htmlFor="email" style={{ color: '#e31212' }}>
+              Email:
+            </label>
           ) : (
             <label>Email:</label>
           )}
-          <input ref={email}></input>
+          <input name="email" ref={email}></input>
         </Styled.InputContainer>
 
         {(emailError || isError) && (
