@@ -20,6 +20,11 @@ export const XMarkIcon = styled(XMark)`
 
   cursor: pointer;
 
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.4rem var(--main-light-color);
+  }
+
   @media (${breakpoint('maxBreakThree')}) {
     height: 3rem;
     width: 3rem;
@@ -29,10 +34,10 @@ export const XMarkIcon = styled(XMark)`
 `;
 
 export const Modal = styled(motion.div)`
-  height: 100%;
+  height: 100vh;
   width: 100%;
 
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
