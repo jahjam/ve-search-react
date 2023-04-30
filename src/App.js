@@ -17,7 +17,9 @@ import NotFound from './pages/NotFound/NotFound';
 import { useEffect, useState } from 'react';
 
 const Modal = ({ handleModelClick }) => {
-  const handleClick = () => {
+  const handleClick = e => {
+    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
+
     handleModelClick(true);
   };
 
@@ -36,7 +38,11 @@ const Modal = ({ handleModelClick }) => {
           opacity: 1,
         }}
       >
-        <Styled.XMarkIcon onClick={handleClick} />
+        <Styled.XMarkIcon
+          onClick={handleClick}
+          onKeyDown={handleClick}
+          tabIndex="0"
+        />
         <h3>Welcome to VESearch!</h3>
 
         <p>
