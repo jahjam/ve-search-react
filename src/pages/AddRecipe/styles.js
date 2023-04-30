@@ -561,21 +561,17 @@ export const UploadIcon = styled(UploadSVG)`
 `;
 
 export const UploadForm = styled.div`
+  width: 24rem;
   font-size: 1.4rem;
-  background-color: var(--main-theme-color);
 
-  & label {
-    border: var(--main-border);
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    cursor: pointer;
-
-    ${Flex()}
-    gap: 1rem;
-  }
+  ${Flex()}
 
   & input {
-    display: none;
+    height: 4rem;
+    width: 100%;
+    border: none;
+
+    padding: 1rem;
   }
 
   &:hover {
