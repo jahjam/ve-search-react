@@ -8,7 +8,9 @@ import * as Styled from './styles';
 const ResultCard = props => {
   const resultBoxWidth = useRef();
 
-  const onClickHandler = () => {
+  const onClickHandler = e => {
+    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
+
     props.getResult(props.id);
   };
 
@@ -39,6 +41,8 @@ const ResultCard = props => {
       onClick={onClickHandler}
       animate={{ opacity: 1 }}
       ref={resultBoxWidth}
+      tabIndex="0"
+      onKeyDown={onClickHandler}
     >
       <Styled.Result>
         <Styled.ImgContainer>
