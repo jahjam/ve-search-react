@@ -60,11 +60,15 @@ const Header = () => {
     if (isError) resetError(false);
   };
 
-  const signUpHandler = () => {
+  const signUpHandler = e => {
+    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
+
     navigate('/sign-up');
   };
 
-  const resetPasswordHandler = () => {
+  const resetPasswordHandler = e => {
+    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
+
     navigate('/reset-password');
   };
 
@@ -79,7 +83,11 @@ const Header = () => {
       }}
       onClick={tryAgainHandler}
     >
-      <Styled.HeaderIcon tabIndex="0" onClick={returnHomeHandler} />
+      <Styled.HeaderIcon
+        tabIndex="0"
+        onClick={returnHomeHandler}
+        onKeyPress={returnHomeHandler}
+      />
 
       <Styled.Alert
         initial={{ opacity: 0 }}
@@ -136,8 +144,20 @@ const Header = () => {
                       })
                     : 'Login'}
                 </Styled.HeaderLoginFormBtn>
-                <span onClick={signUpHandler}>Sign up</span>
-                <span onClick={resetPasswordHandler}>Forgot password?</span>
+                <span
+                  tabIndex="0"
+                  onKeyDown={signUpHandler}
+                  onClick={signUpHandler}
+                >
+                  Sign up
+                </span>
+                <span
+                  tabIndex="0"
+                  onKeyDown={resetPasswordHandler}
+                  onClick={resetPasswordHandler}
+                >
+                  Forgot password?
+                </span>
               </div>
             </form>
           </Styled.LoginForm>
