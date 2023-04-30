@@ -28,7 +28,7 @@ const Account = () => {
   };
 
   const logoutHandler = e => {
-    e.preventDefault();
+    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
 
     const reciever = data => {
       if (data.status === 'success') {
@@ -78,7 +78,13 @@ const Account = () => {
             />
 
             <Styled.AddSection>
-              <span onClick={logoutHandler}>Logout</span>
+              <span
+                onClick={logoutHandler}
+                tabIndex="0"
+                onKeyDown={logoutHandler}
+              >
+                Logout
+              </span>
               <Styled.AddBtn
                 location={location}
                 onClick={addRecipeHandler}
