@@ -60,7 +60,7 @@ export const InnerModal = styled(motion.div)`
   position: relative;
 
   padding: 4rem;
-  overflow-x: scroll;
+  overflow-y: auto;
 
   ${FlexColumn()}
   gap: 2rem;
