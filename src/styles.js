@@ -78,8 +78,8 @@ export const InnerModal = styled(motion.div)`
       border-radius: 0.4rem;
     }
   }
-
   @media (${breakpoint('maxBreakThree')}) {
+    justify-content: flex-start;
     & h3 {
       font-size: 2rem;
     }
