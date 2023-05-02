@@ -63,7 +63,6 @@ export const InnerModal = styled(motion.div)`
   overflow-x: scroll;
 
   ${FlexColumn()}
-  justify-content: flex-start;
   gap: 2rem;
 
   & h3 {

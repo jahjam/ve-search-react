@@ -90,7 +90,7 @@ const Header = () => {
     ? {
         opacity: 1,
         translateY: 0,
-        height: toLogin || authCtx.isLoggedIn ? 280 : 10,
+        height: toLogin || authCtx.isLoggedIn ? 280 : 140,
       }
     : {
         opacity: 1,
