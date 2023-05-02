@@ -86,11 +86,16 @@ const Header = () => {
     });
   }, [matches]);
 
+  const mobileToLogin = toLogin && 280;
+  const mobileIsLoggedIn = authCtx.isLoggedIn && 140;
+
+  console.log(mobileToLogin, mobileIsLoggedIn);
+
   const headerAnimationStyles = matches
     ? {
         opacity: 1,
         translateY: 0,
-        height: toLogin || authCtx.isLoggedIn ? 280 : 140,
+        height: mobileToLogin || mobileIsLoggedIn,
       }
     : {
         opacity: 1,
