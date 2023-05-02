@@ -50,7 +50,7 @@ export const Modal = styled(motion.div)`
 `;
 
 export const InnerModal = styled(motion.div)`
-  height: auto;
+  height: 80%;
   width: 80%;
 
   border: var(--main-border);
@@ -60,6 +60,7 @@ export const InnerModal = styled(motion.div)`
   position: relative;
 
   padding: 4rem;
+  overflow-x: scroll;
 
   ${FlexColumn()}
   justify-content: flex-start;
