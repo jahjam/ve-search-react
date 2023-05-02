@@ -89,8 +89,6 @@ const Header = () => {
   const mobileToLogin = toLogin && 280;
   const mobileIsLoggedIn = authCtx.isLoggedIn && 140;
 
-  console.log(mobileToLogin, mobileIsLoggedIn);
-
   const headerAnimationStyles = matches
     ? {
         opacity: 1,
