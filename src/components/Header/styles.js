@@ -26,7 +26,6 @@ export const Header = styled(motion.header)`
   @media (${breakpoint('maxBreakThree')}) {
     ${FlexColumn()};
     gap: 2rem;
-    height: auto !important;
   }
 `;
 
