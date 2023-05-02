@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useRequest from '../../hooks/use-request';
 import AuthContext from '../../store/auth-context';
@@ -72,15 +72,37 @@ const Header = () => {
     navigate('/reset-password');
   };
 
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 640px)');
+
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+
+    media.addEventListener('change', () => {
+      setMatches(media.matches);
+    });
+  }, [matches]);
+
+  const headerAnimationStyles = matches
+    ? {
+        opacity: 1,
+        translateY: 0,
+        height: toLogin || authCtx.isLoggedIn ? 280 : 10,
+      }
+    : {
+        opacity: 1,
+        translateY: 0,
+        height: toLogin || authCtx.isLoggedIn ? 120 : 80,
+      };
+
   return (
     <Styled.Header
       transition={{ duration: 1 }}
       initial={{ translateY: -80, opacity: 0 }}
-      animate={{
-        opacity: 1,
-        translateY: 0,
-        height: toLogin || authCtx.isLoggedIn ? 120 : 80,
-      }}
+      animate={headerAnimationStyles}
       onClick={tryAgainHandler}
     >
       <Styled.HeaderIcon
