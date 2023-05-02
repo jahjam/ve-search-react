@@ -14,22 +14,35 @@ export const ResultsBox = styled(motion.div)`
   opacity: 0.6;
   cursor: pointer;
 
+  @media (${breakpoint('maxBreakOne')}) {
+    padding: 1.4rem;
+    padding-top: 2rem;
+    height: 16rem;
+    min-width: 10rem;
+    max-width: 10rem;
+  }
+
   @media (${breakpoint('maxBreakTwo')}) {
+    padding: 0.8rem;
+    padding-top: 2rem;
     min-width: 8.4rem;
     max-width: 8.4rem;
   }
 
   @media (${breakpoint('maxBreakThree')}) {
     height: 14rem;
-
+    padding: 0.4rem;
+    padding-top: 2rem;
     min-width: 6.5rem;
     max-width: 6.5rem;
   }
 
   @media (${breakpoint('maxBreakFour')}) {
     height: 12rem;
-    min-width: 5.9rem;
-    max-width: 5.9rem;
+    padding: 0.2rem;
+    padding-top: 2rem;
+    min-width: 7.2rem;
+    max-width: 7.2rem;
   }
 `;
 
