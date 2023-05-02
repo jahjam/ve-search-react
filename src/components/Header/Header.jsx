@@ -95,7 +95,7 @@ const Header = () => {
     ? {
         opacity: 1,
         translateY: 0,
-        height: mobileToLogin || mobileIsLoggedIn,
+        height: mobileToLogin || mobileIsLoggedIn || 140,
       }
     : {
         opacity: 1,
