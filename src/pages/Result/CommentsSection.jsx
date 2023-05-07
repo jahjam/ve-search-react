@@ -2,14 +2,14 @@ import { useParams } from 'react-router-dom';
 import useRequest from '../../hooks/use-request';
 import { useState, useEffect, useMemo, useContext, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Pagination from '../../components/temporaries/Pagination/Pagination';
+import Pagination from '../../components/Pagination/Pagination';
 import { API } from '../../config';
 
 import * as Styled from './styles';
 
 import AuthContext from '../../store/auth-context';
-import ReviewCard from '../../components/temporaries/ReviewCard/ReviewCard';
-import GhostReview from '../../components/temporaries/GhostReview/GhostReview';
+import ReviewCard from '../../components/ReviewCard/ReviewCard';
+import GhostReview from '../../components/GhostReview/GhostReview';
 
 const PAGE_SIZE = 4;
 
@@ -30,7 +30,11 @@ const CommentsSection = () => {
     return reviews?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, reviews]);
 
-  const { isLoading, sendRequest } = useRequest();
+  const { isLoading, sendRequest, isError, errorMsg } = useRequest();
+
+  const handleXClick = () => {
+    setleaveComment(!leaveComment);
+  };
 
   useEffect(() => {
     const receiver = data => {
@@ -67,6 +71,7 @@ const CommentsSection = () => {
       };
 
       setReviews(prevState => [...prevState, review]);
+      setleaveComment(!leaveComment);
     };
 
     sendRequest(
@@ -81,8 +86,6 @@ const CommentsSection = () => {
       },
       receiver
     );
-
-    setleaveComment(!leaveComment);
   };
 
   return (
@@ -107,6 +110,7 @@ const CommentsSection = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
+            <Styled.XIcon onClick={handleXClick} />
             <h3>Leave a comment and rating.</h3>
 
             <form onSubmit={submitHandler}>
@@ -121,6 +125,8 @@ const CommentsSection = () => {
                 id="description"
                 contentEditable
               ></Styled.CommentSpan>
+
+              {isError && <Styled.ErrorMessage>{errorMsg}</Styled.ErrorMessage>}
 
               <Styled.CommentSubmitBtn type="submit" btnSize="medium">
                 Submit
@@ -143,6 +149,7 @@ const CommentsSection = () => {
             comment={review.comment}
             date={review.date}
             author={review.author.username}
+            img={authCtx.userDetails.user.photo}
           />
         ))
       )}
