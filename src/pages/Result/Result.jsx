@@ -7,8 +7,8 @@ import { API } from '../../config';
 import * as Styled from './styles';
 
 import LinkSection from './LinkSection';
-import GhostResult from '../../components/temporaries/GhostResult/GhostResult';
-import MethodCard from '../../components/temporaries/MethodCard/MethodCard';
+import GhostResult from '../../components/GhostResult/GhostResult';
+import MethodCard from '../../components/MethodCard/MethodCard';
 import RecipeImageBox from './RecipeImageSection';
 import HeaderContainer from './HeaderSection';
 import RecipeServingsBox from './RecipeServingsSection';

@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 import * as Styled from './styles';
 
-import Header from './components/Header/Header';
+import Header from './feature/Header/Header';
 import Search from './pages/Search/Search';
 import Result from './pages/Result/Result';
 import Account from './pages/Account/Account';
@@ -14,7 +15,6 @@ import SignUp from './pages/SignUp/SignUp';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import NewPassword from './pages/NewPassword/NewPassword';
 import NotFound from './pages/NotFound/NotFound';
-import { useEffect, useState } from 'react';
 
 const Modal = ({ handleModelClick }) => {
   const handleClick = e => {

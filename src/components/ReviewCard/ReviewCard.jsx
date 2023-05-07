@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { API } from '../../config';
 
 import * as Styled from './styles';
 
@@ -12,9 +13,13 @@ const ReviewCard = props => {
       <p>{props.comment}</p>
 
       <Styled.ReviewDetails>
-        <span>{dateFormatted}</span>
+        <div>
+          <img src={`${API}/public/img/users/${props.img}`} alt="avatar" />
+        </div>
         <span>{props.author}</span>
       </Styled.ReviewDetails>
+
+      <span>{dateFormatted}</span>
     </Styled.CommentContainer>
   );
 };

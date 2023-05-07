@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { API } from '../../../config';
+import { API } from '../../config';
 
-import useRequest from '../../../hooks/use-request';
+import useRequest from '../../hooks/use-request';
 
 import * as Styled from './styles';
 

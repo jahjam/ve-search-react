@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import Button from '../../components/temporaries/Button/Button';
+import Button from '../../components/Button/Button';
 import { Flex, FlexColumn } from '../../styled-utils/mixins';
 import { ReactComponent as AddIconSVG } from '../../imgs/svg/add.svg';
 import { ReactComponent as UploadSVG } from '../../imgs/svg/upload.svg';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex } from '../../../styled-utils/mixins';
+import { Flex } from '../../styled-utils/mixins';
 
 const btnSizes = {
   small: { height: '3rem', width: '6rem', fontSize: '1.2rem' },

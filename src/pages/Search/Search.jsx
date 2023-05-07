@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import * as Styled from './styles';
 
 import Title from '../../components/Title/Title';
-import Results from '../../components/Results/Results';
+import Results from '../../feature/Results/Results';
 
 const Search = () => {
   const inputEl = useRef();

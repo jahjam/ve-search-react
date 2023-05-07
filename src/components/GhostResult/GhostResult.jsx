@@ -1,4 +1,4 @@
-import { generateFramerElipsis } from '../../../helpers/generateFramerElipsis';
+import { generateFramerElipsis } from '../../helpers/generateFramerElipsis';
 
 import * as Styled from './styles';
 

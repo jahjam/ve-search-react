@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Flex } from '../../../styled-utils/mixins';
-import { breakpoint } from '../../../styled-utils/breakpoints';
+import { Flex } from '../../styled-utils/mixins';
+import { breakpoint } from '../../styled-utils/breakpoints';
 
 export const PaginationContainer = styled.div`
   ${Flex()}

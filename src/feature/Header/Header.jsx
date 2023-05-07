@@ -127,8 +127,9 @@ const Header = () => {
       </Styled.Alert>
 
       <div>
-        {authCtxLoading && !toLogin && authCtx.isLoggedIn && (
+        {authCtxLoading && !toLogin && (
           <Styled.LoggingInOnLoad>
+            Logging you in{' '}
             {generateFramerElipsis({
               gap: '0.2rem',
             })}

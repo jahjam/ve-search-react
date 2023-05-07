@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { breakpoint } from '../../../styled-utils/breakpoints';
+import { breakpoint } from '../../styled-utils/breakpoints';
 
 export const MethodCard = styled.div`
   width: 80%;

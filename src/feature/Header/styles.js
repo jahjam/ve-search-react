@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { Flex, FlexColumn } from '../../styled-utils/mixins';
-import Button from '../temporaries/Button/Button';
+import Button from '../../components/Button/Button';
 import { ReactComponent as TitleIcon } from '../../imgs/svg/title-icon.svg';
 import { breakpoint } from '../../styled-utils/breakpoints';
 
@@ -56,7 +56,7 @@ export const Profile = styled.button`
   }
 
   & div {
-    background-color: blue;
+    background-color: var(--main-theme-color);
     height: 4rem;
     width: 4rem;
     border-radius: 50%;

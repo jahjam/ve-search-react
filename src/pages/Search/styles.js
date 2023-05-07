@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import ButtonTemp from '../../components/temporaries/Button/Button';
+import ButtonTemp from '../../components/Button/Button';
 import { Flex, FlexColumn } from '../../styled-utils/mixins';
 import { breakpoint } from '../../styled-utils/breakpoints';
 

@@ -8,8 +8,8 @@ import * as Styled from './styles';
 
 import { ReactComponent as RightArrow } from '../../imgs/svg/right-arrow.svg';
 import { ReactComponent as LeftArrow } from '../../imgs/svg/left-arrow.svg';
-import ResultsCard from '../temporaries/ResultsCard/ResultsCard';
-import GhostCard from '../temporaries/GhostCard/GhostCard';
+import ResultsCard from '../../components/ResultsCard/ResultsCard';
+import GhostCard from '../../components/GhostCard/GhostCard';
 
 const Results = props => {
   const navigate = useNavigate();

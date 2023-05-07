@@ -1,6 +1,6 @@
 import React from 'react';
 
-import usePagination, { DOTS } from '../../../hooks/use-pagination';
+import usePagination, { DOTS } from '../../hooks/use-pagination';
 
 import * as Styled from './styles';
 

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { ReactComponent as LeftArrow } from '../../../imgs/svg/left-arrow-servings.svg';
-import { ReactComponent as RightArrow } from '../../../imgs/svg/right-arrow-servings.svg';
-import { breakpoint } from '../../../styled-utils/breakpoints';
+import { ReactComponent as LeftArrow } from '../../imgs/svg/left-arrow-servings.svg';
+import { ReactComponent as RightArrow } from '../../imgs/svg/right-arrow-servings.svg';
+import { breakpoint } from '../../styled-utils/breakpoints';
 
 export const RecipeListingSection = styled.div`
   margin-top: 2rem;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Flex } from '../../../styled-utils/mixins';
+import { Flex } from '../../styled-utils/mixins';
 
-import { breakpoint } from '../../../styled-utils/breakpoints';
+import { breakpoint } from '../../styled-utils/breakpoints';
 
 export const RecipeCard = styled.div`
   width: 30rem;

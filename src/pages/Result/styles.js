@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import Button from '../../components/temporaries/Button/Button';
+import Button from '../../components/Button/Button';
 import { FlexColumn, Flex } from '../../styled-utils/mixins';
 import { ReactComponent as LeftArrow } from '../../imgs/svg/left-arrow-servings.svg';
 import { ReactComponent as RightArrow } from '../../imgs/svg/right-arrow-servings.svg';
 import { ReactComponent as Bookmark } from '../../imgs/svg/bookmark.svg';
 import { ReactComponent as BookmarkSolid } from '../../imgs/svg/bookmark-solid.svg';
 import { breakpoint } from '../../styled-utils/breakpoints';
+import { ReactComponent as XMarkIcon } from '../../imgs/svg/x-mark.svg';
 
 export const Container = styled(motion.section)`
   ${FlexColumn()}
@@ -577,6 +578,17 @@ export const StyledCommentsSection = styled.section`
       font-size: 1.6rem;
     }
   }
+`;
+
+export const XIcon = styled(XMarkIcon)`
+  height: 2rem;
+  width: 2rem;
+
+  align-self: flex-end;
+`;
+
+export const ErrorMessage = styled.span`
+  color: red;
 `;
 
 export const CommentBox = styled(motion.div)`

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { ReactComponent as UploadSVG } from '../../imgs/svg/upload.svg';
-import ButtonStyles from '../../components/temporaries/Button/Button';
+import ButtonStyles from '../../components/Button/Button';
 import { Flex, FlexColumn } from '../../styled-utils/mixins';
 
 import { breakpoint } from '../../styled-utils/breakpoints';

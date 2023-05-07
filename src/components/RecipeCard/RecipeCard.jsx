@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { API } from '../../../config';
+import { API } from '../../config';
 
-import truncateParagraph from '../../../helpers/truncateParagraph';
+import truncateParagraph from '../../helpers/truncateParagraph';
 
 import * as Styled from './styles';
 

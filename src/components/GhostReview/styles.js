@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { FlexColumn } from '../../../styled-utils/mixins';
-import { breakpoint } from '../../../styled-utils/breakpoints';
+import { FlexColumn } from '../../styled-utils/mixins';
+import { breakpoint } from '../../styled-utils/breakpoints';
 
 export const CommentContainer = styled.div`
   border: var(--main-border);
