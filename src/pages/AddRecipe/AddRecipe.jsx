@@ -78,9 +78,6 @@ const AddRecipe = () => {
   };
 
   const staticInputsChangeHandler = e => {
-    console.log(e);
-    if (e.key !== 'Enter' && e.nativeEvent.type !== 'click') return;
-
     const { name, value, id, innerHTML, files } = e.target;
 
     if (files) setImage(files[0]);
