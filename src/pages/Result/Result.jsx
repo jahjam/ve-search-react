@@ -113,7 +113,7 @@ const Result = () => {
         />
       )}
 
-      <CommentsSection />
+      {!isError && <CommentsSection />}
     </Styled.Container>
   );
 };
