@@ -5,7 +5,7 @@ import UserRecipeCards from './UserRecipeCards/UserRecipeCards';
 
 let PAGE_SIZE = 9;
 
-const MyBookmarks = props => {
+const RecipeCardContainer = props => {
   const authCtx = useContext(AuthContext);
   const [searchInput, setSearchInput] = useState('');
 
@@ -34,4 +34,4 @@ const MyBookmarks = props => {
   );
 };
 
-export default MyBookmarks;
+export default RecipeCardContainer;
