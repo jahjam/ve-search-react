@@ -37,6 +37,7 @@ const initialStaticInputs = {
 const AddRecipe = () => {
   const navigate = useNavigate();
   const { isLoading, isError, errorMsg, sendRequest } = useRequest();
+  const [isWaiting, setIsWaiting] = useState(false);
 
   const [staticInputs, setStaticInputs] = useState(initialStaticInputs);
   const [noochProvided, setNoochProvided] = useState(false);
@@ -157,7 +158,11 @@ const AddRecipe = () => {
     formData.append('photo', image);
 
     const reciever = data => {
-      navigate(`/search/${data.data.recipe.id}`);
+      setIsWaiting(true);
+      setTimeout(() => {
+        navigate(`/search/${data.data.recipe.id}`);
+        setIsWaiting(false);
+      }, 5000);
     };
 
     sendRequest(
@@ -680,7 +685,7 @@ const AddRecipe = () => {
         )}
 
         <Styled.Button type="submit" btnSize="large">
-          {isLoading ? 'Submitting...' : 'Submit recipe!'}
+          {isLoading || isWaiting ? 'Submitting...' : 'Submit recipe!'}
         </Styled.Button>
       </Styled.RecipeForm>
     </Styled.Container>
