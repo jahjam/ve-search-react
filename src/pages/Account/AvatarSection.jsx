@@ -9,9 +9,10 @@ import * as Styled from './styles';
 const AvatarSection = props => {
   const [editAvatar, setEditAvatar] = useState(false);
   const [avatar, setAvatar] = useState(null);
+  const [isWaiting, setIsWaiting] = useState(false);
   const authCtx = useContext(AuthContext);
 
-  const { sendRequest } = useRequest();
+  const { sendRequest, isLoading } = useRequest();
 
   const editAvatarHandler = () => {
     setEditAvatar(!editAvatar);
@@ -28,9 +29,11 @@ const AvatarSection = props => {
     formData.append('photo', avatar);
 
     const reciever = data => {
-      if (data.status === 'success') {
+      setIsWaiting(true);
+      setTimeout(() => {
         authCtx.setUserDetailsHandler(data);
-      }
+        setIsWaiting(false);
+      }, 5000);
     };
 
     sendRequest(
@@ -70,7 +73,7 @@ const AvatarSection = props => {
             <label>
               <Styled.UploadIcon />
               <input type="submit" />
-              Upload
+              {isLoading || isWaiting ? 'Uploading...' : 'Upload'}
             </label>
           </Styled.UploadForm>
         </>
