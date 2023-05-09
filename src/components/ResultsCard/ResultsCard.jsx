@@ -46,11 +46,11 @@ const ResultCard = props => {
     >
       <Styled.Result>
         <Styled.ImgContainer>
-          <img src={`${API}/public/img/recipes/${props.image}`} alt="food" />
+          <img src={`${API}/public/imgs/${props.image}`} alt="food" />
         </Styled.ImgContainer>
         <span>{props.title}</span>
         <span>{props.author}</span>
-        <span>{recipeRating ? `${recipeRating.toFixed(1)}/5` : ''}</span>
+        <span>{recipeRating ? `${Math.floor(recipeRating)}/5` : ''}</span>
       </Styled.Result>
     </Styled.ResultsBox>
   );
