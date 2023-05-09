@@ -149,7 +149,7 @@ const CommentsSection = () => {
             comment={review.comment}
             date={review.date}
             author={review.author.username}
-            img={authCtx.userDetails.user.photo}
+            img={review.author.photo}
           />
         ))
       )}
