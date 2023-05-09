@@ -16,7 +16,7 @@ const RecipeCard = props => {
     <Styled.RecipeCard onClick={onClickHandler}>
       <div>
         <div>
-          <img src={`${API}/public/img/recipes/${props.photo}`} alt="recipe" />
+          <img src={`${API}/public/imgs/${props.img}`} alt="recipe" />
         </div>
         <div>
           <h2>{props.name}</h2>

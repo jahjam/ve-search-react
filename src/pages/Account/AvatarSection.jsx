@@ -48,7 +48,7 @@ const AvatarSection = props => {
       <div>
         {props.userDetails.user && (
           <img
-            src={`${API}/public/img/users/${props.userDetails.user.photo}`}
+            src={`${API}/public/imgs/${props.userDetails.user.photo}`}
             alt="avatar"
           />
         )}

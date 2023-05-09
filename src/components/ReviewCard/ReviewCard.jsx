@@ -14,7 +14,7 @@ const ReviewCard = props => {
 
       <Styled.ReviewDetails>
         <div>
-          <img src={`${API}/public/img/users/${props.img}`} alt="avatar" />
+          <img src={`${API}/public/imgs/${props.img}`} alt="avatar" />
         </div>
         <span>{props.author}</span>
       </Styled.ReviewDetails>
