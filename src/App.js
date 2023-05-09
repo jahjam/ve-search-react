@@ -47,10 +47,11 @@ const Modal = ({ handleModelClick }) => {
 
         <p>
           This is just a quick message to let you know that VESearch is
-          currently just a prototype. There is only one recipe available at the
-          moment, which is found by searching for <code>burger</code>. There
-          will be more recipes added soon - or, you could make an account and
-          add one yourself, the app is fully functional to a MVP standard!
+          currently just a prototype. There are only two (test) recipe available
+          at the moment, which is found by searching for <code>burger</code> or{' '}
+          <code>noodles</code>. There will be more recipes added soon - or, you
+          could make an account and add one yourself, the app is fully
+          functional to a MVP standard!
         </p>
         <p>
           When creating an account, please remember this app isn't fully quality
@@ -59,7 +60,6 @@ const Modal = ({ handleModelClick }) => {
           this the place you store your only copy of your most tastiest recipe
           ever!
         </p>
-        <p>The mobile styles are still being tweaked too.</p>
         <p>
           Thanks for using VESearch, and please come back in the future, there
           will likely be many new, tasty features!
