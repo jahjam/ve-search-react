@@ -15,7 +15,6 @@ const useRequest = () => {
         credentials: 'include',
         body: requestConfig.body || null,
       });
-
       if (!res.ok) {
         const error = await res.json();
 
@@ -23,7 +22,11 @@ const useRequest = () => {
         throw error;
       }
 
-      const data = await res.json();
+      let data;
+
+      if (res.status !== 204) {
+        data = await res.json();
+      }
 
       fn(data);
     } catch (err) {
