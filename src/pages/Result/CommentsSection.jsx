@@ -36,6 +36,11 @@ const CommentsSection = () => {
     setleaveComment(!leaveComment);
   };
 
+  const handleCommentDelete = id => {
+    const newReviews = reviews?.filter(review => review._id !== id);
+    setReviews(newReviews);
+  };
+
   useEffect(() => {
     const receiver = data => {
       setReviews(data.data.reviews);
@@ -145,11 +150,14 @@ const CommentsSection = () => {
         currentTableData.map(review => (
           <ReviewCard
             key={review._id}
+            review_id={review._id}
             rating={review.rating}
             comment={review.comment}
             date={review.date}
             author={review.author.username}
+            author_id={review.author._id}
             img={review.author.photo}
+            handleCommentDelete={handleCommentDelete}
           />
         ))
       )}
