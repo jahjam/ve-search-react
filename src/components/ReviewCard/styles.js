@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FlexColumn } from '../../styled-utils/mixins';
+import { ReactComponent as BinIcon } from '../../imgs/svg/bin.svg';
 import { breakpoint } from '../../styled-utils/breakpoints';
 
 export const CommentContainer = styled.div`
@@ -10,11 +11,12 @@ export const CommentContainer = styled.div`
   /* ${FlexColumn()} */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
+    'bin bin'
     'author body'
     'rating date';
-  align-items: center;
+  align-items: flex-start;
   justify-items: center;
   gap: 1rem;
 
@@ -32,6 +34,7 @@ export const CommentContainer = styled.div`
   }
 
   & span {
+    grid-area: date;
     font-size: 1.4rem;
     font-weight: 700;
   }
@@ -100,6 +103,7 @@ export const ReviewDetails = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+  grid-area: author;
 
   span:first-child {
     font-weight: 400;
@@ -118,5 +122,29 @@ export const ReviewDetails = styled.div`
     & img {
       width: 100%;
     }
+  }
+`;
+
+export const Loading = styled.span`
+  font-size: 2rem;
+  grid-area: bin;
+`;
+
+export const ErrorMsg = styled.span`
+  font-size: 1.2rem;
+  grid-area: bin;
+`;
+
+export const Bin = styled(BinIcon)`
+  grid-area: bin;
+  height: 2rem;
+  width: 2rem;
+
+  cursor: pointer;
+
+  justify-self: flex-end;
+
+  &:hover {
+    color: red;
   }
 `;

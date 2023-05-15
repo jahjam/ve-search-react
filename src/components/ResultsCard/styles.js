@@ -38,8 +38,8 @@ export const ResultsBox = styled(motion.div)`
   @media (${breakpoint('maxBreakThree')}) {
     height: 14rem;
     padding: 0.4rem;
-    min-width: 6.5rem;
-    max-width: 6.5rem;
+    min-width: 9rem;
+    max-width: 9rem;
   }
 
   @media (${breakpoint('maxBreakFour')}) {
@@ -114,6 +114,10 @@ export const Result = styled.div`
     @media (${breakpoint('maxBreakFour')}) {
       font-size: 0.8rem;
     }
+  }
+
+  @media (${breakpoint('maxBreakOne')}) {
+    gap: 0.6rem;
   }
 
   @media (${breakpoint('maxBreakThree')}) {
