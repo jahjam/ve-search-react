@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { API } from '../../config';
+import truncateTitle from '../../helpers/truncateTitle';
 
 import useRequest from '../../hooks/use-request';
 
@@ -48,7 +49,7 @@ const ResultCard = props => {
         <Styled.ImgContainer>
           <img src={`${API}/public/imgs/${props.image}`} alt="food" />
         </Styled.ImgContainer>
-        <span>{props.title}</span>
+        <span>{truncateTitle(props.title)}</span>
         <span>{props.author}</span>
         <span>{recipeRating ? `${Math.floor(recipeRating)}/5` : ''}</span>
       </Styled.Result>
