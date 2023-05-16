@@ -2,6 +2,19 @@
 
 VESearch is a fully responsive, vegan recipe search engine, where you can not only search for tasty user-made recipes, but also create your own account and add your own, as well as bookmarks others.
 
+**What is VESearch?**
+
+VESearch started as a genuine want for a fully vegan, recipe search engine that was simple and ad free. As I couldn't find anything like this
+on the internet, I decided it would make a great project to start to learn more about full stack web development. I decided to use Javascript
+over Typescript as because this was only going to be a solo project I didn't think I needed the type safety as much, however, in hindsight,
+I really wish I had started with Typescript from the beginning, as a lot of bugs I came across would have been mitigated if I was using
+Typescript. I created both a RESTful API for the backend using Node and Express with Mongoose and Mongodb to serve my React powered frontend.
+I believe, for the needs of my app, this technology was adequate. If I was starting this project again, however, I would likely have used Golang
+for the backend, I would, without a doubt have implemented test driven development for both backend and frontend, and, as said, used Typescript on
+the frontend. At its current state the app serves the MVP I aimed for when starting out, and is genuinely useful and easy and fun to use.
+There are still features I think would make the app much better, such as edit functionality for editing already existing recipes, and
+an admin page to manage users and approve/deny recipes if they don't meet the criteria for recipes on the website.
+
 > **Warning**
 > This web app is at a fully functioning MVP stage, however, is constantly under development.
 > Search "burger" to find the test recipe.
