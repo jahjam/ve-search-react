@@ -70,7 +70,11 @@ const CommentsSection = () => {
       const review = {
         comment: data.data.review.comment,
         rating: data.data.review.rating,
-        author: { username: data.data.user.username },
+        author: {
+          username: data.data.review.author.username,
+          photo: data.data.review.author.photo,
+          _id: data.data.review.author._id,
+        },
         date: data.data.review.date,
         _id: data.data.review._id,
       };
