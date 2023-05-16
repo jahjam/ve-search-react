@@ -55,6 +55,10 @@ export const CommentContainer = styled.div`
     & span:nth-child(4) {
       font-size: 1.2rem;
     }
+
+    & span:nth-child(5) {
+      font-size: 1.2rem;
+    }
   }
 
   @media (${breakpoint('maxBreakThree')}) {
@@ -73,6 +77,10 @@ export const CommentContainer = styled.div`
     }
 
     & span:nth-child(4) {
+      font-size: 1.2rem;
+    }
+
+    & span:nth-child(5) {
       font-size: 1.2rem;
     }
   }
@@ -95,6 +103,10 @@ export const CommentContainer = styled.div`
 
     & span:nth-child(4) {
       font-size: 1rem;
+    }
+
+    & span:nth-child(5) {
+      font-size: 1.2rem;
     }
   }
 `;
