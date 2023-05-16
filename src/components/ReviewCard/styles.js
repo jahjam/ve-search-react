@@ -123,6 +123,10 @@ export const ReviewDetails = styled.div`
       width: 100%;
     }
   }
+
+  @media (${breakpoint('maxBreakThree')}) {
+    flex-direction: column;
+  }
 `;
 
 export const Loading = styled.span`
