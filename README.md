@@ -33,6 +33,17 @@ Create an account to save your favourite recipes and also add your own!
 
 <img width="500" alt="Screenshot 2023-03-29 at 22 23 46" src="https://user-images.githubusercontent.com/98130255/228671066-c131e847-65cc-4d4d-85a0-11ce58472e25.png">
 
+Add a recipe!
+
+<img width="500" alt="Screenshot 2023-05-16 at 13 23 31" src="https://github.com/dreamingOfSoy/ve-search-react/assets/98130255/574faa74-567e-44d1-b2da-80e630595407">
+
 Leave comments on other peoples recipes!
 
-<img width="500" alt="Screenshot 2023-03-29 at 22 10 31" src="https://user-images.githubusercontent.com/98130255/228669758-1d5a6190-64b8-40c1-83a2-4b7b6fdb2369.png">
+<img width="500" alt="Screenshot 2023-05-16 at 13 25 33" src="https://github.com/dreamingOfSoy/ve-search-react/assets/98130255/0167c280-4a93-482e-ad60-a56fcaf0cca1">
+
+Start collecting your favourite vegan recipes in one place!
+
+<img width="317" alt="Screenshot 2023-05-16 at 13 25 46" src="https://github.com/dreamingOfSoy/ve-search-react/assets/98130255/ad38d59d-0e8b-44c4-a54f-dac4fc3d320d">
+
+
+
