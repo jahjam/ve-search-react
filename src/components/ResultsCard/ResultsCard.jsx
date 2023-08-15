@@ -1,8 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { API } from '../../config';
+import { useEffect, useRef} from 'react';
 import truncateTitle from '../../helpers/truncateTitle';
-
-import useRequest from '../../hooks/use-request';
 
 import * as Styled from './styles';
 
@@ -23,20 +20,6 @@ const ResultCard = props => {
     );
   }, [props]);
 
-  const { sendRequest } = useRequest();
-  const [recipeRating, setRecipeRating] = useState(null);
-
-  useEffect(() => {
-    const receiver = data => {
-      setRecipeRating(data.data.ratings[0].avgRatings);
-    };
-
-    sendRequest(
-      { url: API + `/api/v1/reviews/ratingsAverage/${props.id}` },
-      receiver
-    );
-  }, [sendRequest, props.id]);
-
   return (
     <Styled.ResultsBox
       onClick={onClickHandler}
@@ -47,11 +30,11 @@ const ResultCard = props => {
     >
       <Styled.Result>
         <Styled.ImgContainer>
-          <img src={`${API}/public/imgs/${props.image}`} alt="food" />
+          <img src={`${props.image}`} alt="food" />
         </Styled.ImgContainer>
         <span>{truncateTitle(props.title)}</span>
         <span>{props.author}</span>
-        <span>{recipeRating ? `${Math.floor(recipeRating)}/5` : ''}</span>
+        <span>{`${Math.floor(props.ratingsAverage)}/5`}</span>
       </Styled.Result>
     </Styled.ResultsBox>
   );

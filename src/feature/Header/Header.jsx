@@ -193,7 +193,7 @@ const Header = () => {
           <Styled.Profile location={location} onClick={toAccountPageHandler}>
             <div>
               <img
-                src={`${API}/public/imgs/${userDetails.user.photo}`}
+                src={`${userDetails.user.photo}`}
                 alt="avatar"
               />
             </div>

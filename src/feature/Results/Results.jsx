@@ -103,6 +103,7 @@ const Results = props => {
                 id={recipe.id}
                 title={recipe.name}
                 image={recipe.coverImage}
+                ratingsAverage={recipe.ratingsAverage}
                 author={recipe.author.username}
                 setScrollWidth={scrollWidthHandler}
                 sliderEl={slider}
