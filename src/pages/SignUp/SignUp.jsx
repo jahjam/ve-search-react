@@ -31,6 +31,7 @@ const SignUp = () => {
     const reciever = data => {
       authCtx.setIsLoggedInHandler();
       authCtx.setUserDetailsHandler(data);
+      navigation('/');
     };
 
     sendRequest(
@@ -48,7 +49,7 @@ const SignUp = () => {
       reciever
     );
 
-    navigation('/');
+
   };
 
   return (
