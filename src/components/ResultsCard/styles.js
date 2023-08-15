@@ -137,8 +137,8 @@ export const ImgContainer = styled.div`
   justify-content: center;
 
   & img {
-    height: 120%;
-    width: 120%;
+    height: 100%;
+    width: 100%;
   }
 
   @media (${breakpoint('maxBreakOne')}) {
